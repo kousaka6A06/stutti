@@ -26,54 +26,104 @@ body {
     color: #ffc042;
 }
 
-/* サイドバー */
-.sidebar {
-    background-color: #4dc0b2;
-    padding: 20px;
-    height: 100%;
+/* メイン */
+
+.position-absolute {
+    width: 100%; /* テキストを画像の幅に合わせる */
+    text-align: center; /* テキストを中央に配置 */
+}
+.text-overlay {
+    position: absolute;
+    top: 20%; /* 上からの距離を調整 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #352b2b;
 }
 
-.sidebar h5 {
+/* HOMEボタン */
+#contents{
+    height:600px;
+  }
+  h1{
+    text-align:center;
+  }
+  .sankaku,
+  .text{
+    text-align:center;
+  }
+  #page-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 14px;
+    line-height: 1;
+    z-index: 99;
+  }
+  #page-top a {
+    background: #ffc042;
+    text-decoration: none;
     color: #fff;
-    font-weight: 600;
-    margin-bottom: 15px;
+    width: 60px;
+    padding: 28px 5px;
+    text-align: center;
+    display: block;
+    border-radius: 90px;
+    opacity: 0.9;
+    transition: all .3s ease;
+  }
+  #page-top a:hover {
+    text-decoration: none;
+    opacity: .5;
+  }
+
+/* マイページテーブル */
+.maintable{
+	border-spacing: 0;
+	border-collapse: separate;
+}
+.maintable th,.maintable td{
+	border-top: 1px solid #FFFFFF;
+	border-left: 1px solid #FFFFFF;
+}
+.maintable th{
+	padding: 5px 10px;
+	background: #78CFBF;
+	color: #FFFFFF;
+}
+.maintable tr:nth-child(even) th{
+	background: #62BBAB;
+}
+.maintable td{
+	width: auto;
+	padding: 50px 0px;
+	background: #FCFCFC;
+	color: #2f302f;
+	text-align: left;
+}
+.maintable tr:nth-child(even) td{
+	background: #EEEEEE;
+}
+.maintable th:last-child,.maintable td:last-child{
+	border-right: 1px solid #FFFFFF;
+}
+.maintable tr:last-child th,.maintable tr:last-child td{
+	border-bottom: 1px solid #FFFFFF;
+}
+.maintable tr:first-child :first-child{
+	border-top-left-radius: 5px;
+}
+.maintable tr:first-child :last-child{
+	border-top-right-radius: 5px;
+}
+.maintable tr:last-child :first-child{
+	border-bottom-left-radius: 5px;
+}
+.maintable tr:last-child :last-child{
+	border-bottom-right-radius: 5px;
 }
 
-.sidebar .list-group-item {
-    background-color: #fff;
-    color: #586365;
-    border: none;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
 
-.sidebar .list-group-item:hover {
-    background-color: #ffc042;
-    color: #fff;
-}
 
-/* メインコンテンツ */
-.main-content {
-    padding: 20px;
-}
-
-.main-content h3 {
-    color: #586365;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.main-content .list-group-item {
-    background-color: #fff;
-    color: #586365;
-    border: 1px solid #37ab9d;
-    font-weight: 600;
-}
-
-.main-content .list-group-item:hover {
-    background-color: #ffc042;
-    color: #fff;
-}
 
 /* フッター */
 .footer {

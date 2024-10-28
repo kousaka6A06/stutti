@@ -1,4 +1,4 @@
-<a href="index.php">トップに戻る</a>
+
 <h1>勉強会一覧</h1><br><br><br>
 
 <ul>

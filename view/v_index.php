@@ -1,94 +1,215 @@
 <!-- メインコンテンツ -->
-<main class="container my-5">
-    <div class="row justify-content-center">
-        <!-- サイドバー（左側） -->
-        <aside class="col-md-3 sidebar">
-            <section>
-                <h5>勉強会一覧</h5>
-                <ul class="list-group mb-4">
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="groupList.php">すべて表示</a>
-                    </li>
-                    <li class="list-group-item">AWS勉強会</li>
-                    <li class="list-group-item">PHP勉強会</li>
-                </ul>
-            </section>
-
-            <section>
-                <h5>tutti広場一覧</h5>
-                <ul class="list-group">
-
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">AWS</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">PHP</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">データベース</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">技術全般</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">フロントエンド</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">Java</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">Python</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">Linux</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">応用数学</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary mx-2" href="tutti.php">ビジネス英語</a>
-                    </li>
-                </ul>
-            </section>
-        </aside>
-
-        <!-- メインコンテンツ（中央） -->
-        <section class="col-md-9 main-content">
-            <h3>募集中の勉強会一部</h3>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">日時　１１月１５日</li>
-                    <li class="list-group-item">参加人数　５－６人</li>
-                    <li class="list-group-item">作成者　すとぅってぃ</li>
-                    <li class="list-group-item"><a href="#" class="card-link">続きはこちら</a></li>
-                </ul>
-                <!-- <div class="card-body">
-                    <a href="#" class="card-link">続きはこちら</a>
+<main>
+    <div class="container mt-5">
+        <div class="position-relative">
+            <img src="img/board.png" alt="" class="img-fluid">
+            <p class="text-overlay">
+                Stuttiとは<br>
+                studti – 未来の可能性を広げる学びの場。<br>
+                学びの仲間とつながる、stuttiで成長の一歩を。
+            </p>
+        </div>
+    </div><br>
+    <hr>
+    <div class="container mt-5">
+        <h2>募集中の勉強会<a href="groupList.php" class="btn btn-secondary btn-sm">すべて見る</a></h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">「勉強会タイトル」</h5>
+                        <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計や運用のコツを共有し、最新の技術動向について議論しましょう。</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">「日時」</li>
+                        <li class="list-group-item">「参加人数」</li>
+                        <li class="list-group-item">
+                            <a href="groupDetail.php" class="btn btn-secondary btn-sm">詳しく見る</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="card-footer">
+                    <small class="text-body-secondary">Last updated 3 mins ago</small>
                 </div> -->
+                </div>
             </div>
-            
-            <br><br>
-            <h3>tutti一覧</h3>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">
-                    プログラミング基礎勉強会 - 2024年10月25日開催
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    AWSクラウドプラクティショナー勉強会 - 2024年11月1日開催
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    基本情報技術者試験勉強会 - 2024年10月28日開催
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    データベース入門勉強会 - 2024年11月3日開催
-                </a>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">「勉強会タイトル」</h5>
+                        <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計や運用のコツを共有し、最新の技術動向について議論しましょう。</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">「日時」</li>
+                        <li class="list-group-item">「参加人数」</li>
+                        <li class="list-group-item">
+                            <a href="groupDetail.php" class="btn btn-secondary btn-sm">詳しく見る</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="card-footer">
+                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                </div> -->
+                </div>
             </div>
-        </section>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">「勉強会タイトル」</h5>
+                        <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計や運用のコツを共有し、最新の技術動向について議論しましょう。</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">「日時」</li>
+                        <li class="list-group-item">「参加人数」</li>
+                        <li class="list-group-item">
+                            <a href="groupDetail.php" class="btn btn-secondary btn-sm">詳しく見る</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="card-footer">
+                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                </div> -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">「勉強会タイトル」</h5>
+                        <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計や運用のコツを共有し、最新の技術動向について議論しましょう。</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">「日時」</li>
+                        <li class="list-group-item">「参加人数」</li>
+                        <li class="list-group-item">
+                            <a href="groupDetail.php" class="btn btn-secondary btn-sm">詳しく見る</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="card-footer">
+                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                </div> -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">「勉強会タイトル」</h5>
+                        <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計や運用のコツを共有し、最新の技術動向について議論しましょう。</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">「日時」</li>
+                        <li class="list-group-item">「参加人数」</li>
+                        <li class="list-group-item">
+                            <a href="groupDetail.php" class="btn btn-secondary btn-sm">詳しく見る</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="card-footer">
+                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                </div> -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">「勉強会タイトル」</h5>
+                        <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計や運用のコツを共有し、最新の技術動向について議論しましょう。</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">「日時」</li>
+                        <li class="list-group-item">「参加人数」</li>
+                        <li class="list-group-item">
+                            <a href="groupDetail.php" class="btn btn-secondary btn-sm">詳しく見る</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="card-footer">
+                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                </div> -->
+                </div>
+            </div>
 
+        </div>
     </div>
+
+    <br><br>
+    <hr>
+
+    <div class="container mt-5">
+        <h2>Tutti広場</h2>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="card bg-primary" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">AWS</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="card bg-secondary" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">PHP</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="card bg-success" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">データベース</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="card bg-danger" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">ビジネス英語</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="card bg-warning" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Java</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="card bg-primary" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">AWS</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="card bg-secondary" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">PHP</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="card bg-success" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">データベース</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="card bg-danger" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">ビジネス英語</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="card bg-warning" style="height: 500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Java</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 </main>

@@ -1,4 +1,4 @@
-<a href="index.php">トップに戻る</a>
+
 <h1>Tutti広場</h1>
 <h2>AWS</h2>
 <ul>説明：AWS全般の集い</ul>

@@ -9,6 +9,13 @@
     </div>
 
     <div class="mb-3">
+      <label for="memberId" class="form-label">ログインIDを入力</label>
+      <small style="font-size: 10px; color: red;">*必須</small>
+      <small>ログイン時に必要になります</small>
+      <input type="email" id="memberId" name="memberId" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
       <label for="handleName" class="form-label">ニックネームを入力</label>
       <small style="font-size: 10px; color: red;">*必須</small>
       <input type="text" id="handleName" name="handleName" class="form-control" required>

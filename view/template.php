@@ -10,7 +10,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- 外部CSSファイルをリンク -->
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <style>
         .logo {
@@ -27,49 +27,49 @@
 </head>
 
 <body>
-    <main>
-        <!-- ヘッダー -->
-        <header class="bg-info header">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container">
-                    <a class="navbar-brand header-logo" href="index.php">
-                    Stutti    
+    <!-- ヘッダー -->
+    <header class="bg-info header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand header-logo" href="index.php">
+                    Stutti
                     <!-- <img src="img/logo.png" alt=""> -->
-                    </a>
-                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                </a>
+                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button> -->
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="btn btn-outline-warning mx-2" href="groupEdit.php">勉強会を作る</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-warning mx-2" href="mypage.php">マイページ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-warning mx-2" href="mypage.php">ログアウト</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-light mx-2" href="login.php">ログイン</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-light mx-2" href="memberRegister.php">会員登録</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="btn btn-outline-warning mx-2" href="groupEdit.php">勉強会を作る</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-warning mx-2" href="mypage.php">マイページ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-warning mx-2" href="mypage.php">ログアウト</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light mx-2" href="login.php">ログイン</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light mx-2" href="userRegister.php">会員登録</a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-        </header>
-
+            </div>
+        </nav>
+    </header>
         <!-- メイン -->
         <?php include $v_includeFile; ?>
+
+        <p id="page-top"><a href="index.php">HOME</a></p>
+        <!-- <p id="page-top"><a href="index.php">上に戻る</a></p> -->
 
         <!-- フッター -->
         <footer class="bg-success text-white text-center py-3 mt-1">
             <p>&copy; 2024 Stutti</p>
         </footer>
-    </main>
 
 
     <!-- BootstrapとjQueryのスクリプト -->
@@ -78,6 +78,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- FontAwesome for social icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- javascript -->
+    <script src="script.js"></script>
+
 </body>
 
 </html>
