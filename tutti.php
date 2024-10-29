@@ -1,4 +1,4 @@
 <?php
-require_once 'common/utilities.php';
+require_once 'utils/Utils.php';
 
-loadView('トップページ', 'view/v_tutti.php');
+Utils::loadView('tutti詳細', 'view/v_tutti.php');

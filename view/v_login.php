@@ -8,9 +8,8 @@
         <div class="bg-light p-4 rounded shadow w-50 mx-auto">
 
             <div class="mb-3">
-                <label for="memberId" class="form-label">ログインIDを入力</label>
-                <input type="email" name="memberId" id="memberId" class="form-control" placeholder="example@mail.com"
-                    required>
+                <label for="login-id" class="form-label">ログインIDを入力</label>
+                <input type="text" name="login-id" id="login-id" class="form-control" placeholder="ログインID" required>
             </div>
 
             <div class="mb-3">

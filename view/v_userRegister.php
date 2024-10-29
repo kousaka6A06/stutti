@@ -1,43 +1,43 @@
 <section class="container mt-1">
   <h2 class="text-center">メンバー登録</h2>
-  <form action="registerMember.php" method="POST" onsubmit="return confirmForm();" enctype="multipart/form-data"
+  <form action="userRegister.php" method="POST" onsubmit="" enctype="multipart/form-data"
     class="bg-light p-4 rounded shadow w-50 mx-auto">
     <div class="mb-3">
-      <label for="memberId" class="form-label">メールアドレスを入力</label>
+      <label for="mail-address" class="form-label">メールアドレスを入力</label>
       <small style="font-size: 10px; color: red;">*必須</small>
-      <input type="email" id="memberId" name="memberId" class="form-control" placeholder="example@mail.com" required>
+      <input type="email" id="mail-address" name="mail-address" class="form-control" placeholder="example@mail.com" required>
     </div>
 
     <div class="mb-3">
-      <label for="memberId" class="form-label">ログインIDを入力</label>
+      <label for="login-id" class="form-label">ログインIDを入力</label>
       <small style="font-size: 10px; color: red;">*必須</small>
       <small>ログイン時に必要になります</small>
-      <input type="email" id="memberId" name="memberId" class="form-control" required>
+      <input type="test" id="login-id" name="login-id" class="form-control" required>
     </div>
 
     <div class="mb-3">
-      <label for="handleName" class="form-label">ニックネームを入力</label>
+      <label for="name" class="form-label">ニックネームを入力</label>
       <small style="font-size: 10px; color: red;">*必須</small>
-      <input type="text" id="handleName" name="handleName" class="form-control" required>
+      <input type="text" id="name" name="name" class="form-control" required>
     </div>
 
     <div class="mb-3">
-      <label for="file" class="form-label">アバター画像をアップロードできます</label>
+      <label for="avatar" class="form-label">アバター画像をアップロードできます</label>
       <input type="hidden" name="max_file_size" value="1000000">
-      <input id="upfile" type="file" name="upfile" class="form-control">
+      <input type="file" id="avatar" name="avatar" class="form-control">
     </div>
 
     <div class="mb-3">
       <label for="password" class="form-label">ログインパスワードを入力</label>
       <small style="font-size: 10px; color: red;">*必須</small>
-      <input type="password" name="password" id="password" class="form-control" required>
+      <input type="password" id="password" name="password" class="form-control" required>
       <small class="form-text text-muted">（英数字 8 〜 12文字以内,特殊文字や記号は使用不可）</small>
     </div>
 
     <div class="mb-3">
       <label for="confirmPassword" class="form-label">確認のため再度入力してください</label>
       <small style="font-size: 10px; color: red;">*必須</small>
-      <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" required>
+      <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
     </div>
 
     <div class="mb-3">

@@ -1,4 +1,4 @@
 <?php
-require_once 'common/utilities.php';
+require_once 'utils/Utils.php';
 
-loadView('トップページ', 'view/v_groupEdit.php');
+Utils::loadView('勉強会作成・詳細', 'view/v_groupEdit.php');
