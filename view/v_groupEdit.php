@@ -13,6 +13,7 @@
 
     <div class="mb-3">
       <label for="" class="form-label">関連するTutti</label>
+      <!-- プルダウン -->
       <small style="font-size: 10px; color: red;">*必須</small>
       <input type="text" id="" name="" class="form-control" placeholder="例：AWS" required>
     </div>

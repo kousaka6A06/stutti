@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $v_title ?>Stutti - 勉強会グループ募集</title>
     <!-- BootstrapのCSSをリンク -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- 外部CSSファイルをリンク -->
@@ -28,54 +32,51 @@
 
 <body>
     <!-- ヘッダー -->
-    <header class="bg-info header">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <a class="navbar-brand header-logo" href="index.php">
-                    Stutti
-                    <!-- <img src="img/logo.png" alt=""> -->
-                </a>
-                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button> -->
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="btn btn-outline-warning mx-2" href="groupEdit.php">勉強会を作る</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-warning mx-2" href="mypage.php">マイページ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-warning mx-2" href="mypage.php">ログアウト</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-light mx-2" href="login.php">ログイン</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-light mx-2" href="userRegister.php">会員登録</a>
-                        </li>
-                    </ul>
-                </div>
+    <header class="header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand header-logo" href="index.php">
+                Stutti
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto"> <!-- ml-auto → ms-auto -->
+                    <li class="nav-item">
+                        <a class="btn btn-outline-info mx-2" href="groupEdit.php">勉強会を作る</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-info mx-2" href="mypage.php">マイページ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-info mx-2" href="mypage.php">ログアウト</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light mx-2" href="login.php">ログイン</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light mx-2" href="userRegister.php">会員登録</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
-        <!-- メイン -->
-        <?php include $v_includeFile; ?>
+        </div>
+    </nav>
+</header>
 
-        <p id="page-top"><a href="index.php">HOME</a></p>
-        <!-- <p id="page-top"><a href="index.php">上に戻る</a></p> -->
+    <!-- メイン -->
+    <?php include $v_includeFile; ?>
 
-        <!-- フッター -->
-        <footer class="bg-success text-white text-center py-3 mt-1">
-            <p>&copy; 2024 Stutti</p>
-        </footer>
+    <p id="page-top"><a href="index.php">TOP</a></p>
+    <!-- <p id="page-top"><a href="index.php">上に戻る</a></p> -->
 
+    <!-- フッター -->
+    <footer class="bg-dark-subtle text-white text-center py-3 mt-1">
+        <p>&copy; 2024 Stutti</p>
+    </footer>
 
-    <!-- BootstrapとjQueryのスクリプト -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Bundle with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FontAwesome for social icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <!-- javascript -->

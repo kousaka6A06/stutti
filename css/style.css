@@ -7,7 +7,7 @@ body {
 
 /* ヘッダーのスタイル */
 .header .navbar {
-    background-color: #37ab9d;
+    background-color: #d5cabd;
 }
 
 .header .navbar-brand {
@@ -122,10 +122,7 @@ body {
 	border-bottom-right-radius: 5px;
 }
 
-
-
-
-/* フッター */
+/* フッター 
 .footer {
     background-color: #586365;
     color: #fff;
@@ -142,4 +139,4 @@ body {
 
 .social-icons i {
     font-size: 1.5rem;
-}
+} */

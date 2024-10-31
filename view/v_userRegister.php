@@ -9,7 +9,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="login-id" class="form-label">ログインIDを入力</label>
+      <label for="login-id" class="form-label">Stutti IDを入力</label>
       <small style="font-size: 10px; color: red;">*必須</small>
       <small>ログイン時に必要になります</small>
       <input type="test" id="login-id" name="login-id" class="form-control" required>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="avatar" class="form-label">アバター画像をアップロードできます</label>
+      <label for="avatar" class="form-label">プロフィール画像をアップロードできます</label>
       <input type="hidden" name="max_file_size" value="1000000">
       <input type="file" id="avatar" name="avatar" class="form-control">
     </div>
