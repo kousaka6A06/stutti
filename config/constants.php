@@ -9,3 +9,6 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'stutti');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
+
+// デフォルトアバター画像
+define('DEFAULT_AVATAR', 'default_avatar.jpg');
