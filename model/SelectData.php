@@ -81,7 +81,7 @@ class SelectData {
     // 作成者IDから、memberテーブルより作成者名を副問い合わせ
     function GroupInfo($groupId) {
         $now = date('YY-mm-dd');
-        $sql = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,(SELECT `member`.`user_name` FROM`member` WHERE `member`.`id` = `groups`.`created_by_id`) AS `user_name` 
+        $sql = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,(SELECT `member`.`users_name` FROM`member` WHERE `member`.`id` = `groups`.`created_by_id`) AS `users_name` 
         FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` = {$groupId}";
         $result = $this->dc->query($sql);
         $ary = $result->fetchAll(PDO::FETCH_ASSOC);
