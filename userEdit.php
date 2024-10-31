@@ -46,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // ユーザー編集試行
     // ユーザー編集に成功した場合
-    if ($user->editUser()) {
+    if ($user->updateUser()) {
 
     // TODO: [モデル]
-    // editUser():bool
+    // updateUser():bool
     // あらかじめプロパティに設定されたユーザー情報で、UsersレコードをUPDATEしてください
     // PDOStatement::execute()の戻り値(true or false)をそのまま返却してください
 
