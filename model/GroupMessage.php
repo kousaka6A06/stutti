@@ -10,7 +10,7 @@ class GroupMessage {
     private $createdAt;
     private $conn;
     
-    private function __construct() {
+    public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
     }
 
