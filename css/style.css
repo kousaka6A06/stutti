@@ -1,7 +1,7 @@
 /* グローバルなスタイル */
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #f5f5f5;
+    background-color: #fff;
     color: #586365;
     padding-top: 70px;
     /* ヘッダーの高さに応じてコンテンツを下にずらす */
@@ -24,12 +24,14 @@ h3 {
     z-index: 1;
     overflow: hidden;
     transition: all 0.3s ease;
-  }
-  .view-more-btn:hover::before {
+}
+
+.view-more-btn:hover::before {
     transform-origin: top right;
     transform: skewX(-45deg) translateX(0);
-  }
-  .view-more-btn::before {
+}
+
+.view-more-btn::before {
     content: '';
     width: 135%;
     height: 100%;
@@ -41,7 +43,7 @@ h3 {
     transform-origin: top left;
     transform: skewX(-45deg) translateX(-100%);
     transition: inherit;
-  }
+}
 
 /* ヘッダーのスタイル */
 .header {
@@ -128,6 +130,40 @@ h3 {
     -ms-writing-mode: tb-rl;
     writing-mode: vertical-rl;
     text-orientation: sideways;
+}
+
+.tilt-card {
+    transform: rotate(5deg);
+    /* 初期の傾き */
+    transform-origin: bottom right;
+    /* 右下を軸にする */
+    transition: transform 0.3s;
+    /* アニメーションのトランジション */
+}
+
+.tilt-card:hover {
+    transform: rotate(0deg);
+    /* ホバー時にまっすぐ */
+    transform: scale(1.15);
+}
+
+.tutti-card2 {
+    transition: transform 0.5s ease;
+}
+
+.tutti-card2:hover {
+    transform: scale(1.15);
+    /* 1.05倍に拡大 */
+}
+
+/* グラデーション */
+.group-section {
+    /* padding-bottom: 0; */
+    /* セクション内の余白 */
+    /* background: linear-gradient(135deg, #ffccbc, #d50000); */
+    background: linear-gradient(to bottom, #fff, #e7e7e7);
+    /* border-radius: 10px; */
+    /* 角を丸くする */
 }
 
 /* マイページテーブル */

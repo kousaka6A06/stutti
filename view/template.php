@@ -7,7 +7,7 @@
     <title><?= $v_title ?>Stutti - 勉強会グループ募集</title>
     <!-- BootstrapのCSSをリンク -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- 外部CSSファイルをリンク -->
@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand header-logo" href="index.php">
-                    Stutti
+                    <img src="img/logo_1.png" alt="Stutti Logo" style="height: 40px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
             </div>
         </nav>
     </header>
-    
+
     <!-- メイン -->
     <main>
         <?php include $v_includeFile; ?>
