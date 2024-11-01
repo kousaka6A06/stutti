@@ -3,11 +3,60 @@ body {
     font-family: 'Nunito', sans-serif;
     background-color: #f5f5f5;
     color: #586365;
+    padding-top: 70px;
+    /* ヘッダーの高さに応じてコンテンツを下にずらす */
 }
 
-/* ヘッダーのスタイル */
-.header .navbar {
+h3 {
+    font-size: 18px;
+}
+
+/* ボタン */
+.view-more-btn {
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 50px;
+    outline: none;
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .view-more-btn:hover::before {
+    transform-origin: top right;
+    transform: skewX(-45deg) translateX(0);
+  }
+  .view-more-btn::before {
+    content: '';
+    width: 135%;
+    height: 100%;
     background-color: #d5cabd;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform-origin: top left;
+    transform: skewX(-45deg) translateX(-100%);
+    transition: inherit;
+  }
+
+/* ヘッダーのスタイル */
+.header {
+    position: fixed;
+    /* ヘッダーを固定 */
+    top: 0;
+    /* 上部に固定 */
+    left: 0;
+    /* 左端に固定 */
+    width: 100%;
+    /* 幅を100%に設定 */
+    z-index: 1000;
+    /* 他の要素より上に表示 */
+    background-color: #d5cabd;
+    /* ヘッダーの背景色 */
 }
 
 .header .navbar-brand {
@@ -27,102 +76,121 @@ body {
 }
 
 /* メイン */
-
 .position-absolute {
-    width: 100%; /* テキストを画像の幅に合わせる */
-    text-align: center; /* テキストを中央に配置 */
+    width: 100%;
+    /* テキストを画像の幅に合わせる */
+    text-align: center;
+    /* テキストを中央に配置 */
 }
+
 .text-overlay {
     position: absolute;
-    top: 20%; /* 上からの距離を調整 */
+    top: 20%;
+    /* 上からの距離を調整 */
     left: 50%;
     transform: translate(-50%, -50%);
     color: #352b2b;
 }
 
-/* HOMEボタン */
-#contents{
-    height:600px;
-  }
-  h1{
-    text-align:center;
-  }
-  .sankaku,
-  .text{
-    text-align:center;
-  }
-  #page-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 14px;
-    line-height: 1;
-    z-index: 99;
-  }
-  #page-top a {
-    background: #ffc042;
-    text-decoration: none;
-    color: #fff;
-    width: 60px;
-    padding: 28px 5px;
-    text-align: center;
-    display: block;
-    border-radius: 90px;
-    opacity: 0.9;
-    transition: all .3s ease;
-  }
-  #page-top a:hover {
-    text-decoration: none;
-    opacity: .5;
-  }
+/* 募集中の勉強会カードのスタイル */
+.list-title {
+    background-color: #FF9800;
+    /* 勉強会タイトルの背景色 */
+    padding: 0;
+}
+
+/* Tuttiカードのスタイル */
+.tutti-card {
+    height: 250px;
+    /* 固定高さ */
+    transition: transform 0.5s ease;
+    /* アニメーションの設定 */
+}
+
+.tutti-card:hover {
+    transform: scale(1.05);
+    /* 1.05倍に拡大 */
+}
+
+.husen {
+    background-color: #ffffff;
+    width: 100px;
+    height: 160px;
+    margin-top: 45px;
+    display: flex;
+    align-items: center;
+    /* 垂直方向の中央揃え */
+    justify-content: center;
+    /* 水平方向の中央揃え */
+}
+
+.vertical-text {
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+}
 
 /* マイページテーブル */
-.maintable{
-	border-spacing: 0;
-	border-collapse: separate;
-}
-.maintable th,.maintable td{
-	border-top: 1px solid #FFFFFF;
-	border-left: 1px solid #FFFFFF;
-}
-.maintable th{
-	padding: 5px 10px;
-	background: #78CFBF;
-	color: #FFFFFF;
-}
-.maintable tr:nth-child(even) th{
-	background: #62BBAB;
-}
-.maintable td{
-	width: auto;
-	padding: 50px 0px;
-	background: #FCFCFC;
-	color: #2f302f;
-	text-align: left;
-}
-.maintable tr:nth-child(even) td{
-	background: #EEEEEE;
-}
-.maintable th:last-child,.maintable td:last-child{
-	border-right: 1px solid #FFFFFF;
-}
-.maintable tr:last-child th,.maintable tr:last-child td{
-	border-bottom: 1px solid #FFFFFF;
-}
-.maintable tr:first-child :first-child{
-	border-top-left-radius: 5px;
-}
-.maintable tr:first-child :last-child{
-	border-top-right-radius: 5px;
-}
-.maintable tr:last-child :first-child{
-	border-bottom-left-radius: 5px;
-}
-.maintable tr:last-child :last-child{
-	border-bottom-right-radius: 5px;
+.maintable {
+    border-spacing: 0;
+    border-collapse: separate;
 }
 
-/* フッター 
+.maintable th,
+.maintable td {
+    border-top: 1px solid #FFFFFF;
+    border-left: 1px solid #FFFFFF;
+}
+
+.maintable th {
+    padding: 5px 10px;
+    background: #78CFBF;
+    color: #FFFFFF;
+}
+
+.maintable tr:nth-child(even) th {
+    background: #62BBAB;
+}
+
+.maintable td {
+    width: auto;
+    padding: 50px 0px;
+    background: #FCFCFC;
+    color: #2f302f;
+    text-align: left;
+}
+
+.maintable tr:nth-child(even) td {
+    background: #EEEEEE;
+}
+
+.maintable th:last-child,
+.maintable td:last-child {
+    border-right: 1px solid #FFFFFF;
+}
+
+.maintable tr:last-child th,
+.maintable tr:last-child td {
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.maintable tr:first-child :first-child {
+    border-top-left-radius: 5px;
+}
+
+.maintable tr:first-child :last-child {
+    border-top-right-radius: 5px;
+}
+
+.maintable tr:last-child :first-child {
+    border-bottom-left-radius: 5px;
+}
+
+.maintable tr:last-child :last-child {
+    border-bottom-right-radius: 5px;
+}
+
+/* フッターのスタイル */
 .footer {
     background-color: #586365;
     color: #fff;
@@ -139,4 +207,12 @@ body {
 
 .social-icons i {
     font-size: 1.5rem;
-} */
+}
+
+/* メディアクエリ */
+@media (max-width: 576px) {
+    .header .navbar-brand {
+        font-size: 1.5rem;
+        /* スマホサイズでフォントを小さく */
+    }
+}

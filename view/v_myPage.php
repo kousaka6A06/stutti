@@ -14,14 +14,14 @@
                         <p><strong>お気に入りTutti:</strong> <span id="">未登録</span></p>
                     </td>
                     <td>
-                        <a href="memberEdit.php" class="btn btn-secondary btn-sm">変更</a>
+                        <a href="userEdit.php" class="btn btn-secondary btn-sm">変更</a>
                     </td>
                 </tr>
                 <tr>
                     <th>メールアドレス</th>
                     <td>example@example.com</td>
                     <td>
-                        <a href="memberEdit.php" class="btn btn-secondary btn-sm">変更</a>
+                        <a href="userEdit.php" class="btn btn-secondary btn-sm">変更</a>
                     </td>
                 </tr>
                 <tr>
@@ -34,7 +34,7 @@
                         </p>
                     </td>
                     <td>
-                        <a href="memberEdit.php" class="btn btn-secondary btn-sm">パスワードを変更</a>
+                        <a href="userEdit.php" class="btn btn-secondary btn-sm">パスワードを変更</a>
                     </td>
                 </tr>
                 <tr>
