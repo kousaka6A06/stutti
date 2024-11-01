@@ -1,9 +1,9 @@
 <section class="container mt-1">
     <h2 class="text-center">ログイン</h2>
-    <p class="fs-10 text-muted text-center">メンバー登録は
+    <p class="fs-10 text-muted text-center">ユーザー登録は
         <a href="input_register.php" class="text-info fw-bold">こちら</a>
     </p>
-    
+
     <form action="login.php" method="POST">
         <div class="bg-light p-4 rounded shadow w-50 mx-auto">
 

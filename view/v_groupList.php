@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-md-1">
                 <div class="card" style="height: 150px; border: 10px solid #FF9800; color: #586365">
-                    <div class="card-body">
-                        <h5 class="card-title">AWS</h5>
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <h5 class="card-title vertical-text">AWS</h5>
                     </div>
                 </div>
             </div>
@@ -70,8 +70,8 @@
         <div class="row">
             <div class="col-md-1">
                 <div class="card" style="height: 150px; border: 10px solid #4FC94F; color: #586365">
-                    <div class="card-body">
-                        <h5 class="card-title">Linux</h5>
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <h5 class="card-title vertical-text">Linux</h5>
                     </div>
                 </div>
             </div>
@@ -134,8 +134,8 @@
         <div class="row">
             <div class="col-md-1">
                 <div class="card" style="height: 150px; border: 10px solid #49BDF0; color: #586365">
-                    <div class="card-body">
-                        <h5 class="card-title">PHP</h5>
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <h5 class="card-title vertical-text">PHP</h5>
                     </div>
                 </div>
             </div>
@@ -198,8 +198,8 @@
         <div class="row">
             <div class="col-md-1">
                 <div class="card" style="height: 150px; border: 10px solid #7B5544; color: #586365">
-                    <div class="card-body">
-                        <h5 class="card-title">Java</h5>
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <h5 class="card-title vertical-text">Java</h5>
                     </div>
                 </div>
             </div>
