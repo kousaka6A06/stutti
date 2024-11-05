@@ -1,7 +1,6 @@
 <?php
-
 require_once 'config/Database.php';
-require_once 'Model/SelectData.php';
+
 class MTutti {
     private $id;
     private $name;
@@ -9,7 +8,7 @@ class MTutti {
     private $color;
     private $conn;
    
-    private function __construct() {
+    public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
     }
 

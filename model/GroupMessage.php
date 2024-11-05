@@ -1,7 +1,6 @@
 <?php
-
 require_once 'config/Database.php';
-require_once 'Model/SelectData.php';
+
 class GroupMessage {
     private $id;
     private $groupId;
@@ -10,7 +9,7 @@ class GroupMessage {
     private $createdAt;
     private $conn;
     
-    private function __construct() {
+    public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
     }
 

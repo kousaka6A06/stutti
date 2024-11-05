@@ -1,6 +1,4 @@
 <?php
-    require_once 'common/DbManager`.`php';
-    require_once '';
 
 class SelectData {
 
@@ -22,16 +20,20 @@ class SelectData {
 //////////////////// ユーザー関連
     // ログイン
     function LoginUser($loginId) {
-        $sql = "SELECT `users`.`login_id`,`users`.`password`, `users`.`users_name` FROM `users` WHERE `users`.`id` = {$loginId}";
-        $result = $this->dc->query($sql);
-        $ary = $result->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT `users`.`stutti_id`,`users`.`password`, `users`.`name` FROM `users` WHERE `users`.`id` = ?";
+        $this->stmt = $this->dc->prepare($sql);
+        $this->stmt->bindValue(1,$loginId,PDO::PARAM_INT);
+        $this->stmt->execute();
+        $ary = $this->stmt->fetch(PDO::FETCH_ASSOC);
         return $ary;
     }
     // マイページ表示
     function userInfo($userId) {
-        $sql = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`login_id`,`users`.`name`, `users`.`avater`, `users`.`created_at` FROM `users` WHERE `users`.`id` = {$userId}";
-        $result = $this->dc->query($sql);
-        $ary = $result->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`stutti_id`,`users`.`name`, `users`.`avater`, `users`.`created_at` FROM `users` WHERE `users`.`id` = ?";
+        $this->stmt = $this->dc->prepare($sql);
+        $this->stmt->bindValue(1,$userId,PDO::PARAM_INT);
+        $this->stmt->execute();
+        $ary = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
 
@@ -63,16 +65,20 @@ class SelectData {
         $sql = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content` 
                 FROM `groups` 
                 WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = {$memberId})";
-        $result = $this->dc->query($sql);
-        $ary = $result->fetchAll(PDO::FETCH_ASSOC);
+        $this->stmt = $this->dc->prepare($sql);
+        $this->stmt->bindValue(1,$memberId,PDO::PARAM_INT);
+        $this->stmt->execute();
+        $ary = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
     // マイページに表示させる自身で作成した勉強会(サムネ・昇順)
     function myPageCreatedGroup($memberId) {
         $now = date('YY-mm-dd');
-        $sql = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content` FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = {$memberId}";
-        $result = $this->dc->query($sql);
-        $ary = $result->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content` FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = ?";
+        $this->stmt = $this->dc->prepare($sql);
+        $this->stmt->bindValue(1,$memberId,PDO::PARAM_INT);
+        $this->stmt->execute();
+        $ary = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
     // 勉強会詳細画面表示用
@@ -81,10 +87,12 @@ class SelectData {
     // 作成者IDから、memberテーブルより作成者名を副問い合わせ
     function GroupInfo($groupId) {
         $now = date('YY-mm-dd');
-        $sql = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,(SELECT `member`.`users_name` FROM`member` WHERE `member`.`id` = `groups`.`created_by_id`) AS `users_name` 
-        FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` = {$groupId}";
-        $result = $this->dc->query($sql);
-        $ary = $result->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,(SELECT `member`.`user_name` FROM`member` WHERE `member`.`id` = `groups`.`created_by_id`) AS `user_name` 
+        FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` = ?";
+        $this->stmt = $this->dc->prepare($sql);
+        $this->stmt->bindValue(1,$groupId,PDO::PARAM_INT);
+        $this->stmt->execute();
+        $ary = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
 
@@ -94,9 +102,11 @@ class SelectData {
     // 昇順表示
     function CommentData($tuttiId) {
         $sql = "SELECT `tutti_comments`.`id`,`tutti_comments`.`name`,`tutti_comments`.`content`,`tutti_comments`.`date`,`tutti_comments`.`tutti_id` 
-        FROM `tutti_comments` WHERE `tutti_comments`.`tutti_id` = {$tuttiId}";
-        $result = $this->dc->query($sql);
-        $ary = $result->fetchAll(PDO::FETCH_ASSOC);
+        FROM `tutti_comments` WHERE `tutti_comments`.`tutti_id` = ?";
+        $this->stmt = $this->dc->prepare($sql);
+        $this->stmt->bindValue(1,$tuttiId,PDO::PARAM_INT);
+        $this->stmt->execute();
+        $ary = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
 ///////////////////// メッセージ関連
@@ -104,10 +114,12 @@ class SelectData {
     // 昇順表示
     // メッセージを作成したメンバーのIDから、メンバー名を副問い合わせ
     function MessageData($groupId) {
-        $sql = "SELECT `group_messages`.`id`,`group_messages`.`group_id`,(SELECT user_name FROM member WHERE `member`.`id` = `group_messages`.`member_id`) AS `member_name`,`group_messages`.`content`,`group_messages`.`date` 
-        FROM `group_messages` WHERE `group_messages`.`group_id` = {$groupId}";
-        $result = $this->dc->query($sql);
-        $ary = $result->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT `group_messages`.`id`,`group_messages`.`group_id`,(SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`,`group_messages`.`content`,`group_messages`.`created_at` 
+        FROM `group_messages` WHERE `group_messages`.`group_id` = ?";
+        $this->stmt = $this->dc->prepare($sql);
+        $this->stmt->bindValue(1,$groupId,PDO::PARAM_INT);
+        $this->stmt->execute();
+        $ary = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
 
