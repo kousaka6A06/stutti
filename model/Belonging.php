@@ -1,6 +1,6 @@
 <?php
-require_once 'common/DbManager.php';
-require_once 'common/SelectData.php';
+require_once 'config/Database.php';
+
 class Belonging {
     private $groupId;
     private $memberId;

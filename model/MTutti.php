@@ -1,7 +1,6 @@
 <?php
-
 require_once 'config/Database.php';
-require_once 'Model/SelectData.php';
+
 class MTutti {
     private $id;
     private $name;

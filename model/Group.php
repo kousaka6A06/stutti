@@ -1,6 +1,6 @@
 <?php
-require_once 'config/DbManager.php';
-require_once 'Model/SelectData.php';
+require_once 'config/Database.php';
+
 class Group {
     private $id;
     private $name;

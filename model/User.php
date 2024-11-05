@@ -1,7 +1,5 @@
 <?php
-
 require_once 'config/Database.php';
-require_once 'Model/SelectData.php';
 
 class User {
     private $id;
@@ -18,6 +16,7 @@ class User {
 
     // TODO: プロパティを private に変更する？
     // TODO: ⇒各プロパティに対してgetter(),setter()用意
+
     public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
     }
