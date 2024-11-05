@@ -1,7 +1,6 @@
 <?php
-
 require_once 'config/Database.php';
-require_once 'Model/SelectData.php';
+
 class TuttiComment {
     private $id;
     private $name;
@@ -10,7 +9,7 @@ class TuttiComment {
     private $createdAt;
     private $conn;
 
-    private function __construct() {
+    public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
     }
 

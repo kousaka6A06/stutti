@@ -1,6 +1,6 @@
 <?php
-require_once 'config/DbManager.php';
-require_once 'Model/SelectData.php';
+require_once 'config/Database.php';
+
 class Group {
     private $id;
     private $name;
@@ -16,7 +16,7 @@ class Group {
     private $updatedAt;
     private $conn;
 
-    private function __construct() {
+    public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
     }
 
