@@ -22,7 +22,7 @@ class User {
     }
 
     public function createUser() {
-        $query = "INSERT INTO users (stutti_id, password, name, mail_address, avatar) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO `users` (`users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`mail_address`, `users`.`avatar`) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
@@ -59,7 +59,7 @@ class User {
     }
 
     public function login() {
-        $query = "SELECT * FROM `users` WHERE stutti_id = ?";
+        $query = "SELECT * FROM `users` WHERE `users`.`stutti_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->stuttiId);
         $stmt->execute();
@@ -102,7 +102,7 @@ class User {
         $this->createdAt = $createdAt;
     }
     function setUpdatedAt($updatedAt) {
-        $this->updateAt = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     // getter
