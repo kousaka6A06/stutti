@@ -22,7 +22,7 @@ if (!isset($_SESSION['userId'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // ユーザーインスタンスを作成してセッション情報をセット
     $user = new User();
-    $user->id = $_SESSION['userId'];
+    $user->setId($_SESSION['userId']);
 
     // TODO: [コントローラー]
     // ユーザー情報を取得する
@@ -31,35 +31,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // ユーザー編集画面を描画
     Utils::loadView('ユーザー編集', 'view/v_userEdit.php');
 
-// ユーザー編集画面で修正ボタンが押下された場合
+// ユーザー編集画面の修正ボタンが押下された場合
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ユーザーインスタンスを作成して画面で入力された内容をセット
+    // ユーザーインスタンスを作成して画面から渡された情報をセット
     $user = new User();
-    $user->password = $_POST['password'];
-    $user->name = $_POST['name'];
-    $user->mail_address = $_POST['mail-address'];
+    $user->setPassword($_POST['password']);
+    $user->setName($_POST['name']);
+    $user->setMailAddress($_POST['mail-address']);
     if (isset($_POST['avatar'])) {
-        $user->avatar = $_POST['avatar'];
+        $user->setAvatar($_POST['avatar']);
     } else {
-        $user->avatar = DEFAULT_AVATAR;
+        $user->setAvatar(DEFAULT_AVATAR);
     }
 
+    // TODO: [コントローラー]
     // ユーザー編集試行
     // ユーザー編集に成功した場合
-    if ($user->updateUser()) {
+    // if ($user->updateUser()) {
 
     // TODO: [モデル]
     // updateUser():bool
     // あらかじめプロパティに設定されたユーザー情報で、UsersレコードをUPDATEしてください
-    // PDOStatement::execute()の戻り値(true or false)をそのまま返却してください
+    // 実行結果の成否を返却してください
 
         // マイページ画面に遷移
         header('Location: ' . BASE_DOMAIN . '/mypage.php');
 
     // ユーザー編集に失敗した場合
-    } else {
+    // } else {
         // エラーメッセージと共にエラー画面を描画
-        $errorMessage = 'ユーザーの編集に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
-        Utils::loadView('エラー', 'view/v_error.php');
-    }
+        // $errorMessage = 'ユーザーの編集に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
+        // Utils::loadView('エラー', 'view/v_error.php');
+    // }
 }
