@@ -5,7 +5,7 @@ class SelectData {
     private $dc;
     private $stmt;
 
-    function __construct() {
+    public function __construct() {
         $this->dc = getDb();
     }
 //////////////////// tutti 表示関連
