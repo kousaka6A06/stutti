@@ -20,7 +20,7 @@ if (!isset($_SESSION['userId'])) {
 
 // ユーザーインスタンスを作成してセッション情報をセット
 $user = new User();
-$user->id = $_SESSION['userId'];
+$user->setId($_SESSION['userId']);
 
 // TODO: [コントローラー]
 // ユーザー情報を取得する
@@ -29,6 +29,25 @@ $user->id = $_SESSION['userId'];
 // TODO: [モデル]
 // getUserById():User
 // あらかじめプロパティに設定されたuserIdを使って、Userを検索して返却してください
+// PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
+
+// TODO: [コントローラー]
+// 作成した勉強会情報取得
+// $ownerGroups = $group->getGroupsByOwnerId($user->getId());
+
+// TODO: [モデル]
+// getGroupsByOwnerId():Group[]
+// 引数で渡されたuserIdを使って、ユーザーが作成したGroupを検索して返却してください
+// PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
+
+// TODO: [コントローラー]
+// 参加中の勉強会情報取得
+// $memberGroups = $group->getGroupsByMemberId($user->getId());
+
+// TODO: [モデル]
+// getGroupsByMemberId():Group[]
+// 引数で渡されたuserIdを使って、ユーザーが参加中のGroupを検索して返却してください
+// ただし、ユーザーが作成したGroupは除いてください
 // PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
 
 // マイページ画面を描画

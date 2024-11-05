@@ -22,18 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // ログイン画面を描画
     Utils::loadView('ログイン', 'view/v_login.php');
 
-// ログイン画面でログインボタンが押下された場合
+// ログイン画面のログインボタンが押下された場合
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ユーザーインスタンスを作成して画面で入力された内容をセット
+    // ユーザーインスタンスを作成して画面から渡された情報をセット
     $user = new User();
-    $user->login_id = $_POST['login-id'];
-    $user->password = $_POST['password'];
+    $user->setStuttiId($_POST['stutti-id']);
+    $user->setPassword($_POST['password']);
 
     // ログイン試行
     // ログインに成功した場合
     if ($user->login()) {
         // セッションにユーザーIDを保存してマイページ画面に遷移
-        $_SESSION['userId'] = $user->id;
+        $_SESSION['userId'] = $user->getId();
         header('Location: ' . BASE_DOMAIN . '/mypage.php');
 
     // ログインに失敗した場合
