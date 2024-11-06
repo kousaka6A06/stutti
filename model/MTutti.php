@@ -12,6 +12,16 @@ class MTutti {
         $this->conn = Database::getInstance()->getConnection();
     }
 
+    //////////////////// tutti 表示関連
+    // tutti の表示内容を取得する
+    function tutti() {
+        $query = "SELECT * FROM `m_tutti`";
+        $stmt = $this->conn->query($query);
+        
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
+    }
+
     // setter
     function setId($id) {
         $this->id = $id;
@@ -27,17 +37,18 @@ class MTutti {
     }
 
     // getter
-    function getId($id):int {
-        return $id;
+    function getId():int {
+        return $this->id;
     }
-    function getName($name):string {
-        return $name;
+    function getName():string {
+        return $this->name;
     }
-    function getAbout($about):string {
-        return $about;
+    function getAbout():string {
+        return $this->about;
     }
-    function getColor($color):string {
-        return $color;
+    function getColor():string {
+        return $this->color;
     }
+
 
 }
