@@ -10,9 +10,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// セッション・画面から渡された情報をサニタイズして変数に格納
+$userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+$stuttiId = isset($_POST['stutti-id']) ? Utils::e($_POST['stutti-id']) : null;
+$password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
+
 // ログイン済みの場合
-if (isset($_SESSION['userId'])) {
-    // マイページ画面に遷移
+if ($userId) {
+    // セッションにメッセージを保存してマイページ画面に遷移
+    $_SESSION['message'] = 'ログイン済みです';
     header('Location: ' . BASE_DOMAIN . '/mypage.php');
     exit;
 }
@@ -26,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ユーザーインスタンスを作成して画面から渡された情報をセット
     $user = new User();
-    $user->setStuttiId($_POST['stutti-id']);
-    $user->setPassword($_POST['password']);
+    $user->setStuttiId($stuttiId);
+    $user->setPassword($password);
 
     // ログイン試行
     // ログインに成功した場合
@@ -38,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // ログインに失敗した場合
     } else {
-        // エラーメッセージと共にログイン画面を再描画
-        $errorMessage = 'Stutti ID かパスワードが異なります';
+        // セッションにメッセージを保存してログイン画面を再描画
+        $_SESSION['message'] = 'Stutti ID かパスワードが異なります';
         Utils::loadView('ログイン', 'view/v_login.php');
     }
 }

@@ -10,17 +10,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// セッションから渡された情報を変数に格納
+$userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+
 // 未ログインの場合
-if (!isset($_SESSION['userId'])) {
-    // エラーメッセージと共にログイン画面に遷移
-    $errorMessage = 'ログインしてください';
+if (!$userId) {
+    // セッションにメッセージを保存してログイン画面に遷移
+    $_SESSION['message'] = 'ログインしてください';
     header('Location: ' . BASE_DOMAIN . '/login.php');
     exit;
 }
 
 // ユーザーインスタンスを作成してセッション情報をセット
 $user = new User();
-$user->setId($_SESSION['userId']);
+$user->setId($userId);
 
 // TODO: [コントローラー]
 // ユーザー情報を取得する
