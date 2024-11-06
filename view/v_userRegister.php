@@ -10,10 +10,10 @@
         </div>
 
         <div class="mb-3">
-            <label for="login-id" class="form-label">Stutti IDを入力</label>
+            <label for="stutti-id" class="form-label">Stutti IDを入力</label>
             <small style="font-size: 10px; color: red;">*必須</small>
             <small>ログイン時に必要になります</small>
-            <input type="test" id="login-id" name="login-id" class="form-control" required>
+            <input type="text" id="stutti-id" name="stutti-id" class="form-control" required>
         </div>
 
         <div class="mb-3">

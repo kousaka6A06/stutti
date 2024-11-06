@@ -8,8 +8,8 @@
         <div class="bg-light p-4 rounded shadow w-50 mx-auto">
 
             <div class="mb-3">
-                <label for="login-id" class="form-label">ログインIDを入力</label>
-                <input type="text" name="login-id" id="login-id" class="form-control" placeholder="ログインID" required>
+                <label for="stutti-id" class="form-label">Stutti IDを入力</label>
+                <input type="text" name="stutti-id" id="stutti-id" class="form-control" placeholder="Stutti ID" required>
             </div>
 
             <div class="mb-3">

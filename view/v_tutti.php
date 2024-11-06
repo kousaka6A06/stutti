@@ -1,20 +1,41 @@
-<h1>Tutti広場</h1>
-  <div class="scrolling-container">
-    <div class="scrolling-text">こんにちは、これが背景の文字です！</div>
-    <div class="scrolling-text">ページをスクロールすると新しい文字が表示されます。</div>
-    <div class="scrolling-text">Webデザインの練習に使ってください。</div>
-    <div class="scrolling-text">このエフェクトはCSSで簡単に作成できます。</div>
-    <div class="scrolling-text">スクロールして次の文字を見てみましょう。</div>
-  </div>
+<!-- セクション 1 -->
+<section class="section section-1">
+    <div class="section-title">
+        <h2>セクション1</h2>
+    </div>
+    <div class="content">
+        <p>セクション1のコンテンツです。</p>
+        <p>ここにスクロール可能なコンテンツを追加してください。</p>
+        <p>セクション1の中のコンテンツがスクロールします。</p>
+        <p>セクション1の中のコンテンツがスクロールします。</p>
+        <p>セクション1の中のコンテンツがスクロールします。</p>
+    </div>
+</section>
 
-  <div class="content">
-    <h1>メインコンテンツ</h1>
-    <p>ここはスクロールしていくコンテンツです。背景の文字が進行とともに変わります。</p>
-    <p>さらにスクロールしてみてください。</p>
-    <!-- 他のコンテンツをここに追加 -->
-  </div>
+<!-- セクション 2 -->
+<section class="section section-2">
+    <div class="section-title">
+        <h2>セクション2</h2>
+    </div>
+    <div class="content">
+        <p>セクション2のコンテンツです。</p>
+        <p>セクション2の中のコンテンツがスクロールします。</p>
+        <p>セクション2の中のコンテンツがスクロールします。</p>
+        <p>セクション2の中のコンテンツがスクロールします。</p>
+    </div>
+</section>
 
-
+<!-- セクション 3 -->
+<section class="section section-3">
+    <div class="section-title">
+        <h2>セクション3</h2>
+    </div>
+    <div class="content">
+        <p>セクション3のコンテンツです。</p>
+        <p>セクション3の中のコンテンツがスクロールします。</p>
+        <p>セクション3の中のコンテンツがスクロールします。</p>
+    </div>
+</section>
 
 
 <!-- <h2>AWS</h2>
