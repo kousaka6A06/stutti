@@ -22,7 +22,7 @@ class User {
     }
 
     public function createUser() {
-        $query = "INSERT INTO users (stutti_id, password, name, mail_address, avatar) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO `users` (`users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`mail_address`, `users`.`avatar`) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
@@ -60,7 +60,7 @@ class User {
     }
 
     public function login() {
-        $query = "SELECT * FROM `users` WHERE stutti_id = ?";
+        $query = "SELECT * FROM `users` WHERE `users`.`stutti_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->stuttiId);
         $stmt->execute();
@@ -94,6 +94,32 @@ class User {
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
+    }
+
+    // ファイル保存用
+    function registerAvatar() : int {
+        $upfile = $_FILES['avatar'];
+        if ($upfile['error'] !== UPLOAD_ERR_OK) {
+            return 40 + $upfile['error'];
+        }
+        $ufName = $upfile['name'];
+        $ufExtention = strtolower(pathinfo($ufName)['extension']);
+        $availableExt = ['gif', 'jpg', 'jpeg', 'png'];
+        if (!in_array($ufExtention, $availableExt)) {
+            return 51;
+        }
+        $ufTmpname = $upfile['tmp_name'];
+        $ufMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $ufTmpname);
+        $availableMType = ['image/gif', 'image/jpg', 'image/jpeg', 'image/png'];
+        if (!in_array($ufMimeType, $availableMType)) {
+            return 52;
+        }
+        $dt = new DateTime();
+        $this->avatar = $dt->format('u') . $ufName;
+        if (!move_uploaded_file($ufTmpname, 'images/' . $this->avatar)) {
+            return 53;
+        }
+        return 0;
     }
 
     // setter
