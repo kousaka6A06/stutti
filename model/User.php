@@ -38,9 +38,11 @@ class User {
 
     // 会員情報更新
     function updateUser() {
-        $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`stutti_id` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avater` = ? WHERE `users`.`id` = ?";
+        $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`stutti_id` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avatar` = ? WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+     
         $stmt->bindValue(1, $this->mailAddress);
         $stmt->bindValue(2, $this->stuttiId);
         $stmt->bindValue(3, $this->password);
