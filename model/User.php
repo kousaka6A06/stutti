@@ -73,6 +73,32 @@ class User {
         return false;
     }
 
+    // ファイル保存用
+    function registerAvatar() : int {
+        $upfile = $_FILES['avatar'];
+        if ($upfile['error'] !== UPLOAD_ERR_OK) {
+            return 40 + $upfile['error'];
+        }
+        $ufName = $upfile['name'];
+        $ufExtention = strtolower(pathinfo($ufName)['extension']);
+        $availableExt = ['gif', 'jpg', 'jpeg', 'png'];
+        if (!in_array($ufExtention, $availableExt)) {
+            return 51;
+        }
+        $ufTmpname = $upfile['tmp_name'];
+        $ufMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $ufTmpname);
+        $availableMType = ['image/gif', 'image/jpg', 'image/jpeg', 'image/png'];
+        if (!in_array($ufMimeType, $availableMType)) {
+            return 52;
+        }
+        $dt = new DateTime();
+        $this->avatar = $dt->format('u') . $ufName;
+        if (!move_uploaded_file($ufTmpname, 'images/' . $this->avatar)) {
+            return 53;
+        }
+        return 0;
+    }
+
     // setter
     function setId($id) {
         $this->id = $id;
