@@ -2,6 +2,7 @@
 
 require_once 'config/constants.php';
 require_once 'model/Group.php';
+require_once 'model/GroupMessage.php';
 require_once 'model/User.php';
 require_once 'utils/Utils.php';
 
@@ -11,15 +12,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// セッション・画面から渡された情報をサニタイズして変数に格納
+$userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+$groupId = isset($_GET['gid']) ? Utils::e($_GET['gid']) : null;
+
 // 勉強会IDが指定されていない場合
-if (!isset($_GET['gid'])) {
+if (!$groupId) {
     // 勉強会一覧画面に遷移
     header('Location: ' . BASE_DOMAIN . '/groupList.php');
+    exit;
 }
 
 // 勉強会インスタンスを作成して画面から渡された情報をセット
 $group = new Group();
-$group->setId($_GET['gid']);
+$group->setId($groupId);
 
 // TODO: [コントローラー]
 // 勉強会情報取得
@@ -30,50 +36,26 @@ $group->setId($_GET['gid']);
 // あらかじめプロパティに設定されたgroupIdを使って、Groupを検索して返却してください
 // PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
 
-// 参加ボタンが押下された場合
-// if (isset($_POST['participate'])) {
-    // 勉強会の定員に余裕がある場合
-    // if (!$group->isFull()) {
-        // TODO: [コントローラー] 
-        // メンバー登録試行
-        // メンバー登録に成功した場合
-        // if ($group->addMember($user->getId())) {
-
-        // TODO: [モデル]
-        // addMember($userId):boolean
-        // 引数で渡されたユーザーをグループに追加してください
-        // 実行結果の成否を返却してください
-
-        // メンバー登録に失敗した場合
-        // } else {
-            // エラーメッセージと共にエラー画面を描画
-            // $errorMessage = 'メンバー登録に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
-            // Utils::loadView('エラー', 'view/v_error.php');
-            // exit;
-        // }
-
-    // 勉強会が満員の場合
-    // } else {
-        // エラーメッセージを設定
-        // $errorMessage = '満員のため勉強会に参加できません。';
-    // }
-// }
-
 // 画面表示制御用にステータス設定
 $userStatus = null;
 $groupStatus = null;
 
 // 未ログインの場合
-if (!isset($_SESSION['user'])) {
+if (!$userId) {
     $userStatus = NOT_LOGGED_IN;
 
 // ログイン済みの場合
 } else {
-    // ユーザーインスタンスをセッションから取得
-    $user = $_SESSION['user'];
+    // ユーザーインスタンスを作成してセッション情報をセット
+    $user = new User();
+    $user->setId($userId);
+
+    // TODO: [コントローラー]
+    // ユーザー情報を取得する
+    // $user = $user->getUserById();
 
     // 勉強会に未参加の場合
-    if (!$user->isMemberOfGroup($_GET['gid'])) {
+    // if (!$user->isMemberOfGroup($groupId)) {
 
     // TODO: [モデル]
     // isMemberOfGroup($groupId):boolean
@@ -91,10 +73,10 @@ if (!isset($_SESSION['user'])) {
         // }
 
     // 勉強会に参加中の場合
-    } else {
+    // } else {
         // 勉強会メッセージを作成して画面から渡された情報をセット
         $message = new GroupMessage();
-        $message->setGroupId($_GET['gid']);
+        $message->setGroupId($groupId);
 
         // TODO: [コントローラー]
         // 勉強会メッセージ情報取得
@@ -107,7 +89,7 @@ if (!isset($_SESSION['user'])) {
 
         // TODO: [コントローラー]
         // 勉強会の作成者の場合
-        // if ($user->isOwnerOfGroup($_GET['gid'])) {
+        // if ($user->isOwnerOfGroup($groupId)) {
 
         // TODO: [モデル]
         // isOwnerOfGroup($groupId):boolean
@@ -119,7 +101,7 @@ if (!isset($_SESSION['user'])) {
         // } else {
             // $userStatus = GROUP_MEMBER;
         // }
-    }
+    // }
 }
 
 // 勉強会詳細画面を描画

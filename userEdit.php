@@ -10,10 +10,17 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// セッション・画面から渡された情報をサニタイズして変数に格納
+$userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+$password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
+$name = isset($_POST['name']) ? Utils::e($_POST['name']) : null;
+$mailAddress = isset($_POST['mail-address']) ? Utils::e($_POST['mail-address']) : null;
+$avatar = isset($_POST['avatar']) ? Utils::e($_POST['avatar']) : null;
+
 // 未ログインの場合
-if (!isset($_SESSION['userId'])) {
-    // エラーメッセージと共にログイン画面に遷移
-    $errorMessage = 'ログインしてください';
+if (!$userId) {
+    // セッションにメッセージを保存してログイン画面に遷移
+    $_SESSION['message'] = 'ログインしてください';
     header('Location: ' . BASE_DOMAIN . '/login.php');
     exit;
 }
@@ -22,7 +29,7 @@ if (!isset($_SESSION['userId'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // ユーザーインスタンスを作成してセッション情報をセット
     $user = new User();
-    $user->setId($_SESSION['userId']);
+    $user->setId($userId);
 
     // TODO: [コントローラー]
     // ユーザー情報を取得する
@@ -35,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ユーザーインスタンスを作成して画面から渡された情報をセット
     $user = new User();
-    $user->setPassword($_POST['password']);
-    $user->setName($_POST['name']);
-    $user->setMailAddress($_POST['mail-address']);
-    if (isset($_POST['avatar'])) {
-        $user->setAvatar($_POST['avatar']);
+    $user->setPassword($password);
+    $user->setName($name);
+    $user->setMailAddress($mailAddress);
+    if ($avatar) {
+        $user->setAvatar($avatar);
     } else {
         $user->setAvatar(DEFAULT_AVATAR);
     }
@@ -54,13 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // あらかじめプロパティに設定されたユーザー情報で、UsersレコードをUPDATEしてください
     // 実行結果の成否を返却してください
 
-        // マイページ画面に遷移
+        // セッションにメッセージを保存してマイページ画面に遷移
+        $_SESSION['message'] = 'ユーザーを編集しました';
         header('Location: ' . BASE_DOMAIN . '/mypage.php');
 
     // ユーザー編集に失敗した場合
     // } else {
-        // エラーメッセージと共にエラー画面を描画
-        // $errorMessage = 'ユーザーの編集に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
-        // Utils::loadView('エラー', 'view/v_error.php');
+        // セッションにメッセージを保存してエラー画面に遷移
+        // $_SESSION['message'] = 'ユーザーの編集に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
+        // header('Location: ' . BASE_DOMAIN . '/error.php');
     // }
 }
