@@ -15,13 +15,22 @@ class TuttiComment {
 
     // tutti コメント投稿
     function createTuttiComment() {
-        $query ="INSERT INTO `tutti_comments` (`tutti_comments`.`name`,`tutti_comments.content`,`tutti_comments.tutti_id`) VALUES(?,?,?)";
-        $stmt = $this->conn->prepare($query);
+        if($this->name){
+            $query ="INSERT INTO `tutti_comments` (`tutti_comments`.`name`,`tutti_comments`.`content`,`tutti_comments`.`tutti_id`) VALUES(?,?,?)";
+            $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(1, $this->name);
-        $stmt->bindValue(2, $this->content);
-        $stmt->bindValue(3, $this->tuttiId);
-        $stmt->execute();
+            $stmt->bindValue(1, $this->name);
+            $stmt->bindValue(2, $this->content);
+            $stmt->bindValue(3, $this->tuttiId);
+        } else {
+            $query ="INSERT INTO `tutti_comments` (`tutti_comments`.`content`,`tutti_comments`.`tutti_id`) VALUES(?,?)";
+            $stmt = $this->conn->prepare($query);
+
+            $stmt->bindValue(1, $this->content);
+            $stmt->bindValue(2, $this->tuttiId);
+        }
+
+        return $stmt->execute();
     }
 
     ///////////////////// tutti コメント関連
