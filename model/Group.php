@@ -22,7 +22,9 @@ class Group {
 
     // 勉強会登録
     function createGroup() {
-        $query = "INSERT INTO `groups` (`groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,`groups`.`created_by_id`,`groups.`tutti_id`) VALUES(?,?,?,?,?,?,?,?)";
+        $query = "INSERT INTO `groups` 
+        (`groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,`groups`.`created_by_id`,`groups`.`tutti_id`) 
+        VALUES(?,?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->name);
@@ -46,8 +48,9 @@ class Group {
         $stmt->bindValue(3, $this->location);
         $stmt->bindValue(4, $this->numPeople);
         $stmt->bindValue(5, $this->content);
-        return $stmt->execute();
+        $stmt->bindValue(6, $this->id); 
 
+        return $stmt->execute();
     }
 
     // 勉強会論理削除
