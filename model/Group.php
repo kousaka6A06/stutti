@@ -21,43 +21,110 @@ class Group {
     }
 
     // 勉強会登録
-    function createGroup($name, $date, $time, $location, $numPeople, $content, $createdById, $tuttiId) {
+    function createGroup() {
         $query = "INSERT INTO `groups` (`groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,`groups`.`created_by_id`,`groups.`tutti_id`) VALUES(?,?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(1, $name);
-        $stmt->bindValue(2, $date);
-        $stmt->bindValue(3, $time);
-        $stmt->bindValue(4, $location);
-        $stmt->bindValue(5, $numPeople);
-        $stmt->bindValue(6, $content);
-        $stmt->bindValue(7, $createdById);
-        $stmt->bindValue(8, $tuttiId);
+        $stmt->bindValue(1, $this->name);
+        $stmt->bindValue(2, $this->date);
+        $stmt->bindValue(3, $this->time);
+        $stmt->bindValue(4, $this->location);
+        $stmt->bindValue(5, $this->numPeople);
+        $stmt->bindValue(6, $this->content);
+        $stmt->bindValue(7, $this->createdById);
+        $stmt->bindValue(8, $this->tuttiId);
         $stmt->execute();
     }
 
     // 勉強会情報更新
-    function updateGroup($date, $time, $location, $numPeople, $content) {
+    function updateGroup() {
         $query = "UPDATE `groups` SET `groups`.`date` = ?, `groups`.`time` = ?, `groups`.`location` = ?, `groups`.`num_people` = ?, `groups`.`content` = ? WHERE `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         
-        $stmt->bindValue(1, $date);
-        $stmt->bindValue(2, $time);
-        $stmt->bindValue(3, $location);
-        $stmt->bindValue(4, $numPeople);
-        $stmt->bindValue(5, $content);
+        $stmt->bindValue(1, $this->date);
+        $stmt->bindValue(2, $this->time);
+        $stmt->bindValue(3, $this->location);
+        $stmt->bindValue(4, $this->numPeople);
+        $stmt->bindValue(5, $this->content);
         $stmt->execute();
 
     }
 
     // 勉強会論理削除
     // 論理削除 UPDATE を利用
-    function deleteGroup($id) {
+    function deleteGroup() {
         $query = "UPDATE `groups` SET `groups`.`delete_flag` = 1 WHERE `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(1, $id);
+        $stmt->bindValue(1, $this->id);
         $stmt->execute();
+    }
+
+
+    // 勉強会の最新の5件を表示する(サムネ)
+    function groupNew() {
+        $now = date('YY-mm-dd');
+        $query = "SELECT `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content` 
+                FROM `groups` WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
+        $stmt = $this->conn->prepare($query);
+        
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
+    }
+
+    // 勉強会詳細画面表示用
+    // 各勉強会サムネのリンクにPOSTで、`groups`.`id` を送ってもらう
+    // POST に `groups`.`id` を持ってもらって画面遷移するので、ページとして変数を持っているからそれを引数として宣言してもらう
+    // 作成者IDから、memberテーブルより作成者名を副問い合わせ
+    function GroupInfo() {
+        $now = date('YY-mm-dd');
+        $query = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,(SELECT `users`.`name` FROM`users` WHERE `users`.`id` = `groups`.`created_by_id`) AS `user_name` 
+        FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` = ?";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
+        $stmt->execute();
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
+    }
+
+
+    // マイページに表示させる参加している勉強会(サムネ・昇順)
+    // group_member テーブルにてユーザーIDで抽出した
+    function myPageAttendGroup() {
+        $now = date('YY-mm-dd');
+        $query = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content` 
+                FROM `groups` 
+                WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?)";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
+        $stmt->execute();
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
+    }
+
+    // マイページに表示させる自身で作成した勉強会(サムネ・昇順)
+    function myPageCreatedGroup() {
+        $now = date('YY-mm-dd');
+        $query = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content` FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = ?";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
+        $stmt->execute();
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
+    }
+
+    // tutti ごとの最新の勉強会表示(サムネ)
+    function tuttiGroup() {
+        $now = date('YY-mm-dd');
+        $query = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,`groups`.`tutti_id` 
+                FROM `groups` WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
+        $stmt = $this->conn->query($query);
+
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
     }
 
     // setter
