@@ -47,9 +47,6 @@
 
         <button type="submit" class="btn btn-dark w-30 d-block mx-auto">作成する</button>
     </form>
-
-    <hr>
-
 </section>
 
 <hr>

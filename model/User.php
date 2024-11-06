@@ -37,24 +37,25 @@ class User {
     }
 
     // 会員情報更新
-    function updateUser($mailAddress, $stuttiId, $password, $name, $avater, $id) {
+    function updateUser() {
         $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`stutti_id` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avater` = ? WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(1, $mailAddress);
-        $stmt->bindValue(2, $stuttiId);
-        $stmt->bindValue(3, $password);
-        $stmt->bindValue(4, $name);
-        $stmt->bindValue(5, $avater);
-        $stmt->bindValue(6, $id);
+        $stmt->bindValue(1, $this->mailAddress);
+        $stmt->bindValue(2, $this->stuttiId);
+        $stmt->bindValue(3, $this->password);
+        $stmt->bindValue(4, $this->name);
+        $stmt->bindValue(5, $this->avatar);
+        $stmt->bindValue(6, $this->id);
         $stmt->execute();
     }
 
     // 会員情報削除
-    function deleteUser($id) {
+    function deleteUser() {
         $query = "UPDATE `users` SET `users`.`delete_flag` = 1  WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(1, $id);
+
+        $stmt->bindValue(1, $this->id);
         $stmt->execute();
     }
 
@@ -71,6 +72,28 @@ class User {
             return true;
         }
         return false;
+    }
+    // //////////////////// ユーザー関連
+    // // ログイン
+    // function LoginUser($loginId) {
+    //     $query = "SELECT `users`.`stutti_id`,`users`.`password`, `users`.`name` FROM `users` WHERE `users`.`id` = ?";
+    //     $stmt = $this->conn->prepare($query);
+
+    //     $stmt->bindValue(1,$loginId,PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $ary = $stmt->fetch(PDO::FETCH_ASSOC);
+    //     return $ary;
+    // }
+
+    // マイページ表示
+    function userInfo() {
+        $query = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`stutti_id`,`users`.`name`, `users`.`avater`, `users`.`created_at` FROM `users` WHERE `users`.`id` = ?";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
+        $stmt->execute();
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
     }
 
     // ファイル保存用

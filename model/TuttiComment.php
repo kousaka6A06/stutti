@@ -14,14 +14,28 @@ class TuttiComment {
     }
 
     // tutti コメント投稿
-    function createTuttiComment($name, $content, $tuttiId) {
+    function createTuttiComment() {
         $query ="INSERT INTO `tutti_comments` (`tutti_comments`.`name`,`tutti_comments.content`,`tutti_comments.tutti_id`) VALUES(?,?,?)";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(1, $name);
-        $stmt->bindValue(2, $content);
-        $stmt->bindValue(3, $tuttiId);
+        $stmt->bindValue(1, $this->name);
+        $stmt->bindValue(2, $this->content);
+        $stmt->bindValue(3, $this->tuttiId);
         $stmt->execute();
+    }
+
+    ///////////////////// tutti コメント関連
+    // コメント表示
+    // 昇順表示
+    function CommentData() {
+        $query = "SELECT `tutti_comments`.`id`,`tutti_comments`.`name`,`tutti_comments`.`content`, `tutti_comments`.`tutti_id`, `tutti_comments`.`created_at`
+        FROM `tutti_comments` WHERE `tutti_comments`.`tutti_id` = ?";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindValue(1,$this->tuttiId,PDO::PARAM_INT);
+        $stmt->execute();
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
     }
 
     // setter

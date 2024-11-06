@@ -1,5 +1,23 @@
 <h1>Tutti広場</h1>
-<h2>AWS</h2>
+  <div class="scrolling-container">
+    <div class="scrolling-text">こんにちは、これが背景の文字です！</div>
+    <div class="scrolling-text">ページをスクロールすると新しい文字が表示されます。</div>
+    <div class="scrolling-text">Webデザインの練習に使ってください。</div>
+    <div class="scrolling-text">このエフェクトはCSSで簡単に作成できます。</div>
+    <div class="scrolling-text">スクロールして次の文字を見てみましょう。</div>
+  </div>
+
+  <div class="content">
+    <h1>メインコンテンツ</h1>
+    <p>ここはスクロールしていくコンテンツです。背景の文字が進行とともに変わります。</p>
+    <p>さらにスクロールしてみてください。</p>
+    <!-- 他のコンテンツをここに追加 -->
+  </div>
+
+
+
+
+<!-- <h2>AWS</h2>
 <ul>説明：AWS全般の集い</ul>
 <hr>
 <h2>AWS最新のトレンド</h2><br><br>
@@ -50,4 +68,4 @@
 <form action="">
     <textarea name="" id=""></textarea>
     <input type="submit" value="投稿する">
-</form>
+</form> -->
