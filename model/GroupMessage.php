@@ -21,7 +21,7 @@ class GroupMessage {
         $stmt->bindValue(1, $this->groupId);
         $stmt->bindValue(2, $this->memberId);
         $stmt->bindValue(3, $this->content);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     // 勉強会メッセージ削除
@@ -31,7 +31,7 @@ class GroupMessage {
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->id);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     ///////////////////// メッセージ関連

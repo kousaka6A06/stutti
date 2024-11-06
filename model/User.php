@@ -42,14 +42,14 @@ class User {
         $stmt = $this->conn->prepare($query);
 
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-     
+
         $stmt->bindValue(1, $this->mailAddress);
         $stmt->bindValue(2, $this->stuttiId);
         $stmt->bindValue(3, $this->password);
         $stmt->bindValue(4, $this->name);
         $stmt->bindValue(5, $this->avatar);
         $stmt->bindValue(6, $this->id);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     // 会員情報削除
@@ -58,7 +58,7 @@ class User {
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->id);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function login() {

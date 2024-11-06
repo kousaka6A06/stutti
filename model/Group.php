@@ -35,7 +35,7 @@ class Group {
         $stmt->bindValue(6, $this->content);
         $stmt->bindValue(7, $this->createdById);
         $stmt->bindValue(8, $this->tuttiId);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     // 勉強会情報更新
@@ -49,8 +49,8 @@ class Group {
         $stmt->bindValue(4, $this->numPeople);
         $stmt->bindValue(5, $this->content);
         $stmt->bindValue(6, $this->id); 
-        $stmt->execute();
 
+        return $stmt->execute();
     }
 
     // 勉強会論理削除
@@ -60,7 +60,7 @@ class Group {
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->id);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
 
