@@ -8,12 +8,20 @@ class MTutti {
     private $color;
     private $conn;
    
-    // public function __construct() {
-    //     $this->conn = Database::getInstance()->getConnection();
-    // }
     public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
     }
+
+    //////////////////// tutti 表示関連
+    // tutti の表示内容を取得する
+    function tutti() {
+        $query = "SELECT * FROM `m_tutti`";
+        $stmt = $this->conn->query($query);
+        
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
+    }
+
     // setter
     function setId($id) {
         $this->id = $id;
@@ -41,5 +49,6 @@ class MTutti {
     function getColor():string {
         return $this->color;
     }
+
 
 }

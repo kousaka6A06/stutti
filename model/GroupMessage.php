@@ -14,24 +14,39 @@ class GroupMessage {
     }
 
     // 勉強会メッセージ投稿
-    function createGroupMessage($group_id, $member_id, $content) {
+    function createGroupMessage() {
         $query ="INSERT INTO `group_messages` (`group_messages`.`group_id`,`group_messages`.`member_id`,`group_messages`.`content`) VALUES(?,?,?)";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(1, $group_id);
-        $stmt->bindValue(2, $member_id);
-        $stmt->bindValue(3, $content);
+        $stmt->bindValue(1, $this->groupId);
+        $stmt->bindValue(2, $this->memberId);
+        $stmt->bindValue(3, $this->content);
         $stmt->execute();
     }
 
     // 勉強会メッセージ削除
 
-    function deleteGroupMessage($id) {
+    function deleteGroupMessage() {
         $query = "DELETE FROM `group_messages` WHERE `group_messages`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(1, $id);
+        $stmt->bindValue(1, $this->id);
         $stmt->execute();
+    }
+
+    ///////////////////// メッセージ関連
+    // メッセージ表示
+    // 昇順表示
+    // メッセージを作成したメンバーのIDから、メンバー名を副問い合わせ
+    function MessageData() {
+        $query = "SELECT `group_messages`.`id`,`group_messages`.`group_id`,(SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`,`group_messages`.`content`,`group_messages`.`created_at` 
+        FROM `group_messages` WHERE `group_messages`.`group_id` = ?";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindValue(1,$this->groupId,PDO::PARAM_INT);
+        $stmt->execute();
+        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
     }
 
     // setter
