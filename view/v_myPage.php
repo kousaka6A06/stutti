@@ -3,7 +3,7 @@
 <h1 class="text-center">マイページ</h1>
 <div class="container mt-5">
 
-    <div id="registrationInfo" class="bg-light p-4 rounded shadow w-50 mx-auto">
+    <div class="bg-light p-4 rounded shadow w-50 mx-auto">
         <table class="maintable">
             <tbody>
                 <tr>
@@ -48,6 +48,5 @@
 </div>
 
 <script src="script.js"></script>
-<h2><a href="groupEdit.php">勉強会を作る</a></h2><br><br>
 <h2><a href="groupEdit.php">作成した勉強会</a></h2><br><br>
 <h2><a href="groupDetail.php">参加中の勉強会</a></h2><br><br><br><br><br><br>

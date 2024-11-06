@@ -1,7 +1,7 @@
 <section class="container mt-1">
     <h2 class="text-center">ログイン</h2>
     <p class="fs-10 text-muted text-center">ユーザー登録は
-        <a href="input_register.php" class="text-info fw-bold">こちら</a>
+        <a href="userRegister.php" class="text-info fw-bold">こちら</a>
     </p>
 
     <form action="login.php" method="POST">

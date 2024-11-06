@@ -56,7 +56,7 @@ $cards = [
             <?php } ?>
         </div>
         <div class="text-center mt-3">
-            <a href="groupList.php" class="btn view-more-btn"><span>View More</span></a>
+            <a href="groupList.php" class="btn view-more-btn"><span>勉強会一覧を表示</span></a>
         </div>
     </section>
 </div>
