@@ -36,7 +36,7 @@ $tiltedIndexes = array_rand(range(0, $totalCards - 1), 4);
                         <div class="card">
                             <div class="card-body" style="height: 100px;">
                                 <h5 class="card-title">「勉強会タイトル」</h5>
-                                <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計や運用のコツを共有し、最新の技術動向について議論しましょう。</p>
+                                <p class="card-text">「勉強内容」</p>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">「日時」</li>
