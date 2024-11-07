@@ -33,7 +33,11 @@ class User {
         $stmt->bindParam(4, $this->mailAddress);
         $stmt->bindParam(5, $this->avatar);
 
-        return $stmt->execute();
+        if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
     }
 
     // 会員情報更新

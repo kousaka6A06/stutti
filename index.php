@@ -12,21 +12,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// セッションから渡された情報を変数に格納
-$userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
-
-// 画面表示制御用にステータス設定
-$userStatus = null;
-
-// ログイン済みの場合
-if ($userId) {
-    $userStatus = LOGGED_IN;
-  
-// 未ログインの場合
-} else {
-    $userStatus = NOT_LOGGED_IN;
-}
-
 // TODO: [コントローラー]
 // 最近作成された勉強会情報を5件取得
 $group = new Group();

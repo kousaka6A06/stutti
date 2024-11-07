@@ -1,15 +1,15 @@
 <?php
 $cards = [
-    ['title' => 'AWS', 'color' => '#FF9800'],
-    ['title' => 'Linux', 'color' => '#4FC94F'],
-    ['title' => 'PHP', 'color' => '#4F5573'],
-    ['title' => 'Java', 'color' => '#7B5544'],
-    ['title' => 'Python', 'color' => '#49BDF0'],
-    ['title' => 'フロントエンド', 'color' => '#FFC20E'],
-    ['title' => 'データベース', 'color' => '#444655'],
-    ['title' => '応用数学', 'color' => '#225CC7'],
-    ['title' => 'ビジネス英語', 'color' => '#BA252F'],
-    ['title' => '技術全般', 'color' => '#BABABA'],
+    ['id' => '1', 'title' => 'AWS', 'color' => '#FF9800'],
+    ['id' => '2', 'title' => 'Linux', 'color' => '#4FC94F'],
+    ['id' => '3', 'title' => 'PHP', 'color' => '#4F5573'],
+    ['id' => '4', 'title' => 'Java', 'color' => '#7B5544'],
+    ['id' => '5', 'title' => 'Python', 'color' => '#49BDF0'],
+    ['id' => '6', 'title' => 'フロントエンド', 'color' => '#FFC20E'],
+    ['id' => '7', 'title' => 'データベース', 'color' => '#444655'],
+    ['id' => '8', 'title' => '応用数学', 'color' => '#225CC7'],
+    ['id' => '9', 'title' => 'ビジネス英語', 'color' => '#BA252F'],
+    ['id' => '10', 'title' => '技術全般', 'color' => '#BABABA'],
 ];
 ?>
 
@@ -48,7 +48,7 @@ $cards = [
                             <li class="list-group-item">「日時」</li>
                             <li class="list-group-item">「参加人数」</li>
                             <li class="list-group-item d-flex justify-content-end">
-                                <a href="groupDetail.php" class="btn btn-secondary btn-sm">詳しく見る</a>
+                                <a href="groupDetail.php?gid=<?=$i+1?>" class="btn btn-secondary btn-sm">詳しく見る</a>
                             </li>
                         </ul>
                     </div>
@@ -68,7 +68,7 @@ $cards = [
     <div class="row g-3">
         <?php foreach ($cards as $card): ?>
             <div class="col">
-                <a href="tutti.php" style="text-decoration: none;">
+                <a href="tutti.php?tid=<?= $card['id']; ?>" style="text-decoration: none;">
                     <div class="card tutti-card"
                         style="height: 250px; background-color: <?= $card['color']; ?>; color: #586365;">
                         <div class="card-body p-0 d-flex flex-column align-items-center">

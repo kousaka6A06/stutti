@@ -53,7 +53,7 @@
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <hr>
 <h1>作成した勉強会を編集する</h1><br><br>
-<form action="groupDetail.php">
+<form action="groupDetail.php?gid=1">
     name<input type="text" placeholder="すとぅってぃ"><br>
     ジャンル <input type="text" placeholder="AWS"><br>
     開催date <input type="text" placeholder="11月15日"><br>

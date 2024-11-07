@@ -49,4 +49,4 @@
 
 <script src="script.js"></script>
 <h2><a href="groupEdit.php">作成した勉強会</a></h2><br><br>
-<h2><a href="groupDetail.php">参加中の勉強会</a></h2><br><br><br><br><br><br>
+<h2><a href="groupDetail.php?gid=1">参加中の勉強会</a></h2><br><br><br><br><br><br>

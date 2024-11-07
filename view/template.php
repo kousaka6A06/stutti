@@ -28,21 +28,24 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto"> <!-- ml-auto → ms-auto -->
-                        <li class="nav-item">
-                            <a class="btn btn-outline-info mx-2" href="groupEdit.php">勉強会を作る</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-info mx-2" href="mypage.php">マイページ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-info mx-2" href="logout.php">ログアウト</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-light mx-2" href="login.php">ログイン</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-light mx-2" href="userRegister.php">ユーザー登録</a>
-                        </li>
+                        <?php if(isset($_SESSION['userId'])): ?>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info mx-2" href="groupEdit.php">勉強会を作る</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info mx-2" href="mypage.php">マイページ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info mx-2" href="logout.php">ログアウト</a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light mx-2" href="login.php">ログイン</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light mx-2" href="userRegister.php">ユーザー登録</a>
+                            </li>
+                        <?php endif ?>
                     </ul>
                 </div>
             </div>
@@ -51,6 +54,12 @@
 
     <!-- メイン -->
     <main>
+        <?php // TODO ?>
+        <?php if(isset($_SESSION['message'])): ?>
+            <p>↓デバッグ用あとでけす↓</p>
+            <p>$_SESSION['message']：<?= $_SESSION['message'] ?></p>
+            <?php unset($_SESSION['message']) ?>
+        <?php endif ?>
         <?php include $v_includeFile; ?>
     </main>
 
