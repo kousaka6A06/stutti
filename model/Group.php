@@ -40,7 +40,9 @@ class Group {
 
     // 勉強会情報更新
     function updateGroup() {
-        $query = "UPDATE `groups` SET `groups`.`date` = ?, `groups`.`time` = ?, `groups`.`location` = ?, `groups`.`num_people` = ?, `groups`.`content` = ? WHERE `groups`.`id` = ?";
+        $query = "UPDATE `groups` 
+        SET `groups`.`date` = ?, `groups`.`time` = ?, `groups`.`location` = ?, `groups`.`num_people` = ?, `groups`.`content` = ? 
+        WHERE `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         
         $stmt->bindValue(1, $this->date);
@@ -64,14 +66,37 @@ class Group {
     }
 
 
-    // 勉強会の最新の5件を表示する(サムネ)
+    // 無作為に勉強会の最新表示する
     function groupNew() {
         $now = date('YY-mm-dd');
         $query = "SELECT `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content` 
-                FROM `groups` WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
+                FROM `groups` WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} 
+                ORDER BY `groups`.`id` DESC";
         $stmt = $this->conn->prepare($query);
-        
+        $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $ary;
+    }
+
+    // 勉強会を tutti 毎に最新「5件」 tuttiId をキーにして、Groupの配列を値に持たせる。
+    // groupList.php
+    function getAllTuttiGroups() {
+        $now = date('YY-mm-dd');
+        //マスターの数をカウント
+        $tuttiCount = $this->conn->query("SELECT COUNT(*) FROM `m_tutti`");
+        $count = $tuttiCount->fetch(PDO::FETCH_COLUMN);
+        
+        $ary = [];
+        for($i = 1; $i <= $count; $i++) {
+
+            $query = "SELECT `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content` 
+            FROM `groups` 
+            WHERE `tutti_id` = {$i} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $tutti = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $ary = array_merge($ary,array($i => $tutti)) ;
+        }
         return $ary;
     }
 
@@ -82,7 +107,8 @@ class Group {
     function GroupInfo() {
         $now = date('YY-mm-dd');
         $query = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,(SELECT `users`.`name` FROM`users` WHERE `users`.`id` = `groups`.`created_by_id`) AS `user_name` 
-        FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` = ?";
+        FROM `groups` 
+        WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
@@ -110,7 +136,9 @@ class Group {
     // マイページに表示させる自身で作成した勉強会(サムネ・昇順)
     function myPageCreatedGroup() {
         $now = date('YY-mm-dd');
-        $query = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content` FROM `groups` WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = ?";
+        $query = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content` 
+        FROM `groups` 
+        WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = ?";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
@@ -123,7 +151,8 @@ class Group {
     function tuttiGroup() {
         $now = date('YY-mm-dd');
         $query = "SELECT `groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,`groups`.`tutti_id` 
-                FROM `groups` WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
+                FROM `groups` 
+                WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
         $stmt = $this->conn->query($query);
 
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
