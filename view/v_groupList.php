@@ -42,7 +42,7 @@ $tiltedIndexes = array_rand(range(0, $totalCards - 1), 4);
                                 <li class="list-group-item">「日時」</li>
                                 <li class="list-group-item">「参加人数」</li>
                                 <li class="list-group-item d-flex justify-content-end">
-                                    <a href="groupDetail.php" class="btn btn-secondary btn-sm">詳しく見る</a>
+                                    <a href="groupDetail.php?gid=<?=$i+1?>" class="btn btn-secondary btn-sm">詳しく見る</a>
                                 </li>
                             </ul>
                         </div>

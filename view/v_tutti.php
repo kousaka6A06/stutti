@@ -44,21 +44,21 @@
 <h2>AWS最新のトレンド</h2><br><br>
 <hr>
 <h2>AWSで募集中の勉強会</h2>
-<form action="groupDetail.php">
+<form action="groupDetail.php?gid=1">
     <ul>
         <li>AWSマスターしよう</li>
         <li>11月5日開催</li>
         <input type="submit" value="続きを見る">
     </ul>
 </form>
-<form action="groupDetail.php">
+<form action="groupDetail.php?gid=1">
     <ul>
         <li>AWSマスターしよう</li>
         <li>11月5日開催</li>
         <input type="submit" value="続きを見る">
     </ul>
 </form>
-<form action="groupDetail.php">
+<form action="groupDetail.php?gid=1">
     <ul>
         <li>AWSマスターしよう</li>
         <li>11月5日開催</li>
