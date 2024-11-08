@@ -28,6 +28,5 @@ if (ini_get('session.use_cookies')) {
 // セッションを破壊する
 session_destroy();
 
-// セッションにメッセージを保存してログイン画面に遷移
-$_SESSION['message'] = 'ログアウトしました';
+// ログイン画面に遷移
 header('Location: ' . BASE_DOMAIN . '/login.php');
