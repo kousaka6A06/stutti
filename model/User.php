@@ -128,6 +128,22 @@ class User {
         return 0;
     }
 
+    // 引数で渡された勉強会の作成者かどうかをbooleanで返却
+    // groupDetail.php
+    public function isOwnerOfGroup($groupId): bool {
+        $query = "SELECT created_by_id FROM `groups` WHERE `id` = ? ";
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $groupId);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result && $result['created_by_id'] == $this->id) {
+            return true;
+        }
+        return false;
+    }
+
     // setter
     function setId($id) {
         $this->id = $id;
