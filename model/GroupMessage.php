@@ -36,13 +36,16 @@ class GroupMessage {
 
     ///////////////////// メッセージ関連
     // メッセージ表示
+    // あらかじめプロパティに設定されたgroupIdを使って、GroupMessageを検索して連想配列ですべて返却
     // 昇順表示
     // メッセージを作成したメンバーのIDから、メンバー名を副問い合わせ
-    function MessageData() {
-        $query = "SELECT `group_messages`.`id`,`group_messages`.`group_id`,(SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`,`group_messages`.`content`,`group_messages`.`created_at` 
-        FROM `group_messages` WHERE `group_messages`.`group_id` = ?";
+    // member_name として扱う
+    // groupDetail.php
+    function getGroupMessagesByGroupId() {
+        $query = "SELECT `group_messages`.`id`, `group_messages`.`group_id`, (SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`, `group_messages`.`content`, `group_messages`.`created_at` 
+        FROM `group_messages` 
+        WHERE `group_messages`.`group_id` = ?";
         $stmt = $this->conn->prepare($query);
-
         $stmt->bindValue(1,$this->groupId,PDO::PARAM_INT);
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
