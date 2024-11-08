@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // セッションから渡された情報を変数に格納
-$errorMessage = $_SESSION['errorMessage'];
+$errorMessage = $_SESSION['message'];
 
 // エラー画面を描画
 Utils::loadView('エラー', 'view/v_error.php');
