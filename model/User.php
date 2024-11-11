@@ -1,4 +1,5 @@
 <?php
+require_once 'config/constants.php';
 require_once 'config/Database.php';
 
 class User {
@@ -93,7 +94,7 @@ class User {
 
     // マイページ表示
     function userInfo() {
-        $query = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`stutti_id`,`users`.`name`, `users`.`avater`, `users`.`created_at` FROM `users` WHERE `users`.`id` = ?";
+        $query = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`avater`, `users`.`created_at` FROM `users` WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
@@ -103,29 +104,35 @@ class User {
     }
 
     // ファイル保存用
-    function registerAvatar() : int {
-        $upfile = $_FILES['avatar'];
-        if ($upfile['error'] !== UPLOAD_ERR_OK) {
-            return 40 + $upfile['error'];
+    function uploadAvatar($avatar) : int {
+        // アップロード処理に失敗
+        if ($avatar['error'] !== UPLOAD_ERR_OK) {
+            return $avatar['error'];
         }
-        $ufName = $upfile['name'];
+
+        // ファイル拡張子チェック
+        $ufName = $avatar['name'];
         $ufExtention = strtolower(pathinfo($ufName)['extension']);
         $availableExt = ['gif', 'jpg', 'jpeg', 'png'];
         if (!in_array($ufExtention, $availableExt)) {
-            return 51;
+            return ERR_CODE_EXTENSION;
         }
-        $ufTmpname = $upfile['tmp_name'];
+
+        // マイムタイプチェック
+        $ufTmpname = $avatar['tmp_name'];
         $ufMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $ufTmpname);
         $availableMType = ['image/gif', 'image/jpg', 'image/jpeg', 'image/png'];
         if (!in_array($ufMimeType, $availableMType)) {
-            return 52;
+            return ERR_CODE_MIME_TYPE;
         }
-        $dt = new DateTime();
-        $this->avatar = $dt->format('u') . $ufName;
-        if (!move_uploaded_file($ufTmpname, 'images/' . $this->avatar)) {
-            return 53;
+
+        // 一時フォルダからイメージ保存フォルダへファイルを移動
+        $uniqueFileName = uniqid().$ufName;
+        if (!move_uploaded_file($ufTmpname, 'img/avatar/' . $uniqueFileName)) {
+            return ERR_CODE_FAIL_UPLOAD;
         }
-        return 0;
+        $this->avatar = $uniqueFileName;
+        return UPLOAD_OK;
     }
     // 〇グループ詳細画面の作成者確認用
     // 引数で渡された勉強会の作成者かどうかをbooleanで返却

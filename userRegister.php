@@ -46,20 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // アバター画像が画面から渡された場合
     } else {
-        // TODO: [コントローラー]
         // 画像アップロード試行
-        // $res = $user->uploadAvatar($avatar);
+        $code = $user->uploadAvatar($avatar);
 
         // 画像アップロードに成功した場合
-        if (!is_int($res)) {
-
-        // TODO: [モデル]
-        // uploadAvatar($avatar):mixed
-        // 引数で渡されたアバター画像をアップロードしてください
-        // アップロードに成功した場合は、一意のファイル名を返却してください
-        // アップロードに失敗した場合は、エラーコード（constants.php参照）を返却してください
-
-            $user->setAvatar($res);
+        if ($code === UPLOAD_OK) {
+            // 処理なし
 
         // 画像アップロードに失敗した場合
         } else {
@@ -77,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             ];
 
             // セッションにメッセージを保存してユーザー登録画面を再描画
-            $_SESSION['message'] = $messages[$res];
+            $_SESSION['message'] = $messages[$code];
             Utils::loadView('ユーザー登録', 'view/v_userRegister.php');
             exit;
         }
