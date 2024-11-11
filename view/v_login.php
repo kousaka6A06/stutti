@@ -9,7 +9,7 @@
 
             <div class="mb-3">
                 <label for="stutti-id" class="form-label">Stutti IDを入力</label>
-                <input type="text" name="stutti-id" id="stutti-id" class="form-control" placeholder="Stutti ID" required>
+                <input type="text" name="stutti-id" id="stutti-id" class="form-control" required>
             </div>
 
             <div class="mb-3">
@@ -20,8 +20,4 @@
             <button type="submit" class="btn btn-dark d-block mx-auto">ログイン</button>
         </div>
     </form>
-    <hr>
-    <!-- <div class="text-center mt-3">
-    <a href="index.php" class="btn btn-outline-secondary">トップに戻る</a>
-  </div> -->
 </section>
