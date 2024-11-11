@@ -127,7 +127,7 @@ class User {
         }
         return 0;
     }
-
+    // 〇グループ詳細画面の作成者確認用
     // 引数で渡された勉強会の作成者かどうかをbooleanで返却
     // groupDetail.php
     public function isOwnerOfGroup($groupId): bool {
