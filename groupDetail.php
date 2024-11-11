@@ -27,14 +27,8 @@ if (!$groupId) {
 $group = new Group();
 $group->setId($groupId);
 
-// TODO: [コントローラー]
 // 勉強会情報取得
-// $group = $group->getGroupById();
-
-// TODO: [モデル]
-// getGroupById():Group
-// あらかじめプロパティに設定されたgroupIdを使って、Groupを検索して返却してください
-// PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
+$group = $group->getGroupById();
 
 // 画面表示制御用にステータス設定
 $userStatus = null;
@@ -54,6 +48,7 @@ if (!$userId) {
     // ユーザー情報を取得する
     // $user = $user->getUserById();
 
+    // TODO: [コントローラー]
     // 勉強会に未参加の場合
     // if (!$user->isMemberOfGroup($groupId)) {
 
@@ -65,6 +60,11 @@ if (!$userId) {
 
         // 勉強会が満員の場合
         // if ($group->isFull()) {
+
+        // TODO: [モデル]
+        // isFull():boolean
+        // 勉強会が満員かどうかをbooleanで返却してください
+
             // $groupStatus = FULL;
 
         // 勉強会の定員に余裕がある場合
@@ -78,29 +78,17 @@ if (!$userId) {
         $message = new GroupMessage();
         $message->setGroupId($groupId);
 
-        // TODO: [コントローラー]
         // 勉強会メッセージ情報取得
-        // $messages = $message->getGroupMessagesByGroupId();
+        $messages = $message->getGroupMessagesByGroupId();
 
-        // TODO: [モデル]
-        // getGroupMessagesByGroupId():GroupMessage[]
-        // あらかじめプロパティに設定されたgroupIdを使って、GroupMessageを検索してオブジェクトの配列で返却してください
-        // PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
-
-        // TODO: [コントローラー]
         // 勉強会の作成者の場合
-        // if ($user->isOwnerOfGroup($groupId)) {
-
-        // TODO: [モデル]
-        // isOwnerOfGroup($groupId):boolean
-        // このユーザーインスタンスが、引数で渡された勉強会の作成者かどうかをbooleanで返却してください
-    
+        if ($user->isOwnerOfGroup($groupId)) {
             $userStatus = GROUP_OWNER;
     
         // 作成者ではない場合
-        // } else {
-            // $userStatus = GROUP_MEMBER;
-        // }
+        } else {
+            $userStatus = GROUP_MEMBER;
+        }
     // }
 }
 

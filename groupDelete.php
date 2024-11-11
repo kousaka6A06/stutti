@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // セッション・画面から渡された情報をサニタイズして変数に格納
 $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
-$groupId = isset($_GET['gid']) ? Utils::e($_GET['gid']) : null;
+$groupId = isset($_POST['gid']) ? Utils::e($_POST['gid']) : null;
 
 // 勉強会IDが指定されていない場合
 if (!$groupId) {
@@ -34,14 +34,13 @@ if (!$userId) {
 $user = new User();
 $user->setId($userId);
 
-// TODO: [コントローラー]
 // 勉強会の作成者ではない場合
-// if (!$user->isOwnerOfGroup($groupId)) {
-//     // セッションにメッセージを保存して勉強会詳細画面に遷移
-//     $_SESSION['message'] = '勉強会を削除する権限がありません';
-//     header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
-//     exit;
-// }
+if (!$user->isOwnerOfGroup($groupId)) {
+    // セッションにメッセージを保存して勉強会詳細画面に遷移
+    $_SESSION['message'] = '勉強会を削除する権限がありません';
+    header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
+    exit;
+}
 
 // 勉強会インスタンスを作成して画面から渡された情報をセット
 $group = new Group();
@@ -57,6 +56,6 @@ if ($group->deleteGroup()) {
 // 勉強会削除に失敗した場合
 } else {
     // セッションにメッセージを保存してエラー画面に遷移
-    $_SESSION['message'] = '勉強会削除に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
+    $_SESSION['message'] = '勉強会の削除に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
     header('Location: ' . BASE_DOMAIN . '/error.php');
 }
