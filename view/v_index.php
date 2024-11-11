@@ -1,8 +1,7 @@
-<?php
-$cards = [
+<?php $cards = [
     ['id' => '1', 'title' => 'AWS', 'color' => '#FF9800'],
     ['id' => '2', 'title' => 'Linux', 'color' => '#4FC94F'],
-    ['id' => '3', 'title' => 'PHP', 'color' => '#4F5573'],
+    ['id' => '3', 'title' => 'PHP', 'color' => '#4F5B93'],
     ['id' => '4', 'title' => 'Java', 'color' => '#7B5544'],
     ['id' => '5', 'title' => 'Python', 'color' => '#49BDF0'],
     ['id' => '6', 'title' => 'フロントエンド', 'color' => '#FFC20E'],
@@ -13,30 +12,61 @@ $cards = [
 ];
 ?>
 
-<div class="container mt-5">
-    <div class="position-relative">
-        <img src="img/board.png" alt="" class="img-fluid">
-        <p class="text-overlay">
-            Stuttiとは<br>
-            studti – 未来の可能性を広げる学びの場。<br>
-            学びの仲間とつながる、stuttiで成長の一歩を。
-        </p>
+<div class="container">
+    <div class="board_3YD0c">
+        <div class="board_inner">
+            <dl class="board_list">
+                <div class="boardnews__16lGr">
+                    <dd class="boardnews__content__2LTeJ">
+                        <section>
+                            <h3 class="boardnews__title__1S5_A"></h3>
+                            <p>
+                                STUTTIは、学習に特化したオンラインコミュニティで、<br>
+                                社会人や学生が自由に勉強会を作成し、参加者同士が交流できるプラットフォームです。<br><br>
+                                ユーザー登録することで、勉強会の作成や参加が可能となり、<br>
+                                興味のある分野で活発な意見交換を行うことができます。<br><br>
+                                Tuttiと呼ばれるカテゴリには、メンバー登録なしでコメントができるため、<br>
+                                知識の共有やスキルアップのためのディスカッションも可能です。<br>
+                                学びの場をもっと身近に、そして楽しく提供します。
+                            </p>
+                        </section>
+                    </dd>
+                </div>
+            </dl>
+        </div>
     </div>
 </div>
-<br>
-<hr>
+<!-- 
+<div class="container mt-4">
+    <div class="d-flex justify-content-center align-items-center position-relative">
+        <p class="text-overlay">
+            STUTTIは、学習に特化したオンラインコミュニティで、<br>
+            社会人や学生が自由に勉強会を作成し、参加者同士が交流できるプラットフォームです。<br><br>
+            ユーザー登録することで、勉強会の作成や参加が可能となり、<br>
+            興味のある分野で活発な意見交換を行うことができます。<br><br>
+            Tuttiと呼ばれるカテゴリには、メンバー登録なしでコメントができるため、<br>
+            知識の共有やスキルアップのためのディスカッションも可能です。<br>
+            学びの場をもっと身近に、そして楽しく提供します。
+        </p>
+    </div>
+</div> -->
+
 <!-- 募集中勉強会 -->
 <div class="container-md mt-5">
     <section>
         <h2>募集中の勉強会</h2>
         <div class="row">
-            <?php for ($i = 0; $i < 8; $i++) { ?>
+            <?php foreach ($cards as $card) { ?>
                 <div class="col-md-3 mb-2">
                     <div class="card">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item list-title">
                                 <div>
-                                    <h3>AWS</h3>
+                                    <!-- ボタンの色を動的に設定 -->
+                                    <button type="button" class="btn btn-sm"
+                                        style="background-color: <?= $card['color']; ?>; color: white;">
+                                        <?= $card['title']; ?>
+                                    </button>
                                 </div>
                             </li>
                         </ul>
@@ -48,7 +78,7 @@ $cards = [
                             <li class="list-group-item">「日時」</li>
                             <li class="list-group-item">「参加人数」</li>
                             <li class="list-group-item d-flex justify-content-end">
-                                <a href="groupDetail.php?gid=<?=$i+1?>" class="btn btn-secondary btn-sm">詳しく見る</a>
+                                <a href="groupDetail.php?gid=<?= $card['id']; ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
                             </li>
                         </ul>
                     </div>
@@ -60,22 +90,28 @@ $cards = [
         </div>
     </section>
 </div>
-<br><br>
-<hr>
+
 <!-- tutti広場 -->
 <div class="container-md mt-5">
-    <h2>Tutti</h2>
-    <div class="row g-3">
+    <div class="row">
+        <!-- <div class="col-1">
+            <p>TUTTI</p>
+        </div> -->
         <?php foreach ($cards as $card): ?>
-            <div class="col">
+            <div class="col-1">
                 <a href="tutti.php?tid=<?= $card['id']; ?>" style="text-decoration: none;">
-                    <div class="card tutti-card"
-                        style="height: 250px; background-color: <?= $card['color']; ?>; color: #586365;">
-                        <div class="card-body p-0 d-flex flex-column align-items-center">
-                            <div class="husen">
-                                <h3 class="card-title vertical-text"><?= $card['title']; ?></h3>
-                            </div>
+                    <div class="card tutti-card p-0"
+                        style="height: 250px; background-color: <?= $card['color']; ?>; color: #586365; flex-direction: row;">
+                        <div class="husen">
+                            <h3 class="card-title vertical-text"><?= $card['title']; ?></h3>
                         </div>
+                        <div class="lines">
+                            <div class="line line-1"></div>
+                            <div class="line line-2"></div>
+                            <div class="line line-3"></div>
+                            <div class="line line-4"></div>
+                        </div>
+
                     </div>
                 </a>
             </div>

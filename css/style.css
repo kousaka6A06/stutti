@@ -1,16 +1,18 @@
-/* グローバルなスタイル */
+/*//////// グローバルなスタイル ////////*/
 body {
     font-family: 'Nunito', sans-serif;
     background-color: #fff;
     color: #586365;
-    padding-top: 70px;
-    /* ヘッダーの高さに応じてコンテンツを下にずらす */
+    padding-top: 58px;
 }
 
 h3 {
-    font-size: 18px;
+    font-size: 16px;
 }
 
+p {
+    font-size: 16px;
+}
 /* ボタン */
 .view-more-btn {
     display: inline-block;
@@ -19,7 +21,7 @@ h3 {
     text-decoration: none;
     line-height: 50px;
     outline: none;
-    background-color: #fff;
+    background-color: #f38282;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -35,7 +37,7 @@ h3 {
     content: '';
     width: 135%;
     height: 100%;
-    background-color: #d5cabd;
+    background-color: #aca398;
     position: absolute;
     top: 0;
     left: 0;
@@ -45,86 +47,159 @@ h3 {
     transition: transform 0.3s ease;
 }
 
-/* ヘッダーのスタイル */
+/*//////// ヘッダー ////////*/
 .header {
+    padding: 0;
     position: fixed;
-    /* ヘッダーを固定 */
     top: 0;
-    /* 上部に固定 */
     left: 0;
-    /* 左端に固定 */
     width: 100%;
-    /* 幅を100%に設定 */
     z-index: 1000;
-    /* 他の要素より上に表示 */
-    background-color: #d5cabd;
-    /* ヘッダーの背景色 */
+    background-color: #04b95f; /* ヘッダーの背景色 */
 }
 
 .header .navbar-brand {
-    color: #fff;
+    color: #ffffff;
     font-size: 1.75rem;
     font-weight: bold;
-}
-
-.header .nav-link {
-    color: #fff;
-    font-weight: 600;
-    margin-right: 15px;
-}
-
-.header .nav-link:hover {
-    color: #ffc042;
-}
-
-/* メイン */
-.position-absolute {
-    width: 100%;
-    /* テキストを画像の幅に合わせる */
-    text-align: center;
-    /* テキストを中央に配置 */
-}
-
-.text-overlay {
-    position: absolute;
-    top: 20%;
-    /* 上からの距離を調整 */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #352b2b;
-}
-
-/* 募集中の勉強会カードのスタイル */
-.list-title {
-    background-color: #FF9800;
-    /* 勉強会タイトルの背景色 */
     padding: 0;
 }
 
-/* Tuttiカードのスタイル */
+.header .btn {
+    font-size: 0.9rem; /* ボタンのフォントサイズ調整 */
+    padding: 5px 10px; /* ボタンのパディング調整 */
+}
+
+/*//////// メイン ////////*/
+/* ホワイトボード */
+.board_3YD0c {
+    margin: 1em auto;
+    position: relative;
+    width: 95%
+}
+/* 消しゴム */
+.board_3YD0c:before {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM0IiBoZWlnaHQ9IjUxIiB2aWV3Qm94PSIwIDAgMTM0IDUxIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNC41MTcwOSAyMi4xMDM1SDEyOS4xMzhWNDcuMDAwMUMxMjkuMTM4IDQ4LjY1NjkgMTI3Ljc5NSA1MC4wMDAxIDEyNi4xMzggNTAuMDAwMUg3LjUxNzFDNS44NjAyNCA1MC4wMDAxIDQuNTE3MDkgNDguNjU2OSA0LjUxNzA5IDQ3LjAwMDFWMjIuMTAzNVoiIGZpbGw9IiMxQzM4NzUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgo8cmVjdCB4PSIxIiB5PSIxMy4zMTA1IiB3aWR0aD0iMTMxLjY1NSIgaGVpZ2h0PSI4LjU1MTcyIiBmaWxsPSIjRjJDNDU2IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iNjIuNTUxOCIgeT0iMSIgd2lkdGg9IjguNTUxNzIiIGhlaWdodD0iMjAuODYyMSIgZmlsbD0iYmxhY2siIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgo8bGluZSB4MT0iMTUuODI3NiIgeTE9IjI4Ljg5NjUiIHgyPSIxMTYuMDY5IiB5Mj0iMjguODk2NSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIxNS44Mjc2IiB5MT0iMzUuOTMwNyIgeDI9IjExNi4wNjkiIHkyPSIzNS45MzA3IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz4KPGxpbmUgeDE9IjE1LjgyNzYiIHkxPSI0Mi45NjU4IiB4Mj0iMTE2LjA2OSIgeTI9IjQyLjk2NTgiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    height: 38px;
+    position: absolute;
+    right: 15%;
+    width: 100px;
+    z-index: 1;
+}
+/* 細長い棒 */
+.board_3YD0c:after {
+    background-color: #aaa;
+    border: 2px solid #0d0d0d;
+    content: "";
+    display: inline-block;
+    padding-top: 2em;
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 50%;
+    width: 85%;
+    transform: translateX(-50%);
+}
+/* font */
+.board_inner {
+    font-family: 'Yusei Magic', sans-serif;
+    font-weight: bold;
+    border: 2px solid #0d0d0d;
+    color: #222121;
+    height: 24em;
+    margin: 0 auto;
+    padding: 2em 3em 3em;
+    position: relative;
+    width: 80%;
+}
+/* スクロールバー */
+.board_list {
+    height: 100%;
+    overflow: auto;
+}
+
+
+/*//////// 募集中の勉強会カードのスタイル ////////*/
+.container-md {
+    max-width: 1060px; /* デフォルトより少し小さく */
+}
+
+/* カード内のタイトルサイズを小さく */
+.card-title {
+    font-size: 1rem; /* フォントサイズを小さく */
+}
+
+/* カードテキストのサイズを小さく */
+.card-text {
+    font-size: 0.875rem; /* 少し小さめ */
+}
+
+/* 勉強会タイトル（h3）を小さく */
+.list-title h3 {
+    font-size: 1.1rem; /* 文字を少し小さく */
+}
+
+
+/*/////// Tuttiカードのスタイル ///////*/
 .tutti-card {
-    height: 250px;
-    /* 固定高さ */
-    transition: transform 0.5s ease;
-    /* アニメーションの設定 */
+    transition: transform 0.5s ease; /* アニメーションの設定 */
+    width: 170px;
+    border: none;
 }
 
 .tutti-card:hover {
-    transform: scale(1.05);
-    /* 1.05倍に拡大 */
+    transform: translateY(-40%); /* 1.05倍に拡大 */
 }
 
 .husen {
     background-color: #ffffff;
-    width: 100px;
-    height: 160px;
-    margin-top: 45px;
+    width: 15%;
+    height: 70%;
+    margin-top: 35px;
+    margin-right: 10px;
     display: flex;
-    align-items: center;
-    /* 垂直方向の中央揃え */
-    justify-content: center;
-    /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    justify-content: center; /* 水平方向の中央揃え */
 }
+
+/* .lines: メインコンテナ */
+.lines {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .line-1: 最初の線 */
+.line-1 {
+    margin-top: 35%;
+    padding: 25% 0 0 0;
+    border-top: 1px solid #000;
+}
+
+/* .line-2: 2番目の線 */
+.line-2 {
+    padding: 120% 0 0 0;
+    border-top: 1px solid #000;
+}
+
+/* .line-3: 3番目の線 */
+.line-3 {
+    padding: 25% 0 0 0;
+    border-top: 1px solid #000;
+}
+
+/* .line-4: 4番目の線 */
+.line-4 {
+    padding: 20% 0 0 0;
+    border-top: 1px solid #000;
+}
+
 
 .vertical-text {
     -ms-writing-mode: tb-rl;
@@ -133,17 +208,13 @@ h3 {
 }
 
 .tilt-card {
-    transform: rotate(5deg);
-    /* 初期の傾き */
-    transform-origin: bottom right;
-    /* 右下を軸にする */
-    transition: transform 0.3s;
-    /* アニメーションのトランジション */
+    transform: rotate(5deg); /* 初期の傾き */
+    transform-origin: bottom right; /* 右下を軸にする */
+    transition: transform 0.3s; /* アニメーションのトランジション */
 }
 
 .tilt-card:hover {
-    transform: rotate(0deg);
-    /* ホバー時にまっすぐ */
+    transform: rotate(0deg); /* ホバー時にまっすぐ */
     transform: scale(1.15);
 }
 
@@ -153,20 +224,17 @@ h3 {
 
 .tutti-card2:hover {
     transform: scale(1.15);
-    /* 1.05倍に拡大 */
 }
 
-/* グラデーション */
+/*//////// グラデーション ////////*/
 .group-section {
     /* padding-bottom: 0; */
     /* セクション内の余白 */
     /* background: linear-gradient(135deg, #ffccbc, #d50000); */
     background: linear-gradient(to bottom, #fff, #e7e7e7);
-    /* border-radius: 10px; */
-    /* 角を丸くする */
 }
 
-/* マイページテーブル */
+/*//////// マイページテーブル ////////*/
 .maintable {
     border-spacing: 0;
     border-collapse: separate;
@@ -226,7 +294,7 @@ h3 {
     border-bottom-right-radius: 5px;
 }
 
-/* フッターのスタイル */
+/*//////// フッターのスタイル ////////*/
 .footer {
     background-color: #586365;
     color: #fff;
@@ -245,70 +313,105 @@ h3 {
     font-size: 1.5rem;
 }
 
-/* メディアクエリ */
-@media (max-width: 576px) {
+/*//////// メディアクエリ ////////*/
+/* さらに小さな画面（モバイルやスマートフォン）に対応 */
+@media (max-width: 480px) {
+    .position-relative img {
+        width: 100%;  /* 画像の幅を100%に設定 */
+    }
+
+    .text-overlay {
+        font-size: 1rem;  /* フォントサイズをさらに小さく */
+        top: 40%;  /* テキストの位置を調整 */
+        max-width: 90%; /* 最大幅を90%に設定 */
+    }
+}
+
+/* 中型スマホ向け */
+@media (max-width: 600px) {
+}
+
+@media (max-width: 768px) {
     .header .navbar-brand {
         font-size: 1.5rem;
         /* スマホサイズでフォントを小さく */
     }
+    
+    .position-relative img {
+        width: 100%;  /* 画像の幅を親要素の100%に設定 */
+    }
+
+    .text-overlay {
+        font-size: 1.2rem;  /* モバイルサイズでフォントサイズを小さくする */
+        top: 40%;  /* テキストの位置を少し調整 */
+        max-width: 90%;  /* 幅の最大値を90%に設定 */
+        padding: 5px;  /* パディングを少し減らす */
+    }
 }
 
+/* 横向きタブレット向け */
+@media (max-width: 1024px) {
+}
 
-/* tutti test *//* 全体のリセット */
-
-
-
-
-/* セクションのスタイル */
+/*//////// セクションのスタイル ////////*/
 .section {
-    min-height: 100vh;  /* セクションを画面全体の高さに */
+    min-height: 100vh;
+    /* セクションを画面全体の高さに */
     display: flex;
     flex-direction: column;
-    padding-top: 60px; /* タイトル分の余白 */
+    padding-top: 60px;
+    /* タイトル分の余白 */
 }
 
-/* 各セクションごとの背景色 */
+/*//////// 各セクションごとの背景色 ////////*/
 .section-1 {
-    background-color: #ADD8E6; /* 薄い青 */
+    background-color: #ADD8E6;
+    /* 薄い青 */
 }
 
 .section-2 {
-    background-color: #FF6347; /* トマト色 */
+    background-color: #FF6347;
+    /* トマト色 */
 }
 
 .section-3 {
-    background-color: #98FB98; /* 薄い緑 */
+    background-color: #98FB98;
+    /* 薄い緑 */
 }
 
-/* 固定タイトル */
+/*//////// 固定タイトル ////////*/
 .section-title {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(15, 15, 15, 0.8); /* 背景を少し透明にしてコンテンツが見えるように */
+    background-color: rgba(15, 15, 15, 0.8);
+    /* 背景を少し透明にしてコンテンツが見えるように */
     padding: 10px 20px;
     text-align: center;
     z-index: 10;
 }
 
-/* タイトルのスタイル */
+/*//////// タイトルのスタイル ////////*/
 .section-title h2 {
     font-size: 2rem;
     color: white;
     margin: 0;
 }
 
-/* コンテンツのスタイル */
+/*//////// コンテンツのスタイル ////////*/
 .content {
     position: relative;
     padding: 20px;
-    margin-top: 60px; /* タイトル下に余白 */
-    height: 200vh; /* コンテンツ部分を大きくしてスクロール可能に */
-    overflow-y: scroll; /* コンテンツ部分のみスクロール */
+    margin-top: 60px;
+    /* タイトル下に余白 */
+    height: 200vh;
+    /* コンテンツ部分を大きくしてスクロール可能に */
+    overflow-y: scroll;
+    /* コンテンツ部分のみスクロール */
 }
 
-/* スクロールバーのカスタマイズ（任意） */
+/*//////// スクロールバーのカスタマイズ（任意） ////////*/
 .content::-webkit-scrollbar {
     width: 8px;
 }
