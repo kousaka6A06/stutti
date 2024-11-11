@@ -142,47 +142,47 @@ class Group {
     }
 
 
-    // マイページに表示させる参加している勉強会(サムネ・昇順)
-    // あらかじめ設定されたプロパティ(groupsのid)にて、
+    // 〇マイページに表示させる参加している勉強会(サムネ・昇順)
+    // 引数(User->id)にて
     // 副問い合わせした belonging テーブルより検索、IN にて対象複数レコードを取得
     // 昇順・全件返却
     // tutti_id から、m_tuttiテーブルより tutti 名を副問い合わせ
     // tutti_name として扱う
     // myPage.php
-    function getGroupsByMemberId() {
+    function getGroupsByMemberId($userId) {
         $now = date('YY-mm-dd');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
                 (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
                 FROM `groups` 
                 WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
+        $stmt->bindValue(1,$userId,PDO::PARAM_INT);
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
 
-    // マイページに表示させる自身で作成した勉強会(サムネ・昇順)
-    // あらかじめ設定されたプロパティ(groupsのid)にて、
+    // 〇マイページに表示させる自身で作成した勉強会(サムネ・昇順)
+    // 引数(User->id)にて
     // created_by_id を検索
     // 昇順・全件返却
     // tutti_id から、m_tuttiテーブルより tutti 名を副問い合わせ
     // tutti_name として扱う
     // myPage.php
-    function getGroupsByOwnerId() {
+    function getGroupsByOwnerId($userId) {
         $now = date('YY-mm-dd');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
                 (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
                 FROM `groups` 
                 WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
+        $stmt->bindValue(1,$userId,PDO::PARAM_INT);
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
 
-    // tutti 詳細ページにて利用
+    // 〇tutti 詳細ページにて利用
     // tutti ごとの最新の勉強会表示
     // (引数で渡された←プロパティにあるので不採用)
     // あらかじめプロパティで設定されたtuttiIDを使って、tuttiに所属するGroupを検索して返却
