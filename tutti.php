@@ -20,34 +20,20 @@ if (!$tuttiId) {
 $tutti = new MTutti();
 $tutti->setId($tuttiId);
 
-// TODO: [コントローラー]
 // tutti情報取得
-// $tutti = $tutti->getTuttiById();
+$tutti = $tutti->getTuttiById();
 
-// TODO: [モデル]
-// getTuttiById():Group
-// あらかじめプロパティに設定されたtuttiIDを使って、tuttiを検索して返却してください
-
-// TODO: [コントローラー]
 // tutti所属の勉強会情報取得
 $group = new Group();
-// $groups = $group->getGroupsByTuttiId($tuttiId);
-
-// TODO: [モデル]
-// getGroupsByTuttiId():Group[]
-// 引数で渡されたtuttiIDを使って、tuttiに所属するGroupを検索して返却してください
+$group->setTuttiId($tuttiId);
+$groups = $group->getGroupsByTuttiId();
 
 // tuttiコメントインスタンスを作成して画面から渡された情報をセット
 $comment = new TuttiComment();
 $comment->setTuttiId($tuttiId);
 
-// TODO: [コントローラー]
 // tuttiコメント情報取得
-// $comments = $comment->getTuttiCommentsByTuttiId();
-
-// TODO: [モデル]
-// getTuttiCommentsByTuttiId():TuttiComment[]
-// あらかじめプロパティに設定されたtuttiIDを使って、TuttiCommentを検索してオブジェクトの配列で返却してください
+$comments = $comment->getTuttiCommentsByTuttiId();
 
 // tutti詳細画面を描画
 Utils::loadView('tutti詳細', 'view/v_tutti.php');

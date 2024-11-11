@@ -21,7 +21,7 @@ $avatar = isset($_POST['avatar']) ? $_POST['avatar'] : null;
 // ログイン済みの場合
 if ($userId) {
     // セッションにメッセージを保存してマイページ画面に遷移
-    $_SESSION['message'] = 'ログイン済みです';
+    $_SESSION['message'] = 'すでにログインしています';
     header('Location: ' . BASE_DOMAIN . '/mypage.php');
     exit;
 }
@@ -86,13 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // ユーザー登録試行
     // ユーザー登録に成功した場合
     if ($user->createUser()) {
-
-    // TODO: [モデル]
-    // createUser():bool
-    // あらかじめプロパティに設定されたユーザー情報で、Usersレコードを作成してください
-    // レコード作成後、下記プログラムを実行して自動採番されたidをインスタンスに設定しておいてください
-    // $this->id = $this->conn->lastInsertId();
-
         // セッションにユーザーID・メッセージを保存してマイページ画面に遷移
         $_SESSION['userId'] = $user->getId();
         $_SESSION['message'] = 'ユーザーを作成しました';
