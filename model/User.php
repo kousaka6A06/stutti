@@ -15,13 +15,13 @@ class User {
     private $updatedAt;
     private $conn;
 
-    // TODO: プロパティを private に変更する？
-    // TODO: ⇒各プロパティに対してgetter(),setter()用意
-
     public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
     }
 
+
+    // ユーザー登録
+    // 
     public function createUser() {
         $query = "INSERT INTO `users` (`users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`mail_address`, `users`.`avatar`) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
@@ -41,7 +41,8 @@ class User {
         return false;
     }
 
-    // 会員情報更新
+    // 〇ユーザー情報更新
+    // userEdit.php
     function updateUser() {
         $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`stutti_id` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avatar` = ? WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
@@ -57,7 +58,8 @@ class User {
         return $stmt->execute();
     }
 
-    // 会員情報削除
+    // 〇ユーザー情報論理削除
+    // userDelete.php
     function deleteUser() {
         $query = "UPDATE `users` SET `users`.`delete_flag` = 1  WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
@@ -66,6 +68,8 @@ class User {
         return $stmt->execute();
     }
 
+    // 〇ログイン処理
+    // login.php
     public function login() {
         $query = "SELECT * FROM `users` WHERE `users`.`stutti_id` = ?";
         $stmt = $this->conn->prepare($query);
@@ -80,7 +84,7 @@ class User {
         }
         return false;
     }
-    // //////////////////// ユーザー関連
+
     // // ログイン
     // function LoginUser($loginId) {
     //     $query = "SELECT `users`.`stutti_id`,`users`.`password`, `users`.`name` FROM `users` WHERE `users`.`id` = ?";
@@ -92,18 +96,21 @@ class User {
     //     return $ary;
     // }
 
-    // マイページ表示
-    function userInfo() {
-        $query = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`avater`, `users`.`created_at` FROM `users` WHERE `users`.`id` = ?";
+    // 〇マイページユーザー表示
+    // myPage.php
+    function getUserById() {
+        $query = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`avater`, `users`.`created_at`, `users`.`updated_at` 
+        FROM `users` 
+        WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
-
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
     }
 
-    // ファイル保存用
+    // 〇ファイル保存用
+    // userRegister.php (おそらく、Edit でも必要になる?)
     function uploadAvatar($avatar) : int {
         // アップロード処理に失敗
         if ($avatar['error'] !== UPLOAD_ERR_OK) {

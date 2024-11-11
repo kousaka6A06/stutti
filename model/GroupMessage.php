@@ -13,12 +13,12 @@ class GroupMessage {
         $this->conn = Database::getInstance()->getConnection();
     }
 
-    // 勉強会メッセージ投稿
-    // 未定
+    // 〇勉強会メッセージ投稿
+    // messagePost.php
     function createGroupMessage() {
         $query ="INSERT INTO `group_messages` 
         (`group_messages`.`group_id`,`group_messages`.`member_id`,`group_messages`.`content`) 
-        VALUES(?,?,?)";
+        VALUES(?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->groupId);
@@ -28,7 +28,8 @@ class GroupMessage {
     }
 
     // 〇勉強会メッセージ削除
-    // groupDelete.php
+    // 物理削除
+    // messageDelete.php
     function deleteGroupMessage() {
         $query = "DELETE FROM `group_messages` WHERE `group_messages`.`id` = ?";
         $stmt = $this->conn->prepare($query);
@@ -44,7 +45,8 @@ class GroupMessage {
     // groupDetail.php
     function getGroupMessagesByGroupId() {
         $query = "SELECT `group_messages`.`id`, `group_messages`.`group_id`, 
-        (SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`, `group_messages`.`content`, `group_messages`.`created_at` 
+        (SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`, 
+        `group_messages`.`content`, `group_messages`.`created_at` 
         FROM `group_messages` 
         WHERE `group_messages`.`group_id` = ?";
         $stmt = $this->conn->prepare($query);
@@ -54,6 +56,23 @@ class GroupMessage {
         return $ary;
     }
 
+    // 〇勉強会メッセージ削除用表示
+    // あらかじめ設定されたメッセージの id を使って、特定のGroupMessageを検索して返却
+    // メッセージを作成したメンバーのIDから、メンバー名(users.id)を副問い合わせ
+    // member_name として扱う
+    // messageDelete.php
+    function getGroupMessageById() {
+        $query = "SELECT `group_messages`.`id`, `group_messages`.`group_id`, 
+        (SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`, 
+        `group_messages`.`content`, `group_messages`.`created_at` 
+        FROM `group_messages` 
+        WHERE `group_messages`.`id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
+        $stmt->execute();
+        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $ary;
+    }
     // setter
     function setId($id) {
         $this->id = $id;
