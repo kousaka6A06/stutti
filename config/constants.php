@@ -25,11 +25,11 @@ define('ERR_CODE_MIME_TYPE', 11);
 define('ERR_CODE_FAIL_UPLOAD', 12);
 
 // ユーザーステータス
-define('NOT_LOGGED_IN', '0');
-define('LOGGED_IN', '1');
-define('GROUP_MEMBER', '2');
-define('GROUP_OWNER', '3');
+define('NOT_LOGGED_IN', 0);
+define('LOGGED_IN', 1);
+define('GROUP_MEMBER', 2);
+define('GROUP_OWNER', 3);
 
 // 勉強会ステータス
-define('NOT_FULL', '0');
-define('FULL', '1');
+define('NOT_FULL', 0);
+define('FULL', 1);
