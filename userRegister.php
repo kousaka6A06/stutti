@@ -16,7 +16,7 @@ $stuttiId = isset($_POST['stutti-id']) ? Utils::e($_POST['stutti-id']) : null;
 $password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
 $name = isset($_POST['name']) ? Utils::e($_POST['name']) : null;
 $mailAddress = isset($_POST['mail-address']) ? Utils::e($_POST['mail-address']) : null;
-$avatar = isset($_POST['avatar']) ? $_POST['avatar'] : null;
+$avatar = isset($_FILES['avatar']) ? $_FILES['avatar'] : null;
 
 // ログイン済みの場合
 if ($userId) {
