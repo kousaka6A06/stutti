@@ -16,7 +16,7 @@ $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
 // 未ログインの場合
 if (!$userId) {
     // セッションにメッセージを保存してログイン画面に遷移
-    $_SESSION['message'] = 'ログインしてください';
+    $_SESSION['message'] = 'ユーザーを削除したい場合はログインしてください';
     header('Location: ' . BASE_DOMAIN . '/login.php');
     exit;
 }
@@ -38,6 +38,6 @@ if ($user->deleteUser()) {
 // ユーザー削除に失敗した場合
 } else {
     // セッションにメッセージを保存してエラー画面に遷移
-    $_SESSION['message'] = 'ユーザー削除に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
+    $_SESSION['message'] = 'ユーザーの削除に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
     header('Location: ' . BASE_DOMAIN . '/error.php');
 }

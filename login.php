@@ -18,7 +18,7 @@ $password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
 // ログイン済みの場合
 if ($userId) {
     // セッションにメッセージを保存してマイページ画面に遷移
-    $_SESSION['message'] = 'ログイン済みです';
+    $_SESSION['message'] = 'すでにログインしています';
     header('Location: ' . BASE_DOMAIN . '/mypage.php');
     exit;
 }
