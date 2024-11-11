@@ -13,7 +13,10 @@ class TuttiComment {
         $this->conn = Database::getInstance()->getConnection();
     }
 
-    // tutti コメント投稿
+    // tutti 詳細画面コメント投稿
+    // $this->name の有無によって条件分岐させ、デフォルト名が入るよう処理
+    // (これがないと、空文字かNULLになる)
+    // 未定
     function createTuttiComment() {
         if($this->name){
             $query ="INSERT INTO `tutti_comments` (`tutti_comments`.`name`,`tutti_comments`.`content`,`tutti_comments`.`tutti_id`) VALUES(?,?,?)";
@@ -33,14 +36,15 @@ class TuttiComment {
         return $stmt->execute();
     }
 
-    ///////////////////// tutti コメント関連
-    // コメント表示
-    // 昇順表示
-    function CommentData() {
+    // 〇tutti 詳細画面コメント表示
+    // 昇順表示・全件返却
+    // 詳細画面に入っているので、tutti_id からの名称返却はせず
+    // tutti.php
+    function getTuttiCommentsByTuttiId() {
         $query = "SELECT `tutti_comments`.`id`,`tutti_comments`.`name`,`tutti_comments`.`content`, `tutti_comments`.`tutti_id`, `tutti_comments`.`created_at`
-        FROM `tutti_comments` WHERE `tutti_comments`.`tutti_id` = ?";
+        FROM `tutti_comments` 
+        WHERE `tutti_comments`.`tutti_id` = ?";
         $stmt = $this->conn->prepare($query);
-
         $stmt->bindValue(1,$this->tuttiId,PDO::PARAM_INT);
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
