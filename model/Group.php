@@ -205,7 +205,7 @@ class Group {
 
     // グループの定員 満員の場合true
     function isFull(){
-        $query = "SELECT COUNT(*) + 1 FROM `belonging` WHERE `belonging`.`group_id` = ?";
+        $query = "SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $this->id);
         if ($stmt->execute()) {
