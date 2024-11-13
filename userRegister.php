@@ -16,7 +16,7 @@ $stuttiId = isset($_POST['stutti-id']) ? Utils::e($_POST['stutti-id']) : null;
 $password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
 $name = isset($_POST['name']) ? Utils::e($_POST['name']) : null;
 $mailAddress = isset($_POST['mail-address']) ? Utils::e($_POST['mail-address']) : null;
-$avatar = isset($_FILES['avatar']) ? $_FILES['avatar'] : null;
+$avatar = $_FILES['avatar'];
 
 // ログイン済みの場合
 if ($userId) {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $user->setMailAddress($mailAddress);
 
     // アバター画像が画面から渡されなかった場合
-    if (!$avatar) {
+    if ($avatar['error'] === UPLOAD_ERR_NO_FILE) {
         $user->setAvatar(DEFAULT_AVATAR);
 
     // アバター画像が画面から渡された場合
