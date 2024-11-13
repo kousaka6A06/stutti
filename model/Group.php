@@ -137,7 +137,7 @@ class Group {
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
         $stmt->execute();
-        $ary = $stmt->fetch(PDO::FETCH_CLASS);
+        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
         return $ary;
     }
 
