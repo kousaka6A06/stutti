@@ -203,6 +203,26 @@ class Group {
         return $ary;
     }
 
+    // グループの定員 満員の場合true
+    function isFull(){
+        $query = "SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(1, $this->id);
+        if ($stmt->execute()) {
+            $currentCount = $stmt->fetchColumn();
+        }
+        $query2 = "SELECT `groups`.`num_people` FROM `groups` WHERE `groups`.`id` = ?";
+        $stmt2 = $this->conn->prepare($query2);
+        $stmt2->bindValue(1, $this->id);
+        if($stmt2->execute()) {
+            $maxPeople = $stmt2->fetchColumn();
+        }
+        if(isset($currentCount) && isset($maxPeople) && $currentCount >= $maxPeople) {
+            return true;
+        }
+        return false;
+    }
+
     // setter
     function setId($id) {
         $this->id = $id;
