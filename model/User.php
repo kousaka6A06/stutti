@@ -99,7 +99,7 @@ class User {
     // 〇マイページユーザー表示
     // myPage.php
     function getUserById() {
-        $query = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`avater`, `users`.`created_at`, `users`.`updated_at` 
+        $query = "SELECT `users`.`id`, `users`.`mail_address`, `users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`avatar`, `users`.`created_at`, `users`.`updated_at` 
         FROM `users` 
         WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);

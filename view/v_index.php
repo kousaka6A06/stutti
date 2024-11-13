@@ -15,7 +15,7 @@
 <div class="container">
     <div class="board_3YD0c">
         <div class="board_inner">
-            <section>
+            <section class="board_list">
                 <p>
                     STUTTIは、学習に特化したオンラインコミュニティで、<br>
                     社会人や学生が自由に勉強会を作成し、参加者同士が交流できるプラットフォームです。<br><br>
@@ -71,7 +71,7 @@
 </div>
 
 <!-- tutti広場 -->
-<div class="container-md mt-5">
+<div class="container-md">
     <h2>TUTTI</h2>
     <div class="row d-flex justify-content-evenly tutti-row">
         <?php foreach ($cards as $card): ?>

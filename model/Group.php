@@ -137,7 +137,7 @@ class Group {
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
         $stmt->execute();
-        $ary = $stmt->fetch(PDO::FETCH_CLASS);
+        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
         return $ary;
     }
 
@@ -195,7 +195,7 @@ class Group {
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
                 (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
                 FROM `groups` 
-                WHERE `groups`.`tutti_id` = ? `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
+                WHERE `groups`.`tutti_id` = ? AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $this->tuttiId, PDO::PARAM_INT);
         $stmt->execute();
