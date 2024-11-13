@@ -1,11 +1,19 @@
 /*//////// グローバルなスタイル ////////*/
+/* スムーズスクロール */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Nunito', sans-serif;
     color: #586365;
     padding-top: 60px;
     margin: 0;
     padding: 0;
+}
 
+main {
+    margin-top: 6rem;
 }
 
 h3 {
@@ -105,7 +113,7 @@ p {
 /*//////// メイン ////////*/
 /* ホワイトボード */
 .board_3YD0c {
-    margin: 7.5em auto;
+    margin: auto;
     position: relative;
     width: 95%
 }
@@ -378,74 +386,4 @@ p {
 @media (max-width: 1024px) {
 }
 
-/*//////// セクションのスタイル ////////*/
-.section {
-    min-height: 100vh;
-    /* セクションを画面全体の高さに */
-    display: flex;
-    flex-direction: column;
-    padding-top: 60px;
-    /* タイトル分の余白 */
-}
-
-/*//////// 各セクションごとの背景色 ////////*/
-.section-1 {
-    background-color: #ADD8E6;
-    /* 薄い青 */
-}
-
-.section-2 {
-    background-color: #FF6347;
-    /* トマト色 */
-}
-
-.section-3 {
-    background-color: #98FB98;
-    /* 薄い緑 */
-}
-
-/*//////// 固定タイトル ////////*/
-.section-title {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(15, 15, 15, 0.8);
-    /* 背景を少し透明にしてコンテンツが見えるように */
-    padding: 10px 20px;
-    text-align: center;
-    z-index: 10;
-}
-
-/*//////// タイトルのスタイル ////////*/
-.section-title h2 {
-    font-size: 2rem;
-    color: white;
-    margin: 0;
-}
-
-/*//////// コンテンツのスタイル ////////*/
-.content {
-    position: relative;
-    padding: 20px;
-    margin-top: 60px;
-    /* タイトル下に余白 */
-    height: 200vh;
-    /* コンテンツ部分を大きくしてスクロール可能に */
-    overflow-y: scroll;
-    /* コンテンツ部分のみスクロール */
-}
-
-/*//////// スクロールバーのカスタマイズ（任意） ////////*/
-.content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.content::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
-}
-
-.content::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.1);
-}
+/*//////// tutti詳細セクションのスタイル ////////*/

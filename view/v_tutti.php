@@ -1,41 +1,5 @@
-<!-- セクション 1 -->
-<section class="section section-1">
-    <div class="section-title">
-        <h2>セクション1</h2>
-    </div>
-    <div class="content">
-        <p>セクション1のコンテンツです。</p>
-        <p>ここにスクロール可能なコンテンツを追加してください。</p>
-        <p>セクション1の中のコンテンツがスクロールします。</p>
-        <p>セクション1の中のコンテンツがスクロールします。</p>
-        <p>セクション1の中のコンテンツがスクロールします。</p>
-    </div>
-</section>
 
-<!-- セクション 2 -->
-<section class="section section-2">
-    <div class="section-title">
-        <h2>セクション2</h2>
-    </div>
-    <div class="content">
-        <p>セクション2のコンテンツです。</p>
-        <p>セクション2の中のコンテンツがスクロールします。</p>
-        <p>セクション2の中のコンテンツがスクロールします。</p>
-        <p>セクション2の中のコンテンツがスクロールします。</p>
-    </div>
-</section>
 
-<!-- セクション 3 -->
-<section class="section section-3">
-    <div class="section-title">
-        <h2>セクション3</h2>
-    </div>
-    <div class="content">
-        <p>セクション3のコンテンツです。</p>
-        <p>セクション3の中のコンテンツがスクロールします。</p>
-        <p>セクション3の中のコンテンツがスクロールします。</p>
-    </div>
-</section>
 
 
 <!-- <h2>AWS</h2>
