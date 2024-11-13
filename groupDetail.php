@@ -44,9 +44,8 @@ if (!$userId) {
     $user = new User();
     $user->setId($userId);
 
-    // TODO: [コントローラー]
     // ユーザー情報を取得する
-    // $user = $user->getUserById();
+    $user = $user->getUserById();
 
     // TODO: [コントローラー]
     // 勉強会に未参加の場合
@@ -58,6 +57,7 @@ if (!$userId) {
 
         $userStatus = LOGGED_IN;
 
+        // TODO: [コントローラー]
         // 勉強会が満員の場合
         // if ($group->isFull()) {
 

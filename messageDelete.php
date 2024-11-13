@@ -41,16 +41,11 @@ if (!$userId) {
 $message = new GroupMessage();
 $message->setId($messageId);
 
-// TODO: [コントローラー]
 // 勉強会メッセージ情報を取得する
-// $message = $message->getGroupMessageById();
-
-// TODO: [モデル]
-// getGroupMessageById():GroupMessage
-// あらかじめプロパティに設定されたidを使って、GroupMessageを検索して返却してください
+$message = $message->getGroupMessageById();
 
 // 勉強会メッセージの作成者ではない場合
-if ($message->getMemberId() !== $userId) {
+if ($message['memberId'] !== $userId) {
     // セッションにメッセージを保存して勉強会詳細画面に遷移
     $_SESSION['message'] = 'メッセージを削除する権限がありません';
     header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
