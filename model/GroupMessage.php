@@ -44,7 +44,7 @@ class GroupMessage {
     // member_name として扱う
     // groupDetail.php
     function getGroupMessagesByGroupId() {
-        $query = "SELECT `group_messages`.`id`, `group_messages`.`group_id`, 
+        $query = "SELECT `group_messages`.`id`, `group_messages`.`group_id`, `group_messages`.`member_id`, 
         (SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`, 
         `group_messages`.`content`, `group_messages`.`created_at` 
         FROM `group_messages` 
@@ -62,7 +62,7 @@ class GroupMessage {
     // member_name として扱う
     // messageDelete.php
     function getGroupMessageById() {
-        $query = "SELECT `group_messages`.`id`, `group_messages`.`group_id`, 
+        $query = "SELECT `group_messages`.`id`, `group_messages`.`group_id`, `group_messages`.`member_id`, 
         (SELECT `users`.`name` FROM `users` WHERE `users`.`id` = `group_messages`.`member_id`) AS `member_name`, 
         `group_messages`.`content`, `group_messages`.`created_at` 
         FROM `group_messages` 
