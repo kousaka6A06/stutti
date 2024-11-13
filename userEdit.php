@@ -20,7 +20,7 @@ $avatar = isset($_POST['avatar']) ? Utils::e($_POST['avatar']) : null;
 // 未ログインの場合
 if (!$userId) {
     // セッションにメッセージを保存してログイン画面に遷移
-    $_SESSION['message'] = 'ログインしてください';
+    $_SESSION['message'] = 'ユーザーを編集したい場合はログインしてください';
     header('Location: ' . BASE_DOMAIN . '/login.php');
     exit;
 }
@@ -51,24 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $user->setAvatar(DEFAULT_AVATAR);
     }
 
-    // TODO: [コントローラー]
     // ユーザー編集試行
     // ユーザー編集に成功した場合
-    // if ($user->updateUser()) {
-
-    // TODO: [モデル]
-    // updateUser():bool
-    // あらかじめプロパティに設定されたユーザー情報で、UsersレコードをUPDATEしてください
-    // 実行結果の成否を返却してください
-
+    if ($user->updateUser()) {
         // セッションにメッセージを保存してマイページ画面に遷移
         $_SESSION['message'] = 'ユーザーを編集しました';
         header('Location: ' . BASE_DOMAIN . '/mypage.php');
 
     // ユーザー編集に失敗した場合
-    // } else {
+    } else {
         // セッションにメッセージを保存してエラー画面に遷移
-        // $_SESSION['message'] = 'ユーザーの編集に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
-        // header('Location: ' . BASE_DOMAIN . '/error.php');
-    // }
+        $_SESSION['message'] = 'ユーザーの編集に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
+        header('Location: ' . BASE_DOMAIN . '/error.php');
+    }
 }

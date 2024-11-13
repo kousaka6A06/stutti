@@ -12,23 +12,13 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// TODO: [コントローラー]
 // 最近作成された勉強会情報を5件取得
 $group = new Group();
-// $groups = $group->getNewGroups();
+$groups = $group->getNewGroups();
 
-// TODO: [モデル]
-// getNewGroups():Group[]
-// 最近作成された勉強会情報を5件返却してください
-
-// TODO: [コントローラー]
 // tutti情報取得
 $tutti = new MTutti();
-// $tuttis = $tutti->getAllTutti();
-
-// TODO: [モデル]
-// getAllTutti():MTutti[]
-// tuttiをidの昇順で全件返却してください
+$tuttis = $tutti->getAllTutti();
 
 // トップ画面を描画
 Utils::loadView('トップ', 'view/v_index.php');

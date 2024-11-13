@@ -16,7 +16,7 @@ $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
 // 未ログインの場合
 if (!$userId) {
     // セッションにメッセージを保存してログイン画面に遷移
-    $_SESSION['message'] = 'ログインしてください';
+    $_SESSION['message'] = 'マイページを表示したい場合はログインしてください';
     header('Location: ' . BASE_DOMAIN . '/login.php');
     exit;
 }
@@ -34,24 +34,14 @@ $user->setId($userId);
 // あらかじめプロパティに設定されたuserIdを使って、Userを検索して返却してください
 // PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
 
-// TODO: [コントローラー]
+// 勉強会インスタンスを作成
+$group = new Group();
+
 // 作成した勉強会情報取得
-// $ownerGroups = $group->getGroupsByOwnerId($user->getId());
+$ownerGroups = $group->getGroupsByOwnerId($user->getId());
 
-// TODO: [モデル]
-// getGroupsByOwnerId():Group[]
-// 引数で渡されたuserIdを使って、ユーザーが作成したGroupを検索して返却してください
-// PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
-
-// TODO: [コントローラー]
 // 参加中の勉強会情報取得
-// $memberGroups = $group->getGroupsByMemberId($user->getId());
-
-// TODO: [モデル]
-// getGroupsByMemberId():Group[]
-// 引数で渡されたuserIdを使って、ユーザーが参加中のGroupを検索して返却してください
-// ただし、ユーザーが作成したGroupは除いてください
-// PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
+$memberGroups = $group->getGroupsByMemberId($user->getId());
 
 // マイページ画面を描画
 Utils::loadView('マイページ', 'view/v_myPage.php');

@@ -16,12 +16,12 @@ $stuttiId = isset($_POST['stutti-id']) ? Utils::e($_POST['stutti-id']) : null;
 $password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
 $name = isset($_POST['name']) ? Utils::e($_POST['name']) : null;
 $mailAddress = isset($_POST['mail-address']) ? Utils::e($_POST['mail-address']) : null;
-$avatar = isset($_POST['avatar']) ? $_POST['avatar'] : null;
+$avatar = isset($_FILES['avatar']) ? $_FILES['avatar'] : null;
 
 // ログイン済みの場合
 if ($userId) {
     // セッションにメッセージを保存してマイページ画面に遷移
-    $_SESSION['message'] = 'ログイン済みです';
+    $_SESSION['message'] = 'すでにログインしています';
     header('Location: ' . BASE_DOMAIN . '/mypage.php');
     exit;
 }
@@ -46,20 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // アバター画像が画面から渡された場合
     } else {
-        // TODO: [コントローラー]
         // 画像アップロード試行
-        // $res = $user->uploadAvatar($avatar);
+        $code = $user->uploadAvatar($avatar);
 
         // 画像アップロードに成功した場合
-        if (!is_int($res)) {
-
-        // TODO: [モデル]
-        // uploadAvatar($avatar):mixed
-        // 引数で渡されたアバター画像をアップロードしてください
-        // アップロードに成功した場合は、一意のファイル名を返却してください
-        // アップロードに失敗した場合は、エラーコード（constants.php参照）を返却してください
-
-            $user->setAvatar($res);
+        if ($code === UPLOAD_OK) {
+            // 処理なし
 
         // 画像アップロードに失敗した場合
         } else {
@@ -77,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             ];
 
             // セッションにメッセージを保存してユーザー登録画面を再描画
-            $_SESSION['message'] = $messages[$res];
+            $_SESSION['message'] = $messages[$code];
             Utils::loadView('ユーザー登録', 'view/v_userRegister.php');
             exit;
         }
@@ -86,13 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // ユーザー登録試行
     // ユーザー登録に成功した場合
     if ($user->createUser()) {
-
-    // TODO: [モデル]
-    // createUser():bool
-    // あらかじめプロパティに設定されたユーザー情報で、Usersレコードを作成してください
-    // レコード作成後、下記プログラムを実行して自動採番されたidをインスタンスに設定しておいてください
-    // $this->id = $this->conn->lastInsertId();
-
         // セッションにユーザーID・メッセージを保存してマイページ画面に遷移
         $_SESSION['userId'] = $user->getId();
         $_SESSION['message'] = 'ユーザーを作成しました';
