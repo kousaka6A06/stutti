@@ -151,9 +151,10 @@ class Group {
     // myPage.php
     function getGroupsByMemberId($userId) {
         $now = date('Y-m-d');
-        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
-                (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
+        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`,
+                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`
                 FROM `groups` 
+                JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
                 WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
@@ -171,9 +172,10 @@ class Group {
     // myPage.php
     function getGroupsByOwnerId($userId) {
         $now = date('Y-m-d');
-        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
-                (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
+        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`,
+                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`
                 FROM `groups` 
+                JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
                 WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
