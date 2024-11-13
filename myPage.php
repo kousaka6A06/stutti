@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config/constants.php';
+require_once 'model/Group.php';
 require_once 'model/User.php';
 require_once 'utils/Utils.php';
 
@@ -25,23 +26,17 @@ if (!$userId) {
 $user = new User();
 $user->setId($userId);
 
-// TODO: [コントローラー]
 // ユーザー情報を取得する
-// $user = $user->getUserById();
-
-// TODO: [モデル]
-// getUserById():User
-// あらかじめプロパティに設定されたuserIdを使って、Userを検索して返却してください
-// PDOStatement::fetch() の引数にPDO::FETCH_CLASS を使うと良い感じかも。。
+$user = $user->getUserById();
 
 // 勉強会インスタンスを作成
 $group = new Group();
 
 // 作成した勉強会情報取得
-$ownerGroups = $group->getGroupsByOwnerId($user->getId());
+$ownerGroups = $group->getGroupsByOwnerId($user['id']);
 
 // 参加中の勉強会情報取得
-$memberGroups = $group->getGroupsByMemberId($user->getId());
+$memberGroups = $group->getGroupsByMemberId($user['id']);
 
 // マイページ画面を描画
 Utils::loadView('マイページ', 'view/v_myPage.php');
