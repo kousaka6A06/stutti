@@ -1,9 +1,11 @@
 /*//////// グローバルなスタイル ////////*/
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #fff;
     color: #586365;
-    padding-top: 58px;
+    padding-top: 60px;
+    margin: 0;
+    padding: 0;
+
 }
 
 h3 {
@@ -13,7 +15,30 @@ h3 {
 p {
     font-size: 16px;
 }
+
 /* ボタン */
+/* //////ヘッダーボタン///// */
+.h-btm {
+    position: relative;
+}
+
+.h-btm::after {
+    position: absolute;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #6b8375;
+    bottom: -10px;
+    transform: scale(0, 1);
+    transition: transform 0.5s;
+    transform-origin: center top;
+}
+
+.h-btm:hover::after {
+    transform: scale(1, 1)
+}
+/* //////view moreボタン///// */
 .view-more-btn {
     display: inline-block;
     width: 200px;
@@ -21,7 +46,7 @@ p {
     text-decoration: none;
     line-height: 50px;
     outline: none;
-    background-color: #f38282;
+    background-color: #8db2a1;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -37,7 +62,7 @@ p {
     content: '';
     width: 135%;
     height: 100%;
-    background-color: #aca398;
+    background-color: #c4d9ca;
     position: absolute;
     top: 0;
     left: 0;
@@ -49,31 +74,38 @@ p {
 
 /*//////// ヘッダー ////////*/
 .header {
+    margin: 0;
     padding: 0;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 1%;
+    left: 50%; /* 横方向で50%に配置 */
+    width: 55%;
     z-index: 1000;
-    background-color: #04b95f; /* ヘッダーの背景色 */
+    background-color: #92b29b;
+    transform: translateX(-50%); /* 自身の幅の50%分、左に移動させて中央に配置 */
+}
+
+.rounded-header {
+    border-radius: 30px;  /* 丸みの半径を指定 */
+    overflow: hidden;     /* 丸い角をきれいに保つために必要 */
 }
 
 .header .navbar-brand {
-    color: #ffffff;
+    color: #1d1c1c;
     font-size: 1.75rem;
     font-weight: bold;
-    padding: 0;
+    padding: 0.5rem;
 }
 
 .header .btn {
     font-size: 0.9rem; /* ボタンのフォントサイズ調整 */
-    padding: 5px 10px; /* ボタンのパディング調整 */
+    padding: 0px 10px; /* ボタンのパディング調整 */
 }
 
 /*//////// メイン ////////*/
 /* ホワイトボード */
 .board_3YD0c {
-    margin: 1em auto;
+    margin: 7.5em auto;
     position: relative;
     width: 95%
 }
@@ -146,14 +178,20 @@ p {
 
 
 /*/////// Tuttiカードのスタイル ///////*/
+.tutti-row {
+    max-width: 90%;
+}
+
 .tutti-card {
-    transition: transform 0.5s ease; /* アニメーションの設定 */
     width: 170px;
     border: none;
+    transition: transform 0.5s ease;
+    /* transform: rotate(70deg); */
 }
 
 .tutti-card:hover {
-    transform: translateY(-40%); /* 1.05倍に拡大 */
+    /* transform: rotate(70deg) translateX(-50%) translateY(-20%); */
+    transform: translateY(-20%);
 }
 
 .husen {
@@ -202,13 +240,14 @@ p {
 
 
 .vertical-text {
-    -ms-writing-mode: tb-rl;
-    writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl; /* IE用 */
+    writing-mode: vertical-rl; /* 左から右の縦書き */
     text-orientation: sideways;
+    transform: rotate(180deg); /* 上下反転 */
 }
 
 .tilt-card {
-    transform: rotate(5deg); /* 初期の傾き */
+    transform: rotate(7deg); /* 初期の傾き */
     transform-origin: bottom right; /* 右下を軸にする */
     transition: transform 0.3s; /* アニメーションのトランジション */
 }
@@ -220,6 +259,7 @@ p {
 
 .tutti-card2 {
     transition: transform 0.5s ease;
+    transform-origin:bottom;
 }
 
 .tutti-card2:hover {
@@ -295,23 +335,8 @@ p {
 }
 
 /*//////// フッターのスタイル ////////*/
-.footer {
-    background-color: #586365;
-    color: #fff;
-}
 
-.footer a {
-    color: #ffc042;
-    text-decoration: none;
-}
 
-.footer a:hover {
-    color: #fff;
-}
-
-.social-icons i {
-    font-size: 1.5rem;
-}
 
 /*//////// メディアクエリ ////////*/
 /* さらに小さな画面（モバイルやスマートフォン）に対応 */

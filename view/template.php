@@ -1,3 +1,15 @@
+<?php
+$images = [
+    "footer1.png",
+    "footer3.png",
+    "footer2.png",
+    "footer4.png",
+    "footer5.png",
+    "footer7.png"
+];
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -18,35 +30,30 @@
 
 <body class="d-flex flex-column min-vh-100">
     <!-- ヘッダー -->
-    <header class="header">
-        <nav class="navbar navbar-expand-lg navbar-light">
+    <header class="header rounded-header">
+        <nav class="navbar navbar-expand-sm">
             <div class="container">
-                <a class="navbar-brand header-logo" href="index.php">
+                <a class="navbar-brand" href="index.php">
                     STUTTI
                 </a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto"> <!-- ml-auto → ms-auto -->
+                    <ul class="navbar-nav ms-auto">
                         <?php if (isset($_SESSION['userId'])): ?>
                             <li class="nav-item">
-                                <a class="btn btn-outline-light mx-2" href="groupEdit.php">勉強会を作る</a>
+                                <a class="btn mx-2 h-btm" href="groupEdit.php">勉強会を作る</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-outline-light mx-2" href="mypage.php">マイページ</a>
+                                <a class="btn mx-2 h-btm" href="mypage.php">マイページ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-outline-light mx-2" href="logout.php">ログアウト</a>
+                                <a class="btn mx-2 h-btm" href="logout.php">ログアウト</a>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a class="btn btn-outline-light mx-2" href="login.php">ログイン</a>
+                                <a class="btn mx-2 h-btm" href="login.php">ログイン</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-outline-light mx-2" href="userRegister.php">ユーザー登録</a>
+                                <a class="btn mx-2 h-btm" href="userRegister.php">ユーザー登録</a>
                             </li>
                         <?php endif ?>
                     </ul>
@@ -67,8 +74,27 @@
     </main>
 
     <!-- フッター -->
-    <footer class="bg-dark-subtle text-white text-center py-3 mt-auto">
-        <p>&copy; 2024 STUTTI</p>
+    <footer class="bg-light py-4">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <?php
+                // 配列を2回繰り返して12個の画像を表示
+                for ($i = 0; $i < 2; $i++):
+                    foreach ($images as $image): ?>
+                        <div class="col-1 p-2">
+                            <img src="img/<?= $image ?>" alt="<?= $image ?>" class="img-fluid w-50">
+                        </div>
+                    <?php endforeach;
+                endfor; ?>
+            </div>
+            <!-- pタグを中央に配置 -->
+            <div class="row">
+                <div class="col-12 d-flex justify-content-evenly">
+                    <p class="mb-0">&copy; 2024 STUTTI</p>
+                    <p class="mb-0">プライバシーポリシー</p>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <!-- Bootstrap Bundle with Popper.js -->
