@@ -33,7 +33,7 @@ class MTutti {
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
         $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
         return $ary;
     }
 

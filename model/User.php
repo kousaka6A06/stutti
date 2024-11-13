@@ -105,7 +105,7 @@ class User {
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
         $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
         return $ary;
     }
 
@@ -135,7 +135,7 @@ class User {
 
         // 一時フォルダからイメージ保存フォルダへファイルを移動
         $uniqueFileName = uniqid().$ufName;
-        if (!move_uploaded_file($ufTmpname, 'img/avatar/' . $uniqueFileName)) {
+        if (!move_uploaded_file($ufTmpname, DIR_AVATAR . $uniqueFileName)) {
             return ERR_CODE_FAIL_UPLOAD;
         }
         $this->avatar = $uniqueFileName;

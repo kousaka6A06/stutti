@@ -24,8 +24,8 @@ class Group {
     // groupEdit.php
     function createGroup() {
         $query = "INSERT INTO `groups` 
-        (`groups`.`name`,`groups`.`date`,`groups`.`time`,`groups`.`location`,`groups`.`num_people`,`groups`.`content`,`groups`.`created_by_id`,`groups`.`tutti_id`) 
-        VALUES(?,?,?,?,?,?,?,?)";
+        (`groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`) 
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->name);
@@ -81,7 +81,7 @@ class Group {
     // 降順
     // index.php
     function getNewGroups() {
-        $now = date('YY-mm-dd');
+        $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content` 
                 FROM `groups` WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} 
                 ORDER BY `groups`.`id` DESC LIMIT 5";
@@ -95,7 +95,7 @@ class Group {
     // 勉強会を tutti 毎に最新「5件」 tuttiId をキーにして、Groupの配列を値に持たせる。
     // groupList.php
     function getAllTuttiGroups() {
-        $now = date('YY-mm-dd');
+        $now = date('Y-m-d');
         $q = $this->conn->query("SELECT * FROM `m_tutti`");
         $ary = [];
         $key = [];
@@ -126,7 +126,7 @@ class Group {
     // tutti_name として扱う
     // groupDetail.php
     function getGroupById() {
-        $now = date('YY-mm-dd');
+        $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, 
         (SELECT `users`.`name` FROM`users` WHERE `users`.`id` = `groups`.`created_by_id`) AS `user_name`, 
         (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name`,
@@ -150,7 +150,7 @@ class Group {
     // tutti_name として扱う
     // myPage.php
     function getGroupsByMemberId($userId) {
-        $now = date('YY-mm-dd');
+        $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
                 (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
                 FROM `groups` 
@@ -170,7 +170,7 @@ class Group {
     // tutti_name として扱う
     // myPage.php
     function getGroupsByOwnerId($userId) {
-        $now = date('YY-mm-dd');
+        $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
                 (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
                 FROM `groups` 
@@ -191,7 +191,7 @@ class Group {
     // tutti_name として扱う
     // tutti.php
     function getGroupsByTuttiId() {
-        $now = date('YY-mm-dd');
+        $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
                 (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
                 FROM `groups` 
@@ -201,6 +201,26 @@ class Group {
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
+    }
+
+    // グループの定員 満員の場合true
+    function isFull(){
+        $query = "SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(1, $this->id);
+        if ($stmt->execute()) {
+            $currentCount = $stmt->fetchColumn();
+        }
+        $query2 = "SELECT `groups`.`num_people` FROM `groups` WHERE `groups`.`id` = ?";
+        $stmt2 = $this->conn->prepare($query2);
+        $stmt2->bindValue(1, $this->id);
+        if($stmt2->execute()) {
+            $maxPeople = $stmt2->fetchColumn();
+        }
+        if(isset($currentCount) && isset($maxPeople) && $currentCount >= $maxPeople) {
+            return true;
+        }
+        return false;
     }
 
     // setter
