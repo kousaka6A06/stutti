@@ -27,16 +27,16 @@ $user = new User();
 $user->setId($userId);
 
 // ユーザー情報を取得する
-$user = $user->getUserById();
+$userInfo = $user->getUserById();
 
 // 勉強会インスタンスを作成
 $group = new Group();
 
 // 作成した勉強会情報取得
-$ownerGroups = $group->getGroupsByOwnerId($user['id']);
+$ownerGroupInfos = $group->getGroupsByOwnerId($userId);
 
 // 参加中の勉強会情報取得
-$memberGroups = $group->getGroupsByMemberId($user['id']);
+$memberGroupInfos = $group->getGroupsByMemberId($userId);
 
 // マイページ画面を描画
 Utils::loadView('マイページ', 'view/v_myPage.php');

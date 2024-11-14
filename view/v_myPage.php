@@ -1,5 +1,5 @@
 <?php
-global $user, $ownerGroups, $memberGroups;
+global $userInfo, $ownerGroupInfos, $memberGroupInfos;
 ?>
 
 <section class="container mt-3 mb-5">
@@ -8,21 +8,21 @@ global $user, $ownerGroups, $memberGroups;
     <h2 class="my-3">ユーザー情報</h2>
     <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
         <div class="col-6 mx-auto my-2">
-            <img class="w-100" src="<?= DIR_AVATAR ?><?= $user['avatar'] ?>" alt="">
+            <img class="w-100" src="<?= DIR_AVATAR ?><?= $userInfo['avatar'] ?>" alt="">
         </div>
         <table class="maintable w-100 my-5">
             <tbody>
                 <tr>
                     <th class="p-3 w-25">ユーザー名</th>
-                    <td class="p-3 w-75"><?= $user['name'] ?></td>
+                    <td class="p-3 w-75"><?= $userInfo['name'] ?></td>
                 </tr>
                 <tr>
                     <th class="p-3 w-25">メールアドレス</th>
-                    <td class="p-3 w-75"><?= $user['mail_address'] ?></td>
+                    <td class="p-3 w-75"><?= $userInfo['mail_address'] ?></td>
                 </tr>
                 <tr>
                     <th class="p-3 w-25">StuttiID</th>
-                    <td class="p-3 w-75"><?= $user['stutti_id'] ?></td>
+                    <td class="p-3 w-75"><?= $userInfo['stutti_id'] ?></td>
                 </tr>
                 <tr>
                     <th class="p-3 w-25">パスワード</th>
@@ -40,7 +40,7 @@ global $user, $ownerGroups, $memberGroups;
 <section class="container mt-3 mb-5">
     <h2 class="my-3">作成した勉強会</h2>
     <div class="row my-3">
-        <?php foreach ($ownerGroups as $group): ?>
+        <?php foreach ($ownerGroupInfos as $group): ?>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
                 <div class="card">
                     <ul class="list-group list-group-flush">
@@ -73,7 +73,7 @@ global $user, $ownerGroups, $memberGroups;
 <section class="container mt-3 mb-5">
     <h2 class="my-3">参加中の勉強会</h2>
     <div class="row my-3">
-        <?php foreach ($memberGroups as $group): ?>
+        <?php foreach ($memberGroupInfos as $group): ?>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
                 <div class="card">
                     <ul class="list-group list-group-flush">

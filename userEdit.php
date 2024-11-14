@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $user->setId($userId);
 
     // ユーザー情報を取得する
-    $user = $user->getUserById();
+    $userInfo = $user->getUserById();
 
     // ユーザー編集画面を描画
     Utils::loadView('ユーザー編集', 'view/v_userEdit.php');
