@@ -24,6 +24,25 @@ class Belonging {
         return $stmt->execute();
     }
 
+
+    // ユーザーが勉強会メンバーかどうか確認用
+    // 勉強会の参加者かどうかをbooleanで返却
+    // groupDetail.php
+    public function isMemberOfGroup() {
+        $query = "SELECT * 
+        FROM `belonging` 
+        WHERE `belonging`.`group_id` = ? AND `belonging`.`member_id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->groupId);
+        $stmt->bindParam(2, $this->memberId);
+        $stmt->execute();
+        if($stmt->fetch(PDO::FETCH_ASSOC)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // setter
     function setGroupId($groupId) {
         $this->groupId = $groupId;
