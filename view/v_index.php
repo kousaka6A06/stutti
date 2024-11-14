@@ -13,10 +13,47 @@
 ?>
 
 <div class="container">
-    <div class="board_3YD0c">
-        <div class="board_inner">
-            <section class="board_list">
-                <p>
+    <div class="board-3YD0c">
+        <div class="board-inner">
+            <section class="board-list">
+                <div class="feature">
+                    <!-- FontAwesome アイコン (ユーザー) -->
+                    <i class="fa-solid fa-users"></i> <!-- アイコンを表示 -->
+                    <p>STUTTIは、学習に特化したオンラインコミュニティで、<br>
+                        社会人や学生が自由に勉強会を作成し、参加者同士が交流できるプラットフォームです。</p>
+                </div>
+
+                <div class="feature">
+                    <!-- FontAwesome アイコン (コメント) -->
+                    <i class="fa-solid fa-comment-dots"></i> <!-- アイコンを表示 -->
+                    <p>ユーザー登録することで、勉強会の作成や参加が可能となり、<br>
+                        興味のある分野で活発な意見交換を行うことができます。</p>
+                </div>
+
+                <div class="feature">
+                    <!-- FontAwesome アイコン (ディスカッション) -->
+                    <i class="fa-solid fa-comments"></i> <!-- アイコンを表示 -->
+                    <p>Tuttiと呼ばれるカテゴリには、メンバー登録なしでコメントができるため、<br>
+                        知識の共有やスキルアップのためのディスカッションも可能です。</p>
+                </div>
+
+                <div class="feature">
+                    <!-- FontAwesome アイコン (学び) -->
+                    <i class="fa-solid fa-book-open"></i> <!-- アイコンを表示 -->
+                    <p>学びの場をもっと身近に、そして楽しく提供します。</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="container">
+    <div class="board-3YD0c">
+        <div class="board-inner">
+            <section class="board-list">
+                <p class="anime-text">
                     STUTTIは、学習に特化したオンラインコミュニティで、<br>
                     社会人や学生が自由に勉強会を作成し、参加者同士が交流できるプラットフォームです。<br><br>
                     ユーザー登録することで、勉強会の作成や参加が可能となり、<br>
@@ -28,7 +65,7 @@
             </section>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- 募集中勉強会 -->
 <div class="container-md mt-5">

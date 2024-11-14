@@ -9,7 +9,6 @@ $images = [
 ];
 ?>
 
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -24,11 +23,16 @@ $images = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- 外部CSSファイルをリンク -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <!-- 背景アニメーション用のキャンバス -->
+    <canvas id="canvas"></canvas>
+    
     <!-- ヘッダー -->
     <header class="header rounded-header">
         <nav class="navbar navbar-expand-sm">
@@ -40,20 +44,20 @@ $images = [
                     <ul class="navbar-nav ms-auto">
                         <?php if (isset($_SESSION['userId'])): ?>
                             <li class="nav-item">
-                                <a class="btn mx-2 h-btm" href="groupEdit.php">勉強会を作る</a>
+                                <a class="btn mx-2 h-btm text-light" href="groupEdit.php">勉強会を作る</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn mx-2 h-btm" href="mypage.php">マイページ</a>
+                                <a class="btn mx-2 h-btm text-light" href="mypage.php">マイページ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn mx-2 h-btm" href="logout.php">ログアウト</a>
+                                <a class="btn mx-2 h-btm text-light" href="logout.php">ログアウト</a>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a class="btn mx-2 h-btm" href="login.php">ログイン</a>
+                                <a class="btn mx-2 h-btm text-light" href="login.php">ログイン</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn mx-2 h-btm" href="userRegister.php">ユーザー登録</a>
+                                <a class="btn mx-2 h-btm text-light" href="userRegister.php">ユーザー登録</a>
                             </li>
                         <?php endif ?>
                     </ul>
@@ -93,8 +97,6 @@ $images = [
 
     <!-- Bootstrap Bundle with Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- FontAwesome for social icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <!-- javascript -->
     <script src="javascript/script.js"></script>
 </body>
