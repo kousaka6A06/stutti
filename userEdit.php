@@ -39,21 +39,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // ユーザー編集画面の修正ボタンが押下された場合
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ユーザーインスタンスを作成してセッション情報をセット
+    // ユーザーインスタンスを作成して画面から渡された情報をセット
     $user = new User();
     $user->setId($userId);
-
-    // ユーザー情報を取得する
-    $user = $user->getUserById();
-
-    // ユーザー情報を画面から渡された情報で上書き
     $user->setPassword($password);
     $user->setName($name);
     $user->setMailAddress($mailAddress);
 
+    // 登録済みのユーザー情報を取得する
+    $userInfo = $user->getUserById();
+
     // アバター画像が画面から渡されなかった場合
     if ($avatar['error'] === UPLOAD_ERR_NO_FILE) {
-        // 処理なし（登録済みの情報のまま）
+        // 登録済みの情報のまま
+        $user->setAvatar($userInfo['avatar']);
 
     // アバター画像が画面から渡された場合
     } else {
