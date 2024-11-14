@@ -36,9 +36,8 @@ $group->setId($groupId);
 // 勉強会情報取得
 $group = $group->getGroupById();
 
-// TODO: [コントローラー]
 // 勉強会の定員に余裕がある場合
-// if (!$group->isFull()) {
+if (!$group->isFull()) {
     // 勉強会参加者インスタンスを作成して画面から渡された情報をセット
     $belonging = new Belonging();
     $belonging->setGroupId($groupId);
@@ -59,8 +58,8 @@ $group = $group->getGroupById();
     }
 
 // 勉強会が満員の場合
-// } else {
+} else {
     // セッションにメッセージを保存して勉強会詳細画面に遷移
-    // $_SESSION['message'] = '満員のため勉強会に参加できません。';
-    // header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
-// }
+    $_SESSION['message'] = '満員のため勉強会に参加できません。';
+    header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
+}

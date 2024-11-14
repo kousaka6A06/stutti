@@ -16,7 +16,7 @@ $stuttiId = isset($_POST['stutti-id']) ? Utils::e($_POST['stutti-id']) : null;
 $password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
 $name = isset($_POST['name']) ? Utils::e($_POST['name']) : null;
 $mailAddress = isset($_POST['mail-address']) ? Utils::e($_POST['mail-address']) : null;
-$avatar = $_FILES['avatar'];
+$avatar = isset($_FILES['avatar']) ? $_FILES['avatar'] : null;
 
 // ログイン済みの場合
 if ($userId) {
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // 画像アップロードに成功した場合
         if ($code === UPLOAD_OK) {
-            // 処理なし
+            // 処理なし(モデル側で画像セット済み)
 
         // 画像アップロードに失敗した場合
         } else {

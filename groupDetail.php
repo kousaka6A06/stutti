@@ -57,20 +57,14 @@ if (!$userId) {
 
         $userStatus = LOGGED_IN;
 
-        // TODO: [コントローラー]
         // 勉強会が満員の場合
-        // if ($group->isFull()) {
-
-        // TODO: [モデル]
-        // isFull():boolean
-        // 勉強会が満員かどうかをbooleanで返却してください
-
-            // $groupStatus = FULL;
+        if ($group->isFull()) {
+            $groupStatus = FULL;
 
         // 勉強会の定員に余裕がある場合
-        // } else {
+        } else {
             $groupStatus = NOT_FULL;
-        // }
+        }
 
     // 勉強会に参加中の場合
     // } else {

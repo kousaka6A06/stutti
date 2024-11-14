@@ -68,12 +68,6 @@ $images = [
 
     <!-- メイン -->
     <main class="flex-grow-1">
-        <?php // TODO ?>
-        <?php if (isset($_SESSION['message'])): ?>
-            <p>↓デバッグ用あとでけす↓</p>
-            <p>$_SESSION['message']：<?= $_SESSION['message'] ?></p>
-            <?php unset($_SESSION['message']) ?>
-        <?php endif ?>
         <?php include $v_includeFile; ?>
     </main>
 

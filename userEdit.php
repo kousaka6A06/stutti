@@ -15,7 +15,7 @@ $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
 $password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
 $name = isset($_POST['name']) ? Utils::e($_POST['name']) : null;
 $mailAddress = isset($_POST['mail-address']) ? Utils::e($_POST['mail-address']) : null;
-$avatar = isset($_POST['avatar']) ? Utils::e($_POST['avatar']) : null;
+$avatar = isset($_FILES['avatar']) ? $_FILES['avatar'] : null;
 
 // 未ログインの場合
 if (!$userId) {
@@ -39,15 +39,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // ユーザー編集画面の修正ボタンが押下された場合
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ユーザーインスタンスを作成して画面から渡された情報をセット
+    // ユーザーインスタンスを作成してセッション情報をセット
     $user = new User();
+    $user->setId($userId);
+
+    // ユーザー情報を取得する
+    $user = $user->getUserById();
+
+    // ユーザー情報を画面から渡された情報で上書き
     $user->setPassword($password);
     $user->setName($name);
     $user->setMailAddress($mailAddress);
-    if ($avatar) {
-        $user->setAvatar($avatar);
+
+    // アバター画像が画面から渡されなかった場合
+    if ($avatar['error'] === UPLOAD_ERR_NO_FILE) {
+        // 処理なし（登録済みの情報のまま）
+
+    // アバター画像が画面から渡された場合
     } else {
-        $user->setAvatar(DEFAULT_AVATAR);
+        // 画像アップロード試行
+        $code = $user->uploadAvatar($avatar);
+
+        // 画像アップロードに成功した場合
+        if ($code === UPLOAD_OK) {
+            // 処理なし(モデル側で画像セット済み)
+
+        // 画像アップロードに失敗した場合
+        } else {
+            // エラーコードによってメッセージ内容を設定
+            $messages = [
+                ERR_CODE_INI_SIZE => 'アップロード画像の最大サイズ制限を超えています(PHP)',
+                ERR_CODE_FORM_SIZE => 'アップロード画像の最大サイズ制限を超えています(HTML)',
+                ERR_CODE_PARTIAL => 'ファイルが一部しかアップロードされていません。<br>繰り返し失敗する場合は管理者に連絡して下さい。',
+                ERR_CODE_NO_TMP_DIR => '一時保存フォルダが存在しないためアップロード処理を中止しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。',
+                ERR_CODE_CANT_WRITE => 'ディスクへの書き込みに失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。',
+                ERR_CODE_MODULE => '拡張モジュールによってアップロードが中断されました。<br>繰り返し失敗する場合は管理者に連絡して下さい。',
+                ERR_CODE_EXTENSION => '画像以外のファイルはアップロードできません',
+                ERR_CODE_MIME_TYPE => 'ファイルの内容が画像ではありません',
+                ERR_CODE_FAIL_UPLOAD => 'アップロード処理に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。'
+            ];
+
+            // セッションにメッセージを保存してユーザー編集画面を再描画
+            $_SESSION['message'] = $messages[$code];
+            Utils::loadView('ユーザー編集', 'view/v_userEdit.php');
+            exit;
+        }
     }
 
     // ユーザー編集試行
