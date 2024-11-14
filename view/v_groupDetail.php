@@ -1,7 +1,5 @@
-
 <h1 class="text-center">勉強会詳細</h1>
-<div class="container mt-5">
-
+<div class="container mt-3">
     <div class="bg-light p-4 rounded shadow w-50 mx-auto">
         <p>group.name <br>目指せ！！AWSクラウドプラクティショナー</p><br>
         <p>tutti <br>AWS</p><br>
