@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
         $group->setId($groupId);
 
         // 勉強会情報取得
-        $group = $group->getGroupById();
+        $groupInfo = $group->getGroupById();
 
         // 勉強会編集画面を描画
         Utils::loadView('勉強会編集', 'view/v_groupEdit.php');

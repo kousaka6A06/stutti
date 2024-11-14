@@ -14,11 +14,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // 最近作成された勉強会情報を5件取得
 $group = new Group();
-$groups = $group->getNewGroups();
+$groupInfos = $group->getNewGroups();
 
 // tutti情報取得
 $tutti = new MTutti();
-$tuttis = $tutti->getAllTutti();
+$tuttiInfos = $tutti->getAllTutti();
 
 // トップ画面を描画
 Utils::loadView('トップ', 'view/v_index.php');

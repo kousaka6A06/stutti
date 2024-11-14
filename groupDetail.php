@@ -28,7 +28,7 @@ $group = new Group();
 $group->setId($groupId);
 
 // 勉強会情報取得
-$group = $group->getGroupById();
+$groupInfo = $group->getGroupById();
 
 // 画面表示制御用にステータス設定
 $userStatus = null;
@@ -43,9 +43,6 @@ if (!$userId) {
     // ユーザーインスタンスを作成してセッション情報をセット
     $user = new User();
     $user->setId($userId);
-
-    // ユーザー情報を取得する
-    $user = $user->getUserById();
 
     // TODO: [コントローラー]
     // 勉強会に未参加の場合
@@ -73,7 +70,7 @@ if (!$userId) {
         $message->setGroupId($groupId);
 
         // 勉強会メッセージ情報取得
-        $messages = $message->getGroupMessagesByGroupId();
+        $messageInfos = $message->getGroupMessagesByGroupId();
 
         // 勉強会の作成者の場合
         if ($user->isOwnerOfGroup($groupId)) {

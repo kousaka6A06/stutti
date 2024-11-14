@@ -34,7 +34,7 @@ $group = new Group();
 $group->setId($groupId);
 
 // 勉強会情報取得
-$group = $group->getGroupById();
+$groupInfo = $group->getGroupById();
 
 // 勉強会の定員に余裕がある場合
 if (!$group->isFull()) {
