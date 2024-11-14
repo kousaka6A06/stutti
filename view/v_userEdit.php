@@ -1,5 +1,5 @@
 <?php
-global $user;
+global $userInfo;
 ?>
 
 <section class="container mt-3">
