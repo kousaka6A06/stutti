@@ -31,9 +31,15 @@ $group->setId($groupId);
 // 勉強会情報取得
 $groupInfo = $group->getGroupById();
 
-// 画面表示制御用にステータス設定
+// 勉強会メッセージを作成して画面から渡された情報をセット
+$message = new GroupMessage();
+$message->setGroupId($groupId);
+
+// 勉強会メッセージ情報取得
+$messageInfos = $message->getGroupMessagesByGroupId();
+
+// 画面表示制御用にユーザーステータス設定
 $userStatus = null;
-$groupStatus = null;
 
 // 未ログインの場合
 if (!$userId) {
@@ -41,46 +47,39 @@ if (!$userId) {
 
 // ログイン済みの場合
 } else {
-    // 勉強会参加者インスタンスを作成
+    // ユーザーインスタンスを作成してセッション情報をセット
+    $user = new User();
+    $user->setId($userId);
+
+    // 勉強会参加者インスタンスを作成してセッション情報をセット
     $belonging = new Belonging();
     $belonging->setMemberId($userId);
     $belonging->setGroupId($groupId);
-    
-    // 勉強会に未参加の場合
-    if (!$belonging->isMemberOfGroup()) {
-        $userStatus = LOGGED_IN;
 
-        // 勉強会が満員の場合
-        if ($group->isFull()) {
-            $groupStatus = FULL;
-
-        // 勉強会の定員に余裕がある場合
-        } else {
-            $groupStatus = NOT_FULL;
-        }
+    // 勉強会の作成者の場合
+    if ($user->isOwnerOfGroup($groupId)) {
+        $userStatus = GROUP_OWNER;
 
     // 勉強会に参加中の場合
+    } elseif ($belonging->isMemberOfGroup()) {
+        $userStatus = GROUP_MEMBER;
+
+    // 勉強会に未参加の場合 
     } else {
-        // 勉強会メッセージを作成して画面から渡された情報をセット
-        $message = new GroupMessage();
-        $message->setGroupId($groupId);
-
-        // 勉強会メッセージ情報取得
-        $messageInfos = $message->getGroupMessagesByGroupId();
-
-        // ユーザーインスタンスを作成してセッション情報をセット
-        $user = new User();
-        $user->setId($userId);
-
-        // 勉強会の作成者の場合
-        if ($user->isOwnerOfGroup($groupId)) {
-            $userStatus = GROUP_OWNER;
-    
-        // 作成者ではない場合
-        } else {
-            $userStatus = GROUP_MEMBER;
-        }
+        $userStatus = LOGGED_IN;
     }
+}
+
+// 画面表示制御用に勉強会ステータス設定
+$groupStatus = null;
+
+// 勉強会が満員の場合
+if ($group->isFull()) {
+    $groupStatus = FULL;
+
+// 勉強会の定員に余裕がある場合
+} else {
+    $groupStatus = NOT_FULL;
 }
 
 // 勉強会詳細画面を描画

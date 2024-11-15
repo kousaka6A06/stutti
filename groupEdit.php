@@ -38,6 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
 
 // 勉強会詳細画面の編集ボタンが押下された場合
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && $groupId) {
+    // ユーザーインスタンスを作成してセッション情報をセット
+    $user = new User();
+    $user->setId($userId);
+
     // 勉強会の作成者以外が直接アクセスしてきた場合
     if (!$user->isOwnerOfGroup($groupId)) {
         // セッションにメッセージを保存して勉強会詳細画面に遷移
