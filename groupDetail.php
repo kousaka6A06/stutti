@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config/constants.php';
+require_once 'model/Belonging.php';
 require_once 'model/Group.php';
 require_once 'model/GroupMessage.php';
 require_once 'model/User.php';
@@ -28,7 +29,7 @@ $group = new Group();
 $group->setId($groupId);
 
 // 勉強会情報取得
-$group = $group->getGroupById();
+$groupInfo = $group->getGroupById();
 
 // 画面表示制御用にステータス設定
 $userStatus = null;
@@ -40,21 +41,13 @@ if (!$userId) {
 
 // ログイン済みの場合
 } else {
-    // ユーザーインスタンスを作成してセッション情報をセット
-    $user = new User();
-    $user->setId($userId);
-
-    // ユーザー情報を取得する
-    $user = $user->getUserById();
-
-    // TODO: [コントローラー]
+    // 勉強会参加者インスタンスを作成
+    $belonging = new Belonging();
+    $belonging->setMemberId($userId);
+    $belonging->setGroupId($groupId);
+    
     // 勉強会に未参加の場合
-    // if (!$user->isMemberOfGroup($groupId)) {
-
-    // TODO: [モデル]
-    // isMemberOfGroup($groupId):boolean
-    // このユーザーインスタンスが、引数で渡された勉強会の参加者かどうかをbooleanで返却してください
-
+    if (!$belonging->isMemberOfGroup()) {
         $userStatus = LOGGED_IN;
 
         // 勉強会が満員の場合
@@ -67,13 +60,17 @@ if (!$userId) {
         }
 
     // 勉強会に参加中の場合
-    // } else {
+    } else {
         // 勉強会メッセージを作成して画面から渡された情報をセット
         $message = new GroupMessage();
         $message->setGroupId($groupId);
 
         // 勉強会メッセージ情報取得
-        $messages = $message->getGroupMessagesByGroupId();
+        $messageInfos = $message->getGroupMessagesByGroupId();
+
+        // ユーザーインスタンスを作成してセッション情報をセット
+        $user = new User();
+        $user->setId($userId);
 
         // 勉強会の作成者の場合
         if ($user->isOwnerOfGroup($groupId)) {
@@ -83,7 +80,7 @@ if (!$userId) {
         } else {
             $userStatus = GROUP_MEMBER;
         }
-    // }
+    }
 }
 
 // 勉強会詳細画面を描画

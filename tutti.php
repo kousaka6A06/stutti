@@ -21,19 +21,19 @@ $tutti = new MTutti();
 $tutti->setId($tuttiId);
 
 // tutti情報取得
-$tutti = $tutti->getTuttiById();
+$tuttiInfo = $tutti->getTuttiById();
 
 // tutti所属の勉強会情報取得
 $group = new Group();
 $group->setTuttiId($tuttiId);
-$groups = $group->getGroupsByTuttiId();
+$groupInfos = $group->getGroupsByTuttiId();
 
 // tuttiコメントインスタンスを作成して画面から渡された情報をセット
 $comment = new TuttiComment();
 $comment->setTuttiId($tuttiId);
 
 // tuttiコメント情報取得
-$comments = $comment->getTuttiCommentsByTuttiId();
+$commentInfos = $comment->getTuttiCommentsByTuttiId();
 
 // tutti詳細画面を描画
 Utils::loadView('tutti詳細', 'view/v_tutti.php');

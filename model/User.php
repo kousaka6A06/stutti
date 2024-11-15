@@ -21,7 +21,7 @@ class User {
 
 
     // ユーザー登録
-    // 
+    // userRegister.php
     public function createUser() {
         $query = "INSERT INTO `users` (`users`.`stutti_id`, `users`.`password`, `users`.`name`, `users`.`mail_address`, `users`.`avatar`) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
@@ -41,20 +41,50 @@ class User {
         return false;
     }
 
+    // stutti_id 重複チェック
+    // 重複していなければ、真を返却
+    // userRegister.php userEdit.php
+    function isUniqueStuttiId() {
+        $query = "SELECT `users`.`stutti_id` FROM `users` WHERE `users`.`stutti_id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1,$this->stuttiId);
+        $stmt->execute();
+        // return $stmt->fetch(PDO::FETCH_COLUMN);
+        if($stmt->fetch(PDO::FETCH_COLUMN)){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // mail_address 重複チェック
+    // 重複していなければ、真を返却
+    // userRegister.php userEdit.php
+    function isUniqueMailAddress() {
+        $query = "SELECT `users`.`mail_address` FROM `users` WHERE `users`.`mail_address` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1,$this->mailAddress);
+        $stmt->execute();
+        if($stmt->fetch(PDO::FETCH_COLUMN)){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     // 〇ユーザー情報更新
     // userEdit.php
     function updateUser() {
-        $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`stutti_id` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avatar` = ? WHERE `users`.`id` = ?";
+        $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avatar` = ? WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
 
         $stmt->bindValue(1, $this->mailAddress);
-        $stmt->bindValue(2, $this->stuttiId);
-        $stmt->bindValue(3, $this->password);
-        $stmt->bindValue(4, $this->name);
-        $stmt->bindValue(5, $this->avatar);
-        $stmt->bindValue(6, $this->id);
+        $stmt->bindValue(2, $this->password);
+        $stmt->bindValue(3, $this->name);
+        $stmt->bindValue(4, $this->avatar);
+        $stmt->bindValue(5, $this->id);
         return $stmt->execute();
     }
 
@@ -71,7 +101,7 @@ class User {
     // 〇ログイン処理
     // login.php
     public function login() {
-        $query = "SELECT * FROM `users` WHERE `users`.`stutti_id` = ?";
+        $query = "SELECT * FROM `users` WHERE `users`.`stutti_id` = ? AND `users`.`delete_flag` = 0";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->stuttiId);
         $stmt->execute();
@@ -145,7 +175,7 @@ class User {
     // 引数で渡された勉強会の作成者かどうかをbooleanで返却
     // groupDetail.php
     public function isOwnerOfGroup($groupId): bool {
-        $query = "SELECT created_by_id FROM `groups` WHERE `id` = ? ";
+        $query = "SELECT `created_by_id` FROM `groups` WHERE `id` = ? ";
     
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $groupId);

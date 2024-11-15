@@ -42,10 +42,10 @@ $message = new GroupMessage();
 $message->setId($messageId);
 
 // 勉強会メッセージ情報を取得する
-$message = $message->getGroupMessageById();
+$messageInfo = $message->getGroupMessageById();
 
 // 勉強会メッセージの作成者ではない場合
-if ($message['memberId'] !== $userId) {
+if ($messageInfo['member_id'] !== $userId) {
     // セッションにメッセージを保存して勉強会詳細画面に遷移
     $_SESSION['message'] = 'メッセージを削除する権限がありません';
     header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
