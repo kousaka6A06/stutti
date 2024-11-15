@@ -12,6 +12,7 @@ body {
     color: #586365;
     padding-top: 60px; /* ヘッダー分のスペースを確保 */
 }
+
 #canvas {
     position: fixed;
     top: 0;
@@ -32,6 +33,25 @@ h3 {
 
 p {
     font-size: 16px;
+}
+
+.icon-spacing i {
+    margin-left: 15px; /* アイコン間のスペースを15pxに設定 */
+}
+
+ /* リストグループのボーダーを非表示に */
+ .list-group.list-group-flush {
+    border: none; /* 内部リストのボーダーを非表示に */
+}
+
+/* リストアイテムの間に線が表示されないように */
+.list-group-item {
+    border: none; /* 各リストアイテムのボーダーを非表示に */
+}
+
+/* 最後のアイテムにマージンを追加する場合 */
+.list-group-item:last-child {
+    border-bottom: 1px solid #ddd; /* 最後のアイテムだけボーダーをつける場合 */
 }
 
 /* ボタン */
@@ -60,10 +80,10 @@ p {
 .view-more-btn {
     color: #fff;
     display: inline-block;
-    width: 200px;
+    width: 130px;
     text-align: center;
     text-decoration: none;
-    line-height: 50px;
+    line-height: 35px;
     outline: none;
     background-color: #8db2a1;
     position: relative;
@@ -137,7 +157,7 @@ p {
 
 /* 消しゴム */
 .board-3YD0c:before {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM0IiBoZWlnaHQ9IjUxIiB2aWV3Qm94PSIwIDAgMTM0IDUxIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNC41MTcwOSAyMi4xMDM1SDEyOS4xMzhWNDcuMDAwMUMxMjkuMTM4IDQ4LjY1NjkgMTI3Ljc5NSA1MC4wMDAxIDEyNi4xMzggNTAuMDAwMUg3LjUxNzFDNS44NjAyNCA1MC4wMDAxIDQuNTE3MDkgNDguNjU2OSA0LjUxNzA5IDQ3LjAwMDFWMjIuMTAzNVoiIGZpbGw9IiMxQzM4NzUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgo8cmVjdCB4PSIxIiB5PSIxMy4zMTA1IiB3aWR0aD0iMTMxLjY1NSIgaGVpZ2h0PSI4LjU1MTcyIiBmaWxsPSIjRjJDNDU2IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iNjIuNTUxOCIgeT0iMSIgd2lkdGg9IjguNTUxNzIiIGhlaWdodD0iMjAuODYyMSIgZmlsbD0iYmxhY2siIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgo8bGluZSB4MT0iMTUuODI3NiIgeTE9IjI4Ljg5NjUiIHgyPSIxMTYuMDY5IiB5Mj0iMjguODk2NSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIxNS44Mjc2IiB5MT0iMzUuOTMwNyIgeDI9IjExNi4wNjkiIHkyPSIzNS45MzA3IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz4KPGxpbmUgeDE9IjE1LjgyNzYiIHkxPSI0Mi45NjU4IiB4Mj0iMTE2LjA2OSIgeTI9IjQyLjk2NTgiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K);
+    background-image: url('../img/eraser.png');
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: contain;
@@ -146,10 +166,101 @@ p {
     display: inline-block;
     height: 38px;
     position: absolute;
-    right: 15%;
+    right: 12%;
     width: 100px;
     z-index: 1;
 }
+/* //////マーカー///// */
+.board-3YD0c .marker1 {
+    background-image: url('../img/marker1.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    height: 15px; /* 高さを適宜調整 */
+    position: absolute;
+    left: 70%; /* 左側に配置 */
+    width: 90px; /* 幅を適宜調整 */
+    z-index: 1;
+}
+.board-3YD0c .marker2 {
+    background-image: url('../img/marker2.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    height: 15px; /* 高さを適宜調整 */
+    position: absolute;
+    left: 60%; /* 左側に配置 */
+    width: 90px; /* 幅を適宜調整 */
+    z-index: 1;
+}
+.board-3YD0c .marker3 {
+    background-image: url('../img/marker3.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    height: 15px; /* 高さを適宜調整 */
+    position: absolute;
+    left: 50%; /* 左側に配置 */
+    width: 90px; /* 幅を適宜調整 */
+    z-index: 1;
+}
+/* //////マグネット///// */
+/* マグネット */
+.board-3YD0c .magnet1 {
+    background-image: url('../img/mag1.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    height: 30px; /* 高さを適宜調整 */
+    position: absolute;
+    top: 45%;
+    right: 12%; /* 右側に配置 */
+    width: 30px; /* 幅を適宜調整 */
+    z-index: 1;
+}
+.board-3YD0c .magnet2 {
+    background-image: url('../img/mag2.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    height: 30px; /* 高さを適宜調整 */
+    position: absolute;
+    top: 55%;
+    right: 18%; /* 右側に配置 */
+    width: 30px; /* 幅を適宜調整 */
+    z-index: 1;
+}
+.board-3YD0c .magnet3 {
+    background-image: url('../img/mag3.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    height: 30px; /* 高さを適宜調整 */
+    position: absolute;
+    top: 60%;
+    right: 13%; /* 右側に配置 */
+    width: 30px; /* 幅を適宜調整 */
+    z-index: 1;
+}
+
 
 /* 細長い棒 */
 .board-3YD0c:after {
@@ -161,7 +272,7 @@ p {
     position: absolute;
     top: calc(100% - 2px);
     left: 50%;
-    width: 85%;
+    width: 81%;
     transform: translateX(-50%);
 }
 
@@ -169,18 +280,11 @@ p {
 .board-inner {
     background-color: #fff;
     border: 2px solid #0d0d0d;
-    height: 24em;
+    height: 28em;
     margin: 0 auto;
     padding: 2em 3em 3em;
     position: relative;
     width: 80%;
-}
-
-.anime-text {
-    font-family: 'Yusei Magic', sans-serif;
-    font-weight: bold;
-    color: #222121;
-    font-size: 18px;
 }
 
 /* スクロールバー */
@@ -192,9 +296,9 @@ p {
 .feature {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     background-color: #fff;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -202,12 +306,15 @@ p {
 /* アイコンのスタイル */
 .feature i {
     font-size: 40px; /* アイコンのサイズ */
-    color: #007bff; /* アイコンの色 */
+    color: #4b4b4b; /* アイコンの色 */
     margin-right: 20px; /* アイコンとテキストの間隔 */
 }
 
 .feature p {
-    font-size: 16px;
+    /* font-family: 'Yusei Magic', sans-serif;
+    font-weight: bold; */
+    color: #222121;
+    font-size: 18px;
     line-height: 1.6;
     margin: 0;
 }
@@ -246,7 +353,7 @@ p {
     width: 170px;
     border: none;
     transition: transform 0.5s ease;
-    /* transform: rotate(70deg); */
+    transform: rotate(2deg);
 }
 
 .tutti-card:hover {
@@ -306,6 +413,7 @@ p {
     transform: rotate(180deg); /* 上下反転 */
 }
 
+/*//////// 勉強会一覧 ////////*/
 .tilt-card {
     transform: rotate(7deg); /* 初期の傾き */
     transform-origin: bottom right; /* 右下を軸にする */
@@ -326,7 +434,7 @@ p {
     transform: scale(1.15);
 }
 
-/*//////// グラデーション ////////*/
+/* グラデーション */
 .group-section {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(200, 200, 200, 0.5));
 }
@@ -395,20 +503,23 @@ p {
 
 
 
+
+
+/*//////// tutti詳細セクションのスタイル ////////*/
+
 /*//////// メディアクエリ ////////*/
 /* さらに小さな画面（モバイルやスマートフォン）に対応 */
 @media (max-width: 480px) {
     .position-relative img {
         width: 100%;  /* 画像の幅を100%に設定 */
     }
-
+    
     .text-overlay {
         font-size: 1rem;  /* フォントサイズをさらに小さく */
         top: 40%;  /* テキストの位置を調整 */
         max-width: 90%; /* 最大幅を90%に設定 */
     }
 }
-
 /* 中型スマホ向け */
 @media (max-width: 600px) {
 }
@@ -422,17 +533,14 @@ p {
     .position-relative img {
         width: 100%;  /* 画像の幅を親要素の100%に設定 */
     }
-
+    
     .text-overlay {
         font-size: 1.2rem;  /* モバイルサイズでフォントサイズを小さくする */
         top: 40%;  /* テキストの位置を少し調整 */
         max-width: 90%;  /* 幅の最大値を90%に設定 */
         padding: 5px;  /* パディングを少し減らす */
     }
-}
 
-/* 横向きタブレット向け */
 @media (max-width: 1024px) {
+    }
 }
-
-/*//////// tutti詳細セクションのスタイル ////////*/
