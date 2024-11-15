@@ -2,9 +2,8 @@
 global $userInfo;
 ?>
 
+<h1 class="text-center py-3">ユーザー編集</h1>
 <section class="container mt-3">
-    <h1 class="text-center py-3">ユーザー編集</h1>
-
     <div class="col-4 mx-auto my-2">
         <img class="w-100" src="<?= DIR_AVATAR ?><?= $userInfo['avatar'] ?>" alt="">
     </div>
@@ -37,7 +36,6 @@ global $userInfo;
             <small style="font-size: 10px; color: red;">*必須</small>
             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
         </div>
-
         <button type="submit" class="btn btn-dark w-30 d-block mx-auto">修正する</button>
     </form>
 </section>
