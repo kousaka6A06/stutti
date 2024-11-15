@@ -1,6 +1,5 @@
+<h1 class="text-center py-3">ユーザー登録</h1>
 <section class="container mt-3">
-    <h1 class="text-center py-3">ユーザー登録</h1>
-
     <form action="userRegister.php" method="POST" enctype="multipart/form-data"
         class="bg-light p-4 rounded shadow mx-auto" style="max-width: 700px">
         <div class="mb-4">
@@ -31,13 +30,11 @@
             <input type="password" id="password" name="password" class="form-control" required>
             <small class="form-text text-muted">（英数字 8 〜 12文字以内,特殊文字や記号は使用不可）</small>
         </div>
-
         <div class="mb-4">
             <label for="confirmPassword" class="form-label">確認のため再度入力してください</label>
             <small style="font-size: 10px; color: red;">*必須</small>
             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
         </div>
-
         <div class="mb-4">
             <label for="terms" class="form-label">利用規約・プライバシーポリシー</label>
             <div id="terms" class="form-control" style="height: 200px; overflow-y: scroll;">
@@ -93,12 +90,10 @@
                     メールアドレス:privacy@stutti.net<br></p>
             </div>
         </div>
-
         <div class="form-check mb-4">
             <input type="checkbox" id="agree" name="agree" class="form-check-input" required>
             <label for="agree" class="form-check-label">利用規約・プライバシーポリシーに同意する</label>
         </div>
-
         <button type="submit" class="btn btn-dark w-30 d-block mx-auto">登録する</button>
     </form>
 </section>

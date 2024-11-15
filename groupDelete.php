@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // セッション・画面から渡された情報をサニタイズして変数に格納
 $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
-$groupId = isset($_POST['gid']) ? Utils::e($_POST['gid']) : null;
+$groupId = isset($_GET['gid']) ? Utils::e($_GET['gid']) : null;
 
 // 勉強会IDが指定されていない場合
 if (!$groupId) {
