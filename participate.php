@@ -3,6 +3,7 @@
 require_once 'config/constants.php';
 require_once 'model/Belonging.php';
 require_once 'model/Group.php';
+require_once 'utils/Utils.php';
 
 // セッションが存在しない場合
 if (session_status() === PHP_SESSION_NONE) {
@@ -12,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // セッション・画面から渡された情報をサニタイズして変数に格納
 $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
-$groupId = isset($_POST['gid']) ? Utils::e($_POST['gid']) : null;
+$groupId = isset($_GET['gid']) ? Utils::e($_GET['gid']) : null;
 
 // 勉強会IDが指定されていない場合
 if (!$groupId) {
@@ -60,6 +61,6 @@ if (!$group->isFull()) {
 // 勉強会が満員の場合
 } else {
     // セッションにメッセージを保存して勉強会詳細画面に遷移
-    $_SESSION['message'] = '満員のため勉強会に参加できません。';
+    $_SESSION['message'] = '満員のため勉強会に参加できません';
     header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
 }
