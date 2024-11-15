@@ -66,7 +66,12 @@ class Group {
         $stmt->bindValue(6, $this->content);
         $stmt->bindValue(7, $this->id); 
 
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("updateGroup Error:" . $e->getMessage());
+            return false;
+        }
     }
 
     // 〇勉強会論理削除
@@ -79,7 +84,13 @@ class Group {
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->id);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        }
+        catch(PDOException $e) {
+            error_log("deleteGroup:" . $e->getMessage());
+            return false;
+        }
     }
 
     // 〇トップページ表示用

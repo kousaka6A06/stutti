@@ -85,7 +85,13 @@ class User {
         $stmt->bindValue(3, $this->name);
         $stmt->bindValue(4, $this->avatar);
         $stmt->bindValue(5, $this->id);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("updateUser:" . $e->getMessage());
+            return false;
+        }
+        
     }
 
     // 〇ユーザー情報論理削除
