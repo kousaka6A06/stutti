@@ -75,7 +75,7 @@ class User {
     // 〇ユーザー情報更新
     // userEdit.php
     function updateUser() {
-        $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avatar` = ? WHERE `users`.`id` = ?";
+        $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avatar` = ?  wer WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
@@ -85,7 +85,13 @@ class User {
         $stmt->bindValue(3, $this->name);
         $stmt->bindValue(4, $this->avatar);
         $stmt->bindValue(5, $this->id);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("updateUser:" . $e->getMessage());
+            return false;
+        }
+        
     }
 
     // 〇ユーザー情報論理削除

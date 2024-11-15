@@ -24,7 +24,12 @@ class GroupMessage {
         $stmt->bindValue(1, $this->groupId);
         $stmt->bindValue(2, $this->memberId);
         $stmt->bindValue(3, $this->content);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) { 
+            error_log("createGroupMessage Error:" . $e->getMessage());
+            return false;
+        }
     }
 
     // 〇勉強会メッセージ削除
@@ -34,7 +39,13 @@ class GroupMessage {
         $query = "DELETE FROM `group_messages` WHERE `group_messages`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $this->id);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("deleteGroupMessage" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // 〇勉強会メッセージ表示
