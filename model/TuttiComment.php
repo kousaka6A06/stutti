@@ -52,9 +52,15 @@ class TuttiComment {
         WHERE `tutti_comments`.`tutti_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->tuttiId,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getTuttiCommentsByTuttiId Error:" . $e->getMessage());
+            return false;
+        } 
+
     }
 
     // setter

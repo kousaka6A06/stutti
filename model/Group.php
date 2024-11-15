@@ -39,13 +39,19 @@ class Group {
         $stmt->bindValue(8, $this->createdById);
         $stmt->bindValue(9, $this->tuttiId);
 
-        // 最新の採番を id のプロパティに設定
-        if ($stmt->execute()) {
-            $this->id = $this->conn->lastInsertId();
-            return true;
-        } else {
+        try {
+            // 最新の採番を id のプロパティに設定
+            if ($stmt->execute()) {
+                $this->id = $this->conn->lastInsertId();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            error_log("createGroup Error:" . $e->getMessage());
             return false;
         }
+
     }
 
     // 〇勉強会情報更新
@@ -100,9 +106,15 @@ class Group {
                 FROM `groups` WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} 
                 ORDER BY `groups`.`id` DESC LIMIT 5";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getNewGroups Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // 〇勉強会一覧表示用
@@ -110,26 +122,37 @@ class Group {
     // groupList.php
     function getAllTuttiGroups() {
         $now = date('Y-m-d');
-        $q = $this->conn->query("SELECT * FROM `m_tutti`");
+        try {
+            $q = $this->conn->query("SELECT * FROM `m_tutti`");
+        } catch (PDOException $e) {
+            error_log("getAllTuttiGroups Error1:" . $e->getMessage());
+            return false;
+        }
         $ary = [];
         $key = [];
         $value = [];
-        while($tutti = $q->fetch(PDO::FETCH_ASSOC)) {
-            $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, 
-            (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
-            FROM `groups` 
-            WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute();
-            $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $tuttiGroups = ['id'=>$tutti['id'],'name'=>$tutti['name'],'groups'=>$groups];
-            array_push($key,$tutti['id']);
-            array_push($value,$tuttiGroups);
-            // $ary = array_merge($ary,array($tutti['id']=>$groups));
-            // $ary = ('id' =>$tutti['id'], 'name'=>$tutti['name'], 'groups'=> $groups);
+
+        try {
+            while($tutti = $q->fetch(PDO::FETCH_ASSOC)) {
+                $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, 
+                (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
+                FROM `groups` 
+                WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute();
+                $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $tuttiGroups = ['id'=>$tutti['id'],'name'=>$tutti['name'],'groups'=>$groups];
+                array_push($key,$tutti['id']);
+                array_push($value,$tuttiGroups);
+                // $ary = array_merge($ary,array($tutti['id']=>$groups));
+                // $ary = ('id' =>$tutti['id'], 'name'=>$tutti['name'], 'groups'=> $groups);
+            }
+            $ary= array_combine($key,$value);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getAllTuttiGroups Error2:" . $e->getMessage());
+            return false;
         }
-        $ary= array_combine($key,$value);
-        return $ary;
     }
 
     // 〇勉強会詳細画面表示用
@@ -150,9 +173,15 @@ class Group {
         WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getGroupById Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
 
@@ -172,9 +201,15 @@ class Group {
                 WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getGroupByMemberId Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // 〇マイページに表示させる自身で作成した勉強会(サムネ・昇順)
@@ -193,9 +228,15 @@ class Group {
                 WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getGroupsByOwnerId Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // 〇tutti 詳細ページにて利用
@@ -214,9 +255,15 @@ class Group {
                 WHERE `groups`.`tutti_id` = ? AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $this->tuttiId, PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getGroupsByTuttiId Error:" .  $e->getMessage());
+            return false;
+        }
+
     }
 
     // グループの定員 満員の場合true
@@ -230,13 +277,19 @@ class Group {
         $query2 = "SELECT `groups`.`num_people` FROM `groups` WHERE `groups`.`id` = ?";
         $stmt2 = $this->conn->prepare($query2);
         $stmt2->bindValue(1, $this->id);
-        if($stmt2->execute()) {
-            $maxPeople = $stmt2->fetchColumn();
+        try {
+            if($stmt2->execute()) {
+                $maxPeople = $stmt2->fetchColumn();
+            }
+            if(isset($currentCount) && isset($maxPeople) && $currentCount >= $maxPeople) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            error_log("isFull Error:" . $e->getMessage());
+            return false;
         }
-        if(isset($currentCount) && isset($maxPeople) && $currentCount >= $maxPeople) {
-            return true;
-        }
-        return false;
+
     }
 
     // setter
