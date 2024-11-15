@@ -34,11 +34,16 @@ class User {
         $stmt->bindParam(4, $this->mailAddress);
         $stmt->bindParam(5, $this->avatar);
 
-        if ($stmt->execute()) {
-            $this->id = $this->conn->lastInsertId();
-            return true;
+        try {
+            if ($stmt->execute()) {
+                $this->id = $this->conn->lastInsertId();
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            error_log("createUser:" .$e->getMessage());
+            return false;
         }
-        return false;
     }
 
     // stutti_id 重複チェック
@@ -48,14 +53,20 @@ class User {
         $query = "SELECT `users`.`stutti_id` FROM `users` WHERE `users`.`stutti_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1,$this->stuttiId);
-        $stmt->execute();
+        
         // return $stmt->fetch(PDO::FETCH_COLUMN);
-        if($stmt->fetch(PDO::FETCH_COLUMN)){
+        try {
+            if ($stmt->execute()) {
+                return $stmt->fetch(PDO::FETCH_COLUMN);
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            error_log("isUniqueStuttiId:" .$e->getMessage());
             return false;
-        } else {
-            return true;
         }
     }
+            
 
     // mail_address 重複チェック
     // 重複していなければ、真を返却
@@ -64,13 +75,18 @@ class User {
         $query = "SELECT `users`.`mail_address` FROM `users` WHERE `users`.`mail_address` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1,$this->mailAddress);
-        $stmt->execute();
-        if($stmt->fetch(PDO::FETCH_COLUMN)){
+        
+        try {
+            if ($stmt->execute()) {
+                return $stmt->fetch(PDO::FETCH_COLUMN);
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            error_log("isUniqueMailAddress:" .$e->getMessage());
             return false;
-        } else {
-            return true;
-        }
-    }
+        } 
+    }  
 
     // 〇ユーザー情報更新
     // userEdit.php
@@ -101,7 +117,12 @@ class User {
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->id);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("deleteUser:" .$e->getMessage());
+            return false;
+        }
     }
 
     // 〇ログイン処理
@@ -110,15 +131,20 @@ class User {
         $query = "SELECT * FROM `users` WHERE `users`.`stutti_id` = ? AND `users`.`delete_flag` = 0";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->stuttiId);
-        $stmt->execute();
-
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && password_verify($this->password, $user['password'])) {
-            $this->id = $user['id'];
-            $this->name = $user['name'];
-            return true;
-        }
-        return false;
+        try {
+            if ($stmt->execute()) {
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($user && password_verify($this->password, $user['password'])) {
+                    $this->id = $user['id'];
+                    $this->name = $user['name'];
+                    return true;
+                }
+            } 
+            return false;
+        } catch (PDOException $e) {
+            error_log("login:" .$e->getMessage());
+            return false;
+        }          
     }
 
     // // ログイン
@@ -140,9 +166,19 @@ class User {
         WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            if ($stmt->execute()) {
+                $ary = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($ary) {
+                    return $ary;
+                }
+            }
+            return false;         
+        } catch (PDOException $e) {
+            error_log("getUserById:" .$e->getMessage());
+            return false;
+        }
+        
     }
 
     // 〇ファイル保存用
@@ -185,14 +221,19 @@ class User {
     
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $groupId);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        if ($result && $result['created_by_id'] == $this->id) {
-            return true;
+        try {
+            if($stmt->execute()) {
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($result && $result['created_by_id'] == $this->id) {
+                    return true;
+                }
+            }
+            return false;
+        }catch (PDOException $e) {
+         error_log("isOwnerOfGroup:" .$e->getMessage());
+         return false;
         }
-        return false;
-    }
+    }          
 
     // setter
     function setId($id) {
