@@ -18,6 +18,7 @@ class TuttiComment {
     // (これがないと、空文字かNULLになる)
     // commentPost.php
     function createTuttiComment() {
+    try {
         if($this->name){
             $query ="INSERT INTO `tutti_comments` (`tutti_comments`.`name`, `tutti_comments`.`content`, `tutti_comments`.`tutti_id`) VALUES(?, ?, ?)";
             $stmt = $this->conn->prepare($query);
@@ -32,8 +33,13 @@ class TuttiComment {
             $stmt->bindValue(1, $this->content);
             $stmt->bindValue(2, $this->tuttiId);
         }
+        $stmt->execute();
+        return true;
+    } catch  (PDOException $e) {
+        error_log("createTuttiComment Error:" . $e->getMessage());
+        return false;
+    }
 
-        return $stmt->execute();
     }
 
     // 〇tutti 詳細画面コメント表示
