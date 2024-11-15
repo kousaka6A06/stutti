@@ -75,7 +75,7 @@ class User {
     // 〇ユーザー情報更新
     // userEdit.php
     function updateUser() {
-        $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avatar` = ?  wer WHERE `users`.`id` = ?";
+        $query = "UPDATE `users` SET `users`.`mail_address` = ?, `users`.`password` = ?, `users`.`name` = ?, `users`.`avatar` = ? WHERE `users`.`id` = ?";
         $stmt = $this->conn->prepare($query);
 
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
