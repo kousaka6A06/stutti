@@ -90,10 +90,16 @@
                             <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計について議論しましょう。</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-end">「日時」</li>
-                            <li class="list-group-item d-flex justify-content-end">「参加人数」</li>
                             <li class="list-group-item d-flex justify-content-end">
-                                <a href="groupDetail.php?gid=<?= $card['id']; ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
+                                <i class="fa fa-calendar"></i> 「日時」
+                            </li>
+                            <li class="list-group-item d-flex justify-content-end">
+                                <i class="fa fa-users"></i> 「参加人数」
+                            </li>
+                            <li class="list-group-item d-flex justify-content-end">
+                                <a href="groupDetail.php?gid=<?= $card['id']; ?>" class="btn btn-secondary btn-sm">
+                                    <i class="fa fa-arrow-right"></i>詳しく見る
+                                </a>
                             </li>
                         </ul>
                     </div>

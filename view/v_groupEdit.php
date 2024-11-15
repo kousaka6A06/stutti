@@ -24,7 +24,7 @@
         <div class="mb-3">
             <label for="" class="form-label">開始時間</label>
             <small style="font-size: 10px; color: red;">*必須</small>
-            <input type="" name="password" id="" class="form-control" placeholder="例：13時から16時まで" required>
+            <input type="time" name="password" id="" class="form-control" placeholder="例：13時から16時まで" required>
         </div>
 
         <div class="mb-3">
