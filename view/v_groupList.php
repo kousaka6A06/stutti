@@ -21,8 +21,8 @@ $tiltedIndexes = array_rand(range(0, $totalCards - 1), 4);
 
 <section>
     <?php foreach ($cards as $index => $card): ?>
-        <div class="group-section d-flex justify-content-center">
-            <div class="container row mt-3 d-flex justify-content-center align-items-end">
+        <div class="d-flex justify-content-center">
+            <div class="container group-section row mt-3 d-flex justify-content-center align-items-end">
                 <div class="col-md-1">
                     <div class="card tutti-card2 <?= in_array($index, $tiltedIndexes) ? 'tilt-card' : ''; ?>"
                         style="border: 10px solid <?= $card['color']; ?>; color: #586365">

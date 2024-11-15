@@ -5,7 +5,8 @@ class Group {
     private $id;
     private $name;
     private $date;
-    private $time;
+    private $startTime;
+    private $endTime;
     private $location;
     private $numPeople;
     private $content;
@@ -24,18 +25,19 @@ class Group {
     // groupEdit.php
     function createGroup() {
         $query = "INSERT INTO `groups` 
-        (`groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`) 
+        (`groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`) 
         VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->name);
         $stmt->bindValue(2, $this->date);
-        $stmt->bindValue(3, $this->time);
-        $stmt->bindValue(4, $this->location);
-        $stmt->bindValue(5, $this->numPeople);
-        $stmt->bindValue(6, $this->content);
-        $stmt->bindValue(7, $this->createdById);
-        $stmt->bindValue(8, $this->tuttiId);
+        $stmt->bindValue(3, $this->startTime);
+        $stmt->bindValue(4, $this->endTime);
+        $stmt->bindValue(5, $this->location);
+        $stmt->bindValue(6, $this->numPeople);
+        $stmt->bindValue(7, $this->content);
+        $stmt->bindValue(8, $this->createdById);
+        $stmt->bindValue(9, $this->tuttiId);
 
         // 最新の採番を id のプロパティに設定
         if ($stmt->execute()) {
@@ -51,23 +53,24 @@ class Group {
     // groupEdit.php
     function updateGroup() {
         $query = "UPDATE `groups` 
-        SET `groups`.`date` = ?, `groups`.`time` = ?, `groups`.`location` = ?, `groups`.`num_people` = ?, `groups`.`content` = ? 
+        SET `groups`.`date` = ?, `groups`.`start_time` = ?, `groups`.`end_time` = ?, `groups`.`location` = ?, `groups`.`num_people` = ?, `groups`.`content` = ? 
         WHERE `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         
         $stmt->bindValue(1, $this->date);
-        $stmt->bindValue(2, $this->time);
-        $stmt->bindValue(3, $this->location);
-        $stmt->bindValue(4, $this->numPeople);
-        $stmt->bindValue(5, $this->content);
-        $stmt->bindValue(6, $this->id); 
+        $stmt->bindValue(2, $this->startTime);
+        $stmt->bindValue(3, $this->endTime);
+        $stmt->bindValue(4, $this->location);
+        $stmt->bindValue(5, $this->numPeople);
+        $stmt->bindValue(6, $this->content);
+        $stmt->bindValue(7, $this->id); 
+
         try {
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("updateGroup Error:" . $e->getMessage());
             return false;
         }
-
     }
 
     // 〇勉強会論理削除
@@ -93,7 +96,7 @@ class Group {
     // index.php
     function getNewGroups() {
         $now = date('Y-m-d');
-        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content` 
+        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content` 
                 FROM `groups` WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} 
                 ORDER BY `groups`.`id` DESC LIMIT 5";
         $stmt = $this->conn->prepare($query);
@@ -112,7 +115,7 @@ class Group {
         $key = [];
         $value = [];
         while($tutti = $q->fetch(PDO::FETCH_ASSOC)) {
-            $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, 
+            $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, 
             (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
             FROM `groups` 
             WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
@@ -138,7 +141,7 @@ class Group {
     // groupDetail.php
     function getGroupById() {
         $now = date('Y-m-d');
-        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, 
+        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, 
         (SELECT `users`.`name` FROM`users` WHERE `users`.`id` = `groups`.`created_by_id`) AS `user_name`, 
         (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name`,
         `groups`.`created_at`,
@@ -162,7 +165,7 @@ class Group {
     // myPage.php
     function getGroupsByMemberId($userId) {
         $now = date('Y-m-d');
-        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`,
+        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`,
                 `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
@@ -183,7 +186,7 @@ class Group {
     // myPage.php
     function getGroupsByOwnerId($userId) {
         $now = date('Y-m-d');
-        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`,
+        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`,
                 `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
@@ -205,7 +208,7 @@ class Group {
     // tutti.php
     function getGroupsByTuttiId() {
         $now = date('Y-m-d');
-        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
+        $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, 
                 (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
                 FROM `groups` 
                 WHERE `groups`.`tutti_id` = ? AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
@@ -246,8 +249,11 @@ class Group {
     function setDate($date) {
         $this->date = $date;
     }
-    function setTime($time) {
-        $this->time = $time;
+    function setStartTime($startTime) {
+        $this->startTime = $startTime;
+    }
+    function setEndTime($endTime) {
+        $this->endTime = $endTime;
     }
     function setLocation($location) {
         $this->location= $location;
