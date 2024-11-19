@@ -88,6 +88,30 @@ class User {
         } 
     }  
 
+    // パスワードバリデーションチェック
+    // 8文字以上・大文字小文字英数記号!@;: 3種以上を利用
+    // 
+    public function isMatchPassword() {
+        $pregPassword = "/^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@;:])|(?=.*[A-Z])(?=.*[0-9])(?=.*[!@;:])|(?=.*[a-z])(?=.*[0-9])(?=.*[!@;:]))([a-zA-Z0-9!@;:]){8,}$/";
+        if(preg_match($pregPassword, $this->password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    // メールアドレスバリデーションチェック
+    // @の直後は、ドットではない
+    // 
+    public function isMatchMailAddress() {
+        $pregEmail = "/\A([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+\z/"; 
+
+        if(preg_match($pregEmail, $this->mailAddress)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // 〇ユーザー情報更新
     // userEdit.php
     function updateUser() {
