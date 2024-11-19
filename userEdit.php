@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($user->updateUser()) {
         // セッションにメッセージを保存してマイページ画面に遷移
         $_SESSION['message'] = 'ユーザーを編集しました';
-        header('Location: ' . BASE_DOMAIN . '/mypage.php');
+        header('Location: ' . BASE_DOMAIN . '/myPage.php');
 
     // ユーザー編集に失敗した場合
     } else {
