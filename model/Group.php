@@ -21,6 +21,29 @@ class Group {
         $this->conn = Database::getInstance()->getConnection();
     }
 
+    // 開催日が未来の日付であるか確認する
+    // 
+    public function isMatchTime() {
+        $now = date('Y-m-d');
+        if($this->date < $now) {
+            return false;
+        }
+        return true;
+    }
+
+    // 開始時刻、終了時刻の過去未来チェック
+    // 開始時刻、終了時刻が入力されているとき、
+    // 開始時刻が終了時刻より未来になっていないかチェックする
+    //
+    public function isMatchStartEndTime() {
+        if($this->startTime && $this->endTime) {
+            if($this->startTime > $this->endTime) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     // 〇勉強会登録
     // groupEdit.php
