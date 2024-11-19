@@ -62,9 +62,15 @@ class GroupMessage {
         WHERE `group_messages`.`group_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->groupId,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getGroupMessagesByGroupId Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // 〇勉強会メッセージ削除用表示
@@ -80,9 +86,15 @@ class GroupMessage {
         WHERE `group_messages`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getGroupMessagesById Error:" . $e->getMessage());
+            return false;
+        }
+
     }
     // setter
     function setId($id) {

@@ -21,6 +21,7 @@ class Group {
         $this->conn = Database::getInstance()->getConnection();
     }
 
+
     // 〇勉強会登録
     // groupEdit.php
     function createGroup() {
@@ -121,26 +122,30 @@ class Group {
         $ary = [];
         $key = [];
         $value = [];
-        while($tutti = $q->fetch(PDO::FETCH_ASSOC)) {
-            $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
-                    `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`, 
-                    `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
-                    FROM `groups` 
-                    JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
-                    WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute();
-            $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $tuttiGroups = ['id'=>$tutti['id'],'name'=>$tutti['name'],'groups'=>$groups];
-            array_push($key,$tutti['id']);
-            array_push($value,$tuttiGroups);
-            // $ary = array_merge($ary,array($tutti['id']=>$groups));
-            // $ary = ('id' =>$tutti['id'], 'name'=>$tutti['name'], 'groups'=> $groups);
+        try {
+            while($tutti = $q->fetch(PDO::FETCH_ASSOC)) {
+                $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
+                        `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`, 
+                        `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
+                        FROM `groups` 
+                        JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
+                        WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute();
+                $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $tuttiGroups = ['id'=>$tutti['id'],'name'=>$tutti['name'],'groups'=>$groups];
+                array_push($key,$tutti['id']);
+                array_push($value,$tuttiGroups);
+                // $ary = array_merge($ary,array($tutti['id']=>$groups));
+                // $ary = ('id' =>$tutti['id'], 'name'=>$tutti['name'], 'groups'=> $groups);
+            }
+            $ary= array_combine($key,$value);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getAllTuttiGroups Error2:" . $e->getMessage());
+            return false;
         }
-        $ary= array_combine($key,$value);
-        return $ary;
     }
-
     // 〇勉強会詳細画面表示用
     // あらかじめプロパティに設定された$groupId = groups.id を使って、特定の単一勉強会を検索して返却
     // 作成者IDから、memberテーブルより作成者名を副問い合わせ

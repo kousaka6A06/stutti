@@ -18,9 +18,15 @@ class MTutti {
     function getAllTutti() {
         $query = "SELECT * 
         FROM `m_tutti`";
-        $stmt = $this->conn->query($query);
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt = $this->conn->query($query);
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getAllTutti Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // 〇tutti 詳細画面表示用
@@ -32,9 +38,15 @@ class MTutti {
         WHERE `m_tutti`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getTuttiById Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // setter
