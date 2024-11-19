@@ -19,7 +19,7 @@ $password = isset($_POST['password']) ? Utils::e($_POST['password']) : null;
 if ($userId) {
     // セッションにメッセージを保存してマイページ画面に遷移
     $_SESSION['message'] = 'すでにログインしています';
-    header('Location: ' . BASE_DOMAIN . '/mypage.php');
+    header('Location: ' . BASE_DOMAIN . '/myPage.php');
     exit;
 }
 
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($user->login()) {
         // セッションにユーザーIDを保存してマイページ画面に遷移
         $_SESSION['userId'] = $user->getId();
-        header('Location: ' . BASE_DOMAIN . '/mypage.php');
+        header('Location: ' . BASE_DOMAIN . '/myPage.php');
 
     // ログインに失敗した場合
     } else {

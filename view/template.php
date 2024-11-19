@@ -47,7 +47,7 @@ $images = [
                                 <a class="btn mx-2 h-btm text-light" href="groupEdit.php">勉強会を作る</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn mx-2 h-btm text-light" href="mypage.php">マイページ</a>
+                                <a class="btn mx-2 h-btm text-light" href="myPage.php">マイページ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn mx-2 h-btm text-light" href="logout.php">ログアウト</a>
