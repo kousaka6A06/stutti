@@ -23,7 +23,17 @@ global $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                 </tr>
                 <tr>
                     <th class="p-3 w-25">開催日時</th>
-                    <td class="p-3 w-75"><?= $groupInfo['date'] ?> <?= $groupInfo['start_time'] ?>～<?= $groupInfo['end_time'] ?></td>
+                    <td class="p-3 w-75">
+                        <?= $groupInfo['date'] ?>
+                        <?=
+                            empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
+                                ? "時間未定"
+                                :
+                                    (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
+                                    . "~"
+                                    . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <th class="p-3 w-25">開催場所</th>

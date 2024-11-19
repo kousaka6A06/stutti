@@ -2,6 +2,7 @@
 
 require_once 'config/constants.php';
 require_once 'model/Group.php';
+require_once 'model/MTutti.php';
 require_once 'model/User.php';
 require_once 'utils/Utils.php';
 
@@ -16,12 +17,12 @@ $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
 $groupId = isset($_GET['gid']) ? Utils::e($_GET['gid']) : null;
 $name = isset($_POST['name']) ? Utils::e($_POST['name']) : null;
 $date = isset($_POST['date']) ? Utils::e($_POST['date']) : null;
-$startTime = isset($_POST['start_time']) ? Utils::e($_POST['start_time']) : null;
-$endTime = isset($_POST['end_time']) ? Utils::e($_POST['end_time']) : null;
+$startTime = isset($_POST['start-time']) ? Utils::e($_POST['start-time']) : null;
+$endTime = isset($_POST['end-time']) ? Utils::e($_POST['end-time']) : null;
 $location = isset($_POST['location']) ? Utils::e($_POST['location']) : null;
 $numPeople = isset($_POST['num-people']) ? Utils::e($_POST['num-people']) : null;
 $content = isset($_POST['content']) ? Utils::e($_POST['content']) : null;
-$tuttiId = isset($_POST['tid']) ? Utils::e($_POST['tid']) : null;
+$tuttiId = isset($_POST['tutti-id']) ? Utils::e($_POST['tutti-id']) : null;
 
 // 未ログインの場合
 if (!$userId) {
@@ -30,6 +31,12 @@ if (!$userId) {
     header('Location: ' . BASE_DOMAIN . '/login.php');
     exit;
 }
+
+// tuttiインスタンスを作成
+$tutti = new MTutti();
+
+// 全tutti情報を取得
+$tuttiInfos = $tutti->getAllTutti();
 
 // ヘッダーの勉強会作成ボタンが押下された場合
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
@@ -93,6 +100,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
 
     // 勉強会編集画面の場合
     } else {
+        // セッション情報をセット
+        $group->setId($groupId);
+
         // 勉強会修正試行
         // 勉強会修正に成功した場合
         if ($group->updateGroup()) {

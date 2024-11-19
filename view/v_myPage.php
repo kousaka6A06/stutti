@@ -56,7 +56,17 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
                         <p class="card-text"><?= $group['content'] ?></p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-end"><?= $group['date'] ?> <?= $group['start_time'] ?>～<?= $group['end_time'] ?></li>
+                        <li class="list-group-item d-flex justify-content-end">
+                            <?= $group['date'] ?>
+                            <?=
+                                empty($group['start_time']) && empty($group['end_time'])
+                                    ? "時間未定"
+                                    :
+                                        (empty($group['start_time']) ? "未定" : $group['start_time'])
+                                        . "~"
+                                        . (empty($group['end_time']) ? "未定" : $group['end_time'])
+                            ?>
+                        </li>
                         <li class="list-group-item d-flex justify-content-end"><?= $group['num_people'] ?>人</li>
                         <li class="list-group-item d-flex justify-content-end">
                             <a href="groupDetail.php?gid=<?= $group['id'] ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
@@ -88,8 +98,18 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
                         <p class="card-text"><?= $group['content'] ?></p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><?= $group['date'] ?> <?= $group['start_time'] ?>～<?= $group['end_time'] ?></li>
-                        <li class="list-group-item"><?= $group['num_people'] ?>人</li>
+                        <li class="list-group-item d-flex justify-content-end">
+                            <?= $group['date'] ?>
+                            <?=
+                                empty($group['start_time']) && empty($group['end_time'])
+                                    ? "時間未定"
+                                    :
+                                        (empty($group['start_time']) ? "未定" : $group['start_time'])
+                                        . "~"
+                                        . (empty($group['end_time']) ? "未定" : $group['end_time'])
+                            ?>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-end"><?= $group['num_people'] ?>人</li>
                         <li class="list-group-item d-flex justify-content-end">
                             <a href="groupDetail.php?gid=<?= $group['id'] ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
                         </li>
