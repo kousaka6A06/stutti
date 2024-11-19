@@ -28,7 +28,7 @@ class Group {
         $query = "INSERT INTO `groups` 
                 (`groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
                 `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`) 
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindValue(1, $this->name);
