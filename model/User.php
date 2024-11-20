@@ -57,11 +57,12 @@ class User {
         // return $stmt->fetch(PDO::FETCH_COLUMN);
         try {
             if ($stmt->execute()) {
-                if(!$stmt->fetch(PDO::FETCH_COLUMN))
+                if(!$stmt->fetch(PDO::FETCH_COLUMN)) {
                     return true;
                 } else {
                     return false;
                 }
+            }
         } catch (PDOException $e) {
             error_log("isUniqueStuttiId:" .$e->getMessage());
             return false;
