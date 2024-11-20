@@ -2,15 +2,11 @@
 html, body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
     overflow: auto;
 }
 
 body {
     font-family: 'Nunito', sans-serif;
-    color: #586365;
-    padding-top: 60px; /* ヘッダー分のスペースを確保 */
 }
 
 #canvas {
@@ -25,6 +21,46 @@ body {
 
 main {
     margin-top: 2rem;
+}
+
+.container-md {
+    margin-top: 5rem;
+    max-width: 60%; /* デフォルトより少し小さく */
+}
+
+/* 
+h2:first-letter {
+    font-size: 150%;
+    color: #eb6100;
+  }
+   */
+
+.heading07 {
+    position: relative;
+    padding-top: 50px;
+    padding-left: 30px;
+    font-size: 32px;
+    font-family: "Yusei Magic", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.heading07 span {
+	position: relative;
+	z-index: 2;
+}
+
+.heading07::before {
+	content: attr(data-en);
+	position: absolute;
+	transform: rotate(-5deg);
+	top: -15px;
+	left: 0;
+	color: rgba(105, 105, 105, 0.6);
+	font-size: 56px;
+	font-weight: 400;
+	font-family: luxus-brut, cursive;
+	font-style: italic;
 }
 
 h3 {
@@ -117,33 +153,40 @@ p {
 }
 
 /*//////// ヘッダー ////////*/
-.header {
-    margin: 0;
-    padding: 0;
+.fixed-header {
     position: fixed;
     top: 1%;
-    left: 50%; /* 横方向で50%に配置 */
-    width: 55%;
-    z-index: 1000;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
     background-color: #92b29b;
-    transform: translateX(-50%); /* 自身の幅の50%分、左に移動させて中央に配置 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 0px 10px;
+    box-sizing: border-box;
+}
+.navbar-brand:hover {
+    color: #fff;
+}
+.navbar-brand {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-item .btn {
+    border: none;
+    border-radius: 5px;
+    padding: 0px 10px;
+    font-size: 14px;
 }
 
 .rounded-header {
-    border-radius: 30px;  /* 丸みの半径を指定 */
-    overflow: hidden;     /* 丸い角をきれいに保つために必要 */
+    border-radius: 30px;
 }
 
-.header .navbar-brand {
-    color: #fff;
-    font-size: 1.75rem;
-    font-weight: bold;
-    padding: 0.5rem 1.5rem;
-}
-
-.header .btn {
-    font-size: 0.9rem; /* ボタンのフォントサイズ調整 */
-    padding: 0px 10px; /* ボタンのパディング調整 */
+.text-light {
+    color: white;
 }
 
 /*//////// メイン ////////*/
@@ -319,18 +362,7 @@ p {
     margin: 0;
 }
 
-/* アイコンとテキストの整列 */
-.feature {
-    display: flex;
-    align-items: center;
-}
-
-
 /*//////// 募集中の勉強会カードのスタイル ////////*/
-.container-md {
-    max-width: 1060px; /* デフォルトより少し小さく */
-}
-
 .card-title {
     font-size: 1rem; /* フォントサイズを小さく */
 }
@@ -347,6 +379,7 @@ p {
 /*/////// Tuttiカードのスタイル ///////*/
 .tutti-row {
     max-width: 90%;
+    margin: 5% 0;
 }
 
 .tutti-card {
@@ -511,103 +544,100 @@ p {
     position: relative;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    overflow: hidden;
     padding: 2rem;
 }
 
-/* 初期テキスト（ページロード時） */
 .tutti-intro {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
     font-size: 3rem;
-    color: rgb(139 139 139 / 85%);
+    color: rgba(139, 139, 139, 0.85);
     opacity: 0;
-    z-index: 10;
     animation: introFadeIn 1.5s ease forwards;
-    transition: opacity 0.5s ease;
 }
 
 @keyframes introFadeIn {
-    0% {
+    from {
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.8);
     }
-    100% {
+    to {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
     }
 }
 
-/* 非表示状態 */
-.tutti-intro-hidden {
-    display: none;
-}
-
-/* コンテンツ全体を非表示 */
 .tutti-hidden {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease, visibility 0s 0.5s;
 }
 
-/* コンテンツ全体が表示される状態 */
 .tutti-visible {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.5s ease;
+    transition: opacity 1s ease;
 }
 
-/* 背景テキストのスタイル */
 .tutti-background-text {
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
     font-size: 6rem;
-    color: rgb(139 139 139 / 15%);
-    pointer-events: none;
+    color: rgba(139, 139, 139, 0.15);
     z-index: 5;
 }
 
 
-
 /*//////// メディアクエリ ////////*/
-/* さらに小さな画面（モバイルやスマートフォン）に対応 */
-@media (max-width: 480px) {
-    .position-relative img {
-        width: 100%;  /* 画像の幅を100%に設定 */
-    }
-    
-    .text-overlay {
-        font-size: 1rem;  /* フォントサイズをさらに小さく */
-        top: 40%;  /* テキストの位置を調整 */
-        max-width: 90%; /* 最大幅を90%に設定 */
-    }
-}
-/* 中型スマホ向け */
-@media (max-width: 600px) {
-}
-
 @media (max-width: 768px) {
-    .header .navbar-brand {
-        font-size: 1.5rem;
-        /* スマホサイズでフォントを小さく */
-    }
-    
-    .position-relative img {
-        width: 100%;  /* 画像の幅を親要素の100%に設定 */
-    }
-    
-    .text-overlay {
-        font-size: 1.2rem;  /* モバイルサイズでフォントサイズを小さくする */
-        top: 40%;  /* テキストの位置を少し調整 */
-        max-width: 90%;  /* 幅の最大値を90%に設定 */
-        padding: 5px;  /* パディングを少し減らす */
+    body {
+        padding-top: 80px; /* スマホ用の余白 */
     }
 
-@media (max-width: 1024px) {
+    .header {
+        width: 90%;
+        font-size: 14px;
+    }
+    .board-inner {
+        width: 100%;
+    }
+    .board-3YD0c:after{
+        width: 100%;
+    }
+    .board-3YD0c .magnet1 {
+        right: 5%;
+    }
+    .board-3YD0c .magnet2 {
+        right: 8%;
+    }
+    .board-3YD0c .magnet3 {
+        right: 2%;
+    }
+    .tutti-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tutti-card {
+        width: 100%; /* カード幅を画面いっぱいに */
+        margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 {
+        font-size: 1.2rem; /* テキストサイズ調整 */
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .view-more-btn {
+        width: 30%;
+        line-height: 30px;
     }
 }

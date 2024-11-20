@@ -9,7 +9,7 @@
     <!-- セクションコンテンツ -->
     <div class="tutti-sections">
         <!-- セクション1 -->
-        <section class="tutti-section" data-background="NEWS">
+        <section class="tutti-section" data-background="News">
             <div class="container-md tutti-news">
                 <ul class="list-group">
                     <li class="list-group-item tutti-content-item">勉強会「PHP入門」開催決定！日程は11月25日。</li>

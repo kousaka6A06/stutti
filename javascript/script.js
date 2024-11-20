@@ -105,27 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentWrapper = document.getElementById('tuttiContent');
     const backgroundText = document.getElementById('tuttiBackgroundText');
 
-    // 初期テキストのフェードアウトとコンテンツ表示準備
+    // 初期テキストのフェードアウト
     setTimeout(() => {
         introText.style.opacity = 0;
 
         // 初期テキストが非表示になった後
         setTimeout(() => {
-            introText.classList.add('tutti-intro-hidden'); // 初期テキストを完全非表示
-            contentWrapper.classList.remove('tutti-hidden');
-            contentWrapper.classList.add('tutti-visible');
+            introText.style.display = 'none'; // 初期テキストを完全非表示
+            contentWrapper.classList.replace('tutti-hidden', 'tutti-visible'); // コンテンツを表示
         }, 500); // 初期テキストのフェードアウト時間
     }, 2000);
-
-    // スクロールに応じて背景テキストを動かす
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY; // 現在のスクロール位置
-        const windowHeight = window.innerHeight; // ウィンドウの高さ
-
-        // 背景テキストの位置をスクロールに合わせて動かす
-        const position = Math.max(10, 100 - (scrollY / windowHeight) * 100); // スクロールに応じて上下
-        backgroundText.style.top = `${position}%`;
-    });
 
     // Intersection Observerでセクションを監視
     const observer = new IntersectionObserver((entries) => {
@@ -135,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 backgroundText.textContent = entry.target.dataset.background;
             }
         });
+    }, {
+        threshold: 0.5 // 50%が表示されたときにトリガー
     });
 
     // 各セクションを監視
