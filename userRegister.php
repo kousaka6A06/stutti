@@ -40,6 +40,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $user->setName($name);
     $user->setMailAddress($mailAddress);
 
+    // バリデーション
+    if (!$user->isMatchMailAddress() || !$user->isUniqueMailAddress() || !$user->isUniqueStuttiId() || !$user->isMatchPassword()) {
+        // 画面から渡された情報を次画面に引き継ぎ
+        $userInfo['stutti_id'] = $stuttiId;
+        $userInfo['name'] = $name;
+        $userInfo['mail_address'] = $mailAddress;
+
+        // セッションにメッセージを保存してユーザー登録画面を再描画
+        $_SESSION['message'] = "";
+        if (!$user->isMatchMailAddress()) {
+            $_SESSION['message'] .= 'メールアドレスの形式が異なります<br>';
+        }
+        if (!$user->isUniqueMailAddress()) {
+            $_SESSION['message'] .= '登録済みのメールアドレスです<br>';
+        }
+        if (!$user->isUniqueStuttiId()) {
+            $_SESSION['message'] .= '登録済みの Stutti ID です<br>';
+        }
+        if (!$user->isMatchPassword()) {
+            $_SESSION['message'] .= 'パスワードの形式が異なります<br>';
+        }
+        Utils::loadView('ユーザー登録', 'view/v_userRegister.php');
+        exit;
+    }
+
     // アバター画像が画面から渡されなかった場合
     if ($avatar['error'] === UPLOAD_ERR_NO_FILE) {
         $user->setAvatar(DEFAULT_AVATAR);

@@ -107,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
             Utils::loadView('勉強会作成', 'view/v_groupEdit.php');
             exit;
         }
-        
 
         // 勉強会登録試行
         // 勉強会登録に成功した場合
@@ -126,15 +125,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
     // 勉強会編集画面の場合
     } else {
         // バリデーション
-        if (!$group->isMatchTime()) {
+        if (!$group->isMatchTime() || !$group->isMatchStartEndTime()) {
             // セッションにメッセージを保存して勉強会編集画面に再遷移
-            $_SESSION['message'] = '開催日に過去の日付が入力されています';
-            header('Location: ' . BASE_DOMAIN . '/groupEdit.php?gid=' . $groupId);
-            exit;
-        }
-        if (!$group->isMatchStartEndTime()) {
-            // セッションにメッセージを保存して勉強会編集画面に再遷移
-            $_SESSION['message'] = '終了時刻は開始時刻より後にしてください';
+            $_SESSION['message'] = "";
+            if (!$group->isMatchTime()) {
+                $_SESSION['message'] .= '開催日に過去の日付が入力されています<br>';
+            }
+            if (!$group->isMatchStartEndTime()) {
+                $_SESSION['message'] .= '終了時刻は開始時刻より後にしてください<br>';
+            }
             header('Location: ' . BASE_DOMAIN . '/groupEdit.php?gid=' . $groupId);
             exit;
         }
