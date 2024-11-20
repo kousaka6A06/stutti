@@ -1,17 +1,3 @@
-<?php $cards = [
-    ['id' => '1', 'title' => 'AWS', 'color' => '#FF9800'],
-    ['id' => '2', 'title' => 'Linux', 'color' => '#49BDF0'],
-    ['id' => '3', 'title' => 'PHP', 'color' => '#4F5B93'],
-    ['id' => '4', 'title' => 'Java', 'color' => '#7B5544'],
-    ['id' => '5', 'title' => 'Python', 'color' => '#FFC20E'],
-    ['id' => '6', 'title' => 'フロントエンド', 'color' => '#4FC94F'],
-    ['id' => '7', 'title' => 'データベース', 'color' => '#444655'],
-    ['id' => '8', 'title' => '応用数学', 'color' => '#225CC7'],
-    ['id' => '9', 'title' => 'ビジネス英語', 'color' => '#BA252F'],
-    ['id' => '10', 'title' => '技術全般', 'color' => '#BABABA'],
-];
-?>
-
 <div class="container">
     <div class="board-3YD0c">
         <!-- マーカー -->
