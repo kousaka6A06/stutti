@@ -148,8 +148,7 @@ class Group {
         try {
             while($tutti = $q->fetch(PDO::FETCH_ASSOC)) {
                 $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
-                        `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`, 
-                        `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
+                        `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`
                         FROM `groups` 
                         JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
                         WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
