@@ -96,3 +96,48 @@ setInterval(function () {
         elements[e].draw(ctx, time);
     }
 }, 10);
+
+
+
+///////////////////////////////
+document.addEventListener('DOMContentLoaded', () => {
+    const introText = document.getElementById('tuttiIntro');
+    const contentWrapper = document.getElementById('tuttiContent');
+    const backgroundText = document.getElementById('tuttiBackgroundText');
+
+    // 初期テキストのフェードアウトとコンテンツ表示準備
+    setTimeout(() => {
+        introText.style.opacity = 0;
+
+        // 初期テキストが非表示になった後
+        setTimeout(() => {
+            introText.classList.add('tutti-intro-hidden'); // 初期テキストを完全非表示
+            contentWrapper.classList.remove('tutti-hidden');
+            contentWrapper.classList.add('tutti-visible');
+        }, 500); // 初期テキストのフェードアウト時間
+    }, 2000);
+
+    // スクロールに応じて背景テキストを動かす
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY; // 現在のスクロール位置
+        const windowHeight = window.innerHeight; // ウィンドウの高さ
+
+        // 背景テキストの位置をスクロールに合わせて動かす
+        const position = Math.max(10, 100 - (scrollY / windowHeight) * 100); // スクロールに応じて上下
+        backgroundText.style.top = `${position}%`;
+    });
+
+    // Intersection Observerでセクションを監視
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // セクションに対応する背景テキストに変更
+                backgroundText.textContent = entry.target.dataset.background;
+            }
+        });
+    });
+
+    // 各セクションを監視
+    const sections = document.querySelectorAll('.tutti-section');
+    sections.forEach((section) => observer.observe(section));
+});

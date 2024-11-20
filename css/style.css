@@ -507,6 +507,73 @@ p {
 
 /*//////// tutti詳細セクションのスタイル ////////*/
 
+.tutti-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+/* 初期テキスト（ページロード時） */
+.tutti-intro {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    font-size: 3rem;
+    color: rgb(139 139 139 / 85%);
+    opacity: 0;
+    z-index: 10;
+    animation: introFadeIn 1.5s ease forwards;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes introFadeIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* 非表示状態 */
+.tutti-intro-hidden {
+    display: none;
+}
+
+/* コンテンツ全体を非表示 */
+.tutti-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+}
+
+/* コンテンツ全体が表示される状態 */
+.tutti-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease;
+}
+
+/* 背景テキストのスタイル */
+.tutti-background-text {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6rem;
+    color: rgb(139 139 139 / 15%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+
+
 /*//////// メディアクエリ ////////*/
 /* さらに小さな画面（モバイルやスマートフォン）に対応 */
 @media (max-width: 480px) {
