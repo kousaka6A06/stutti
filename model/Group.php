@@ -156,7 +156,7 @@ class Group {
                 $stmt = $this->conn->prepare($query);
                 $stmt->execute();
                 $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $tuttiGroups = ['id'=>$tutti['id'],'name'=>$tutti['name'],'groups'=>$groups];
+                $tuttiGroups = ['id'=>$tutti['id'], 'name'=>$tutti['name'], 'color'=>$tutti['color'], 'icon'=>$tutti['icon'], 'groups'=>$groups];
                 array_push($key,$tutti['id']);
                 array_push($value,$tuttiGroups);
                 // $ary = array_merge($ary,array($tutti['id']=>$groups));
