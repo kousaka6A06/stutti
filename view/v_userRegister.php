@@ -2,8 +2,8 @@
 global $userInfo;
 ?>
 
-<h1 class="text-center py-3">ユーザー登録</h1>
-<section class="container mt-3">
+<section class="container-md">
+    <h1 class="text-center">ユーザー登録</h1>
     <form action="userRegister.php" method="POST" enctype="multipart/form-data"
         class="bg-light p-4 rounded shadow mx-auto" style="max-width: 700px">
         <div class="mb-4">

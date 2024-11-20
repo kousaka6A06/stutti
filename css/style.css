@@ -19,12 +19,8 @@ body {
     z-index: -1; /* 背景として配置 */
 }
 
-main {
-    margin-top: 2rem;
-}
-
 .container-md {
-    margin-top: 5rem;
+    margin-top: 7%;
     max-width: 60%; /* デフォルトより少し小さく */
 }
 
@@ -155,7 +151,7 @@ p {
 /*//////// ヘッダー ////////*/
 .fixed-header {
     position: fixed;
-    top: 1%;
+    top: 3%;
     left: 50%;
     transform: translateX(-50%);
     width: 50%;
@@ -447,6 +443,10 @@ p {
 }
 
 /*//////// 勉強会一覧 ////////*/
+.group-list {
+    margin-top: 7%;
+}
+
 .tilt-card {
     transform: rotate(7deg); /* 初期の傾き */
     transform-origin: bottom right; /* 右下を軸にする */

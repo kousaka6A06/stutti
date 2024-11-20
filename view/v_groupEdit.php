@@ -2,8 +2,8 @@
 global $groupId, $groupInfo, $tuttiInfos;
 ?>
 
-<h1 class="text-center py-3"><?= isset($groupId) ? "勉強会編集" : "勉強会作成" ?></h1>
-<section class="container mt-3">
+<section class="container-md">
+    <h1 class="text-center"><?= isset($groupId) ? "勉強会編集" : "勉強会作成" ?></h1>
     <form action="groupEdit.php<?= isset($groupId) ? "?gid=" . $groupId : "" ?>" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow mx-auto"
         style="max-width: 700px">
         <div class="mb-4">
