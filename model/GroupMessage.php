@@ -24,7 +24,12 @@ class GroupMessage {
         $stmt->bindValue(1, $this->groupId);
         $stmt->bindValue(2, $this->memberId);
         $stmt->bindValue(3, $this->content);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) { 
+            error_log("createGroupMessage Error:" . $e->getMessage());
+            return false;
+        }
     }
 
     // 〇勉強会メッセージ削除
@@ -34,7 +39,13 @@ class GroupMessage {
         $query = "DELETE FROM `group_messages` WHERE `group_messages`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $this->id);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("deleteGroupMessage" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // 〇勉強会メッセージ表示
@@ -51,9 +62,15 @@ class GroupMessage {
         WHERE `group_messages`.`group_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->groupId,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getGroupMessagesByGroupId Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
     // 〇勉強会メッセージ削除用表示
@@ -69,9 +86,15 @@ class GroupMessage {
         WHERE `group_messages`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch (PDOException $e) {
+            error_log("getGroupMessagesById Error:" . $e->getMessage());
+            return false;
+        }
+
     }
     // setter
     function setId($id) {

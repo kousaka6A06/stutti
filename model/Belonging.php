@@ -21,7 +21,13 @@ class Belonging {
 
         $stmt->bindParam(1, $this->groupId);
         $stmt->bindParam(2, $this->memberId);
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("addMember Error:" . $e->getMessage());
+            return false;
+        }
+
     }
 
 
@@ -35,12 +41,18 @@ class Belonging {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->groupId);
         $stmt->bindParam(2, $this->memberId);
-        $stmt->execute();
-        if($stmt->fetch(PDO::FETCH_ASSOC)){
-            return true;
-        } else {
+        try {
+            $stmt->execute();
+            if($stmt->fetch(PDO::FETCH_ASSOC)){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            error_log("isMemberOfGroup Error:" . $e->getMessage());
             return false;
         }
+
     }
 
     // setter

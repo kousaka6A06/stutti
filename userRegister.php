@@ -22,7 +22,7 @@ $avatar = isset($_FILES['avatar']) ? $_FILES['avatar'] : null;
 if ($userId) {
     // セッションにメッセージを保存してマイページ画面に遷移
     $_SESSION['message'] = 'すでにログインしています';
-    header('Location: ' . BASE_DOMAIN . '/mypage.php');
+    header('Location: ' . BASE_DOMAIN . '/myPage.php');
     exit;
 }
 
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // セッションにユーザーID・メッセージを保存してマイページ画面に遷移
         $_SESSION['userId'] = $user->getId();
         $_SESSION['message'] = 'ユーザーを作成しました';
-        header('Location: ' . BASE_DOMAIN . '/mypage.php');
+        header('Location: ' . BASE_DOMAIN . '/myPage.php');
 
     // ユーザー登録に失敗した場合
     } else {
