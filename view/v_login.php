@@ -1,5 +1,5 @@
-<h1 class="text-center py-3">ログイン</h1>
-<section class="container mt-3">
+<section class="container-md">
+    <h1 class="text-center">ログイン</h1>
     <p class="fs-10 text-muted text-center">ユーザー登録は
         <a href="userRegister.php" class="text-info fw-bold">こちら</a>
     </p>

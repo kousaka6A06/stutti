@@ -2,8 +2,8 @@
 global $userInfo, $ownerGroupInfos, $memberGroupInfos;
 ?>
 
-<h1 class="text-center py-3">マイページ</h1>
-<section class="container mt-3 mb-5">
+<section class="container-md">
+    <h1 class="text-center">マイページ</h1>
     <h2 class="my-3">ユーザー情報</h2>
     <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
         <div class="col-6 mx-auto my-2">
@@ -35,7 +35,7 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
         </div>
     </div>
 </section>
-<section class="container mt-3 mb-5">
+<section class="container-md mb-5">
     <h2 class="my-3">作成した勉強会</h2>
     <div class="row my-3">
         <?php foreach ($ownerGroupInfos as $group): ?>
@@ -77,7 +77,7 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
         <?php endforeach; ?>
     </div>
 </section>
-<section class="container mt-3 mb-5">
+<section class="container-md mb-5">
     <h2 class="my-3">参加中の勉強会</h2>
     <div class="row my-3">
         <?php foreach ($memberGroupInfos as $group): ?>

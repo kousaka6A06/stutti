@@ -83,7 +83,7 @@ $cards = [
     <!-- メイン -->
     <main class="flex-grow-1">
         <?php if (isset($_SESSION['message'])): ?>
-            <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 container"
+            <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 container-md"
                 style="max-width: 700px">
                 <?= $_SESSION['message'] ?>
             </p>

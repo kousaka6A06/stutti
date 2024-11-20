@@ -4,10 +4,10 @@ global $tuttiGroupInfos;
 $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
 ?>
 
-<section>
+<section class="group-list">
     <?php foreach ($tuttiGroupInfos as $key => $tuttiGroupInfo): ?>
         <div class="d-flex justify-content-center">
-            <div class="container group-section row mt-3 d-flex justify-content-center align-items-end">
+            <div class="container group-section row d-flex justify-content-center align-items-end mt-3">
                 <div class="col-md-1">
                     <div class="card tutti-card2 <?= in_array($key, $tiltedKey) ? 'tilt-card' : ''; ?>"
                         style="border: 10px solid <?= $tuttiGroupInfo['color'] ?>; color: #586365">

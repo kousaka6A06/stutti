@@ -2,8 +2,8 @@
 global $userInfo;
 ?>
 
-<h1 class="text-center py-3">ユーザー編集</h1>
-<section class="container mt-3">
+<section class="container-md">
+    <h1 class="text-center">ユーザー編集</h1>
     <div class="col-4 mx-auto my-2">
         <img class="w-100" src="<?= DIR_AVATAR ?><?= $userInfo['avatar'] ?>" alt="">
     </div>
