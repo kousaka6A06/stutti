@@ -2,9 +2,9 @@
 global $groupId, $groupInfo, $tuttiInfos;
 ?>
 
-<h1 class="text-center py-3"><?= isset($groupInfo) ? "勉強会編集" : "勉強会作成" ?></h1>
+<h1 class="text-center py-3"><?= isset($groupId) ? "勉強会編集" : "勉強会作成" ?></h1>
 <section class="container mt-3">
-    <form action="groupEdit.php?gid=<?= $groupId ?>" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow mx-auto"
+    <form action="groupEdit.php<?= isset($groupId) ? "?gid=" . $groupId : "" ?>" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow mx-auto"
         style="max-width: 700px">
         <div class="mb-4">
             <label for="name" class="form-label">勉強会名を入力</label>
@@ -17,7 +17,7 @@ global $groupId, $groupInfo, $tuttiInfos;
             <select id="tutti-id" name="tutti-id" class="form-control d-table-cell" required>
                 <option value="">選択してください</option>
                 <?php foreach ($tuttiInfos as $tuttiInfo): ?>
-                    <option value="<?= $tuttiInfo['id'] ?>"<?= isset($groupInfo) && $groupInfo['tutti_id'] === $tuttiInfo['id'] ? " selected" : "" ?>><?= $tuttiInfo['name'] ?></option>
+                    <option value="<?= $tuttiInfo['id'] ?>"<?= isset($groupInfo) && $groupInfo['tutti_id'] == $tuttiInfo['id'] ? " selected" : "" ?>><?= $tuttiInfo['name'] ?></option>
                 <?php endforeach; ?>
              </select>
         </div>

@@ -45,9 +45,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $user->setPassword($password);
     $user->setName($name);
     $user->setMailAddress($mailAddress);
-
+    
     // 登録済みのユーザー情報を取得する
     $userInfo = $user->getUserById();
+
+    // バリデーション
+    if (
+        ($mailAddress !== $userInfo['mail_address'] && !$user->isMatchMailAddress())
+        || ($mailAddress !== $userInfo['mail_address'] && !$user->isUniqueMailAddress())
+        || ($password !== $userInfo['password'] && !$user->isMatchPassword())
+    ) {
+        // セッションにメッセージを保存してユーザー編集画面に再遷移
+        $_SESSION['message'] = "";
+        if ($mailAddress !== $userInfo['mail_address'] && !$user->isMatchMailAddress()) {
+            $_SESSION['message'] .= 'メールアドレスの形式が異なります<br>';
+        }
+        if ($mailAddress !== $userInfo['mail_address'] && !$user->isUniqueMailAddress()) {
+            $_SESSION['message'] .= '登録済みのメールアドレスです<br>';
+        }
+        if ($password !== $userInfo['password'] && !$user->isMatchPassword()) {
+            $_SESSION['message'] .= 'パスワードの形式が異なります<br>';
+        }
+        header('Location: ' . BASE_DOMAIN . '/userEdit.php');
+        exit;
+    }
 
     // アバター画像が画面から渡されなかった場合
     if ($avatar['error'] === UPLOAD_ERR_NO_FILE) {

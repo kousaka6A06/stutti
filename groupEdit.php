@@ -84,6 +84,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
 
     // 勉強会作成画面の場合
     if (!$groupId) {
+        // バリデーション
+        if (!$group->isMatchTime() || !$group->isMatchStartEndTime()) {
+            // 画面から渡された情報を次画面に引き継ぎ
+            $groupInfo['name'] = $name;
+            $groupInfo['date'] = $date;
+            $groupInfo['start_time'] = $startTime;
+            $groupInfo['end_time'] = $endTime;
+            $groupInfo['location'] = $location;
+            $groupInfo['num_people'] = $numPeople;
+            $groupInfo['content'] = $content;
+            $groupInfo['tutti_id'] = $tuttiId;
+
+            // セッションにメッセージを保存して勉強会作成画面を再描画
+            $_SESSION['message'] = "";
+            if (!$group->isMatchTime()) {
+                $_SESSION['message'] .= '開催日に過去の日付が入力されています<br>';
+            }
+            if (!$group->isMatchStartEndTime()) {
+                $_SESSION['message'] .= '終了時刻は開始時刻より後にしてください<br>';
+            }
+            Utils::loadView('勉強会作成', 'view/v_groupEdit.php');
+            exit;
+        }
+
         // 勉強会登録試行
         // 勉強会登録に成功した場合
         if ($group->createGroup()) {
@@ -100,6 +124,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
 
     // 勉強会編集画面の場合
     } else {
+        // バリデーション
+        if (!$group->isMatchTime() || !$group->isMatchStartEndTime()) {
+            // セッションにメッセージを保存して勉強会編集画面に再遷移
+            $_SESSION['message'] = "";
+            if (!$group->isMatchTime()) {
+                $_SESSION['message'] .= '開催日に過去の日付が入力されています<br>';
+            }
+            if (!$group->isMatchStartEndTime()) {
+                $_SESSION['message'] .= '終了時刻は開始時刻より後にしてください<br>';
+            }
+            header('Location: ' . BASE_DOMAIN . '/groupEdit.php?gid=' . $groupId);
+            exit;
+        }
+
         // セッション情報をセット
         $group->setId($groupId);
 
