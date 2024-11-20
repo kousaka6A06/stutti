@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-md">
     <div class="board-3YD0c">
         <!-- マーカー -->
         <div class="marker1"></div>
@@ -38,10 +38,10 @@
 </div>
 
 <!-- 募集中勉強会 -->
-<div class="container-md mt-5">
+<div class="container-md">
     <section>
         <div class="d-flex justify-content-between align-items-center">
-            <h2>募集中の勉強会</h2>
+            <h2 class="heading07" data-en="Study">募集中の勉強会</h2>
             <div class="icon-spacing">
                 <i class="fa-brands fa-aws fa-2x"></i>
                 <i class="fa-brands fa-linux fa-2x"></i>
@@ -100,7 +100,7 @@
 
 <!-- tutti広場 -->
 <div class="container-md">
-    <h2>TUTTI</h2>
+    <h2 class="heading07" data-en="community">TUTTI広場</h2>
     <div class="row d-flex justify-content-evenly tutti-row">
         <?php foreach ($cards as $card): ?>
             <div class="col-1">

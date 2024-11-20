@@ -32,10 +32,9 @@ $cards = [
     <title><?= $v_title ?>STUTTI - 勉強会グループ募集</title>
     <!-- BootstrapのCSSをリンク -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Yusei+Magic&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -46,9 +45,9 @@ $cards = [
 <body class="d-flex flex-column min-vh-100">
     <!-- 背景アニメーション用のキャンバス -->
     <canvas id="canvas"></canvas>
-    
+
     <!-- ヘッダー -->
-    <header class="header rounded-header">
+    <header class="header rounded-header fixed-header">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
                 <a class="navbar-brand" href="index.php">
@@ -80,10 +79,12 @@ $cards = [
         </nav>
     </header>
 
+
     <!-- メイン -->
     <main class="flex-grow-1">
-        <?php if(isset($_SESSION['message'])): ?>
-            <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 container" style="max-width: 700px">
+        <?php if (isset($_SESSION['message'])): ?>
+            <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 container"
+                style="max-width: 700px">
                 <?= $_SESSION['message'] ?>
             </p>
             <?php unset($_SESSION['message']) ?>
