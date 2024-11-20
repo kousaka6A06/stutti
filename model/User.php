@@ -57,9 +57,11 @@ class User {
         // return $stmt->fetch(PDO::FETCH_COLUMN);
         try {
             if ($stmt->execute()) {
-                return $stmt->fetch(PDO::FETCH_COLUMN);
-            } else {
-                return false;
+                if(!$stmt->fetch(PDO::FETCH_COLUMN)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         } catch (PDOException $e) {
             error_log("isUniqueStuttiId:" .$e->getMessage());
@@ -78,9 +80,11 @@ class User {
         
         try {
             if ($stmt->execute()) {
-                return $stmt->fetch(PDO::FETCH_COLUMN);
-            } else {
-                return false;
+                if(!$stmt->fetch(PDO::FETCH_COLUMN)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         } catch (PDOException $e) {
             error_log("isUniqueMailAddress:" .$e->getMessage());

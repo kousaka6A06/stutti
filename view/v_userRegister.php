@@ -110,21 +110,40 @@ global $userInfo;
     let confirmPassword = document.getElementById('confirmPassword').value;
     document.getElementById('password').addEventListener('change', function(event) {
         password = document.getElementById('password').value;
-        console.log(password);
+        confirmPassword = document.getElementById('confirmPassword').value;
         if(passPattern.test(password)){
-            document.getElementById('passAl1').innerHTML = '';
-            isRight = true;
+            if(confirmPassword){
+                if (password === confirmPassword) {
+                    document.getElementById('passAl2').innerHTML = '';
+                    document.getElementById('passAl1').innerHTML = '';
+                    isRight = true;
+                } else {
+                    document.getElementById('passAl2').innerHTML = '再入力されたパスワードが一致しません。';
+                    isRight = false;
+                }
+            } else {
+                document.getElementById('passAl1').innerHTML = '';
+                isRight = true;
+            }
         } else {
             document.getElementById('passAl1').innerHTML = 'パスワードは8文字以上、英大文字・英小文字・数字・記号の4種類の文字種のうち3種類を含むようご入力ください。';
             isRight = false;
         }
+
     });
     document.getElementById('confirmPassword').addEventListener('change', function(event) {
+        password = document.getElementById('password').value;
         confirmPassword = document.getElementById('confirmPassword').value;
-        console.log(confirmPassword);
         if (password === confirmPassword) {
-            document.getElementById('passAl2').innerHTML = '';
-            isRight = true;
+            if(passPattern.test(confirmPassword)) {
+                document.getElementById('passAl1').innerHTML = '';
+                document.getElementById('passAl2').innerHTML = '';
+                isRight = true;
+            } else {
+                document.getElementById('passAl2').innerHTML = '';
+                document.getElementById('passAl1').innerHTML = 'パスワードは8文字以上、英大文字・英小文字・数字・記号の4種類の文字種のうち3種類を含むようご入力ください。';
+                isRight = false;
+            }
         } else {
             document.getElementById('passAl2').innerHTML = '再入力されたパスワードが一致しません。';
             isRight = false;
@@ -132,9 +151,7 @@ global $userInfo;
     });
     document.getElementById('submit').addEventListener('click', function(event) {
         if(isRight === false) {
-            console.log(isRight);
             event.preventDefault();
         }
     });
-
 </script>
