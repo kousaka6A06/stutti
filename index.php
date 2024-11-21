@@ -12,7 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 最近作成された勉強会情報を5件取得
+// 最近作成された勉強会情報を8件取得
 $group = new Group();
 $groupInfos = $group->getNewGroups();
 
