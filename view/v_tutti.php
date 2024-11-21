@@ -1,3 +1,7 @@
+<?php
+global $tuttiInfo, $groupInfos, $commentInfos;
+?>
+
 <!-- 初期テキスト -->
 <div class="tutti-intro" id="tuttiIntro">AWSコミュニティ</div>
 
@@ -10,61 +14,86 @@
     <div class="tutti-sections">
         <!-- セクション1 -->
         <section class="tutti-section" data-background="News">
-            <div class=" tutti-news">
+            <div class="">
                 <ul class="list-group">
-                    <li class="list-group-item tutti-content-item">勉強会「PHP入門」開催決定！日程は11月25日。</li>
-                    <li class="list-group-item tutti-content-item">新しいカテゴリー「React」を追加しました。</li>
-                    <li class="list-group-item tutti-content-item">TUTTIが正式リリースされました！</li>
+                    <li class="list-group-item">勉強会「PHP入門」開催決定！日程は11月25日。</li>
+                    <li class="list-group-item">新しいカテゴリー「React」を追加しました。</li>
+                    <li class="list-group-item">TUTTIが正式リリースされました！</li>
                 </ul>
             </div>
         </section>
 
         <!-- セクション2 -->
         <section class="tutti-section" data-background="Study Group">
-            <div class=" tutti-groups">
+            <div class="">
                 <div class="row">
-                    <?php foreach ($cards as $card) { ?>
+                    <?php foreach ($groupInfos as $groupInfo) : ?>
                         <div class="col-md-3 mb-2">
                             <div class="card">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item list-title">
-                                        <div>
-                                            <!-- ボタンの色を動的に設定 -->
-                                            <button type="button" class="btn btn-sm"
-                                                style="background-color: <?= $card['color']; ?>; color: white;">
-                                                <?= $card['title']; ?>
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
                                 <div class="card-body">
-                                    <h3 class="card-title">「勉強会タイトル」</h3>
-                                    <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計について議論しましょう。</p>
+                                    <h3 class="card-title"><?= $groupInfo['name'] ?></h3>
+                                    <p class="card-text"><?= $groupInfo['content'] ?></p>
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-end">
-                                        <i class="fa fa-calendar"></i> 「日時」
+                                        <i class="fa fa-calendar"></i>
+                                        <?= $groupInfo['date'] ?>
+                                        <?=
+                                            empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
+                                                ? "時間未定"
+                                                :
+                                                    (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
+                                                    . "~"
+                                                    . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
+                                        ?>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-end">
-                                        <i class="fa fa-users"></i> 「参加人数」
+                                        <i class="fa fa-users"></i><?= $groupInfo['num_people'] ?>人
                                     </li>
                                     <li class="list-group-item d-flex justify-content-end">
-                                        <a href="groupDetail.php?gid=<?= $card['id']; ?>" class="btn btn-secondary btn-sm">
+                                        <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">
                                             <i class="fa fa-arrow-right"></i>詳しく見る
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php endforeach; ?>
                 </div>
         </section>
 
         <!-- セクション3 -->
         <section class="tutti-section" data-background="Message">
-            <div class=" tutti-message">
-                <p class="lead tutti-content-item">TUTTIは、学びたい全ての人に平等な学習の機会を提供します。</p>
-                <p class="tutti-content-item">勉強会を通じて、新しいスキルを習得し、仲間とつながる場を提供することを目指しています。</p>
+            <div class="bg-light p-4 rounded shadow">
+                <p class="p-3"><?= $tuttiInfo['about'] ?></p>
+                <table class="maintable w-100 mb-5">
+                    <thead>
+                        <tr>
+                            <th class="p-3 w-25" style="background-color: <?= $tuttiInfo['color'] ?>;">投稿者</th>
+                            <th class="p-3 w-75" style="background-color: <?= $tuttiInfo['color'] ?>;">投稿内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($commentInfos as $commentInfo): ?>
+                        <tr>
+                            <td class="p-3 w-25">
+                                <?= $commentInfo['name'] ?>
+                            </td>
+                            <td class="p-3 w-75">
+                                <?= $commentInfo['content'] ?><br>
+                                <small><?= $commentInfo['created_at'] ?></small>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <p class="text-center">コメントを投稿する</p>
+                <form action="commentPost.php" method="POST" enctype="multipart/form-data" class="text-center">
+                    <input type="text" name="name" class="ps-1 w-75" placeholder="投稿者">
+                    <textarea type="text" name="content" class="p-1 w-75" placeholder="投稿内容"></textarea><br>
+                    <input type="hidden" name="tid" value="<?= $tuttiInfo['id'] ?>">
+                    <button type="submit" class="btn btn-dark w-30">投稿</button>
+                </form>
             </div>
         </section>
     </div>
