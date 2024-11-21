@@ -46,10 +46,9 @@ global $groupInfos, $tuttiInfos;
         <div class="icon-spacing">
             <?php foreach ($tuttiInfos as $tuttiInfo): ?>
                 <i class="<?= $tuttiInfo['icon'] ?> fa-2x"></i>
-            <?php endforeach ?>
+            <?php endforeach; ?>
         </div>
     </div>
-
     <div class="row">
         <?php foreach ($groupInfos as $groupInfo): ?>
             <div class="col-md-3 mb-2">
@@ -57,7 +56,6 @@ global $groupInfos, $tuttiInfos;
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-title">
                             <div>
-                                <!-- ボタンの色を動的に設定 -->
                                 <button type="button" class="btn btn-sm"
                                     style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
                                     <?= $groupInfo['tutti_name'] ?>
@@ -75,12 +73,12 @@ global $groupInfos, $tuttiInfos;
                             <?= $groupInfo['date'] ?>
                             <?=
                                 empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
-                                ? "時間未定"
-                                :
-                                (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
-                                . "~"
-                                . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
-                                ?>
+                                    ? "時間未定"
+                                    :
+                                        (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
+                                        . "~"
+                                        . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
+                            ?>
                         </li>
                         <li class="list-group-item d-flex justify-content-end">
                             <i class="fa fa-users"></i><?= $groupInfo['num_people'] ?>人
@@ -93,7 +91,7 @@ global $groupInfos, $tuttiInfos;
                     </ul>
                 </div>
             </div>
-        <?php endforeach ?>
+        <?php endforeach; ?>
     </div>
     <div class="text-center mt-3">
         <a href="groupList.php" class="btn view-more-btn"><span>View more</span></a>

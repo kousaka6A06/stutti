@@ -104,7 +104,7 @@ global $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
             </table>
             <p class="text-center">メッセージを投稿する</p>
             <form action="messagePost.php" method="POST" enctype="multipart/form-data" class="text-center">
-                <textarea type="text" name="content" class="p-3 w-75"></textarea>
+                <textarea type="text" name="content" class="p-1 w-75" placeholder="投稿内容"></textarea>
                 <input type="hidden" name="gid" value="<?= $groupId ?>">
                 <button type="submit" class="btn btn-dark w-30 d-block mx-auto">投稿</button>
             </form>
