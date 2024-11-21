@@ -1,10 +1,4 @@
 /*//////// グローバルなスタイル ////////*/
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-}
-
 body {
     font-family: 'Nunito', sans-serif;
 }
@@ -19,18 +13,16 @@ body {
     z-index: -1; /* 背景として配置 */
 }
 
-.container-md {
-    margin-top: 7%;
-    max-width: 60%; /* デフォルトより少し小さく */
+main {
+    margin-top: 8rem;
 }
-
 /* 
 h2:first-letter {
     font-size: 150%;
     color: #eb6100;
   }
    */
-
+/* 見出し */
 .heading07 {
     position: relative;
     padding-top: 50px;
@@ -59,6 +51,29 @@ h2:first-letter {
 	font-style: italic;
 }
 
+.login .heading07 {
+    padding-left: 0;
+}
+
+.login .heading07::before {
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+}
+
+.group-list .heading07 {
+    padding-left: 0;
+}
+
+.group-list .heading07::before {
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+}
+/* h1 {
+    font-family: "Yusei Magic", serif;
+    font-weight: 400;
+    font-style: normal;
+} */
+
 h3 {
     font-size: 16px;
 }
@@ -81,13 +96,7 @@ p {
     border: none; /* 各リストアイテムのボーダーを非表示に */
 }
 
-/* 最後のアイテムにマージンを追加する場合 */
-.list-group-item:last-child {
-    border-bottom: 1px solid #ddd; /* 最後のアイテムだけボーダーをつける場合 */
-}
-
-/* ボタン */
-/* //////ヘッダーボタン///// */
+/* //////ボタン///// */
 .h-btm {
     position: relative;
 }
@@ -108,7 +117,8 @@ p {
 .h-btm:hover::after {
     transform: scale(1, 1)
 }
-/* //////view moreボタン///// */
+
+/* view moreボタン */
 .view-more-btn {
     color: #fff;
     display: inline-block;
@@ -151,24 +161,28 @@ p {
 /*//////// ヘッダー ////////*/
 .fixed-header {
     position: fixed;
-    top: 3%;
+    top: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 50%;
+    width: 55%;
     background-color: #92b29b;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 0px 10px;
     box-sizing: border-box;
 }
-.navbar-brand:hover {
-    color: #fff;
-}
+
+/* 通常の状態 */
 .navbar-brand {
-    color: white;
+    color: #fff !important; /* デフォルトの色 */
     font-weight: bold;
     font-size: 1.5rem;
 }
+
+/* ホバー時 クリック時 (フォーカス時)
+.navbar-brand:hover, .navbar-brand:active, .navbar-brand:active {
+    color: #fff;
+} */
 
 .navbar-nav .nav-item .btn {
     border: none;
@@ -185,13 +199,17 @@ p {
     color: white;
 }
 
-/*//////// メイン ////////*/
+/*//////// トップぺージ ////////*/
+.study-group, .tutti-list {
+    max-width: 80%;
+    margin-top: 10rem;
+}
 
 /* ホワイトボード */
 .board-3YD0c {
+    max-width: 85%;
     margin: auto;
     position: relative;
-    width: 95%
 }
 
 /* 消しゴム */
@@ -209,7 +227,7 @@ p {
     width: 100px;
     z-index: 1;
 }
-/* //////マーカー///// */
+/* マーカー */
 .board-3YD0c .marker1 {
     background-image: url('../img/marker1.png');
     background-position: 50%;
@@ -252,7 +270,6 @@ p {
     width: 90px; /* 幅を適宜調整 */
     z-index: 1;
 }
-/* //////マグネット///// */
 /* マグネット */
 .board-3YD0c .magnet1 {
     background-image: url('../img/mag1.png');
@@ -311,7 +328,7 @@ p {
     position: absolute;
     top: calc(100% - 2px);
     left: 50%;
-    width: 81%;
+    width: 93%;
     transform: translateX(-50%);
 }
 
@@ -323,7 +340,7 @@ p {
     margin: 0 auto;
     padding: 2em 3em 3em;
     position: relative;
-    width: 80%;
+    width: 90%;
 }
 
 /* スクロールバー */
@@ -443,10 +460,6 @@ p {
 }
 
 /*//////// 勉強会一覧 ////////*/
-.group-list {
-    margin-top: 7%;
-}
-
 .tilt-card {
     transform: rotate(7deg); /* 初期の傾き */
     transform-origin: bottom right; /* 右下を軸にする */
@@ -472,7 +485,11 @@ p {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(200, 200, 200, 0.5));
 }
 
-/*//////// マイページテーブル ////////*/
+/*//////// マイページ ////////*/
+.mypage, .mk-studygroup, .edit-studygroup {
+    max-width: 80%;
+}
+
 .maintable {
     border-spacing: 0;
     border-collapse: separate;
@@ -545,7 +562,6 @@ p {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 2rem;
 }
 
 .tutti-intro {

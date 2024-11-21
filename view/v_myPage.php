@@ -2,9 +2,9 @@
 global $userInfo, $ownerGroupInfos, $memberGroupInfos;
 ?>
 
-<section class="container-md">
+<section class="mypage mx-auto">
     <h1 class="text-center">マイページ</h1>
-    <h2 class="my-3">ユーザー情報</h2>
+    <h2 class="my-3 heading07" data-en="User">ユーザー情報</h2>
     <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
         <div class="col-6 mx-auto my-2">
             <img class="w-100" src="<?= DIR_AVATAR ?><?= $userInfo['avatar'] ?>" alt="">
@@ -35,8 +35,8 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
         </div>
     </div>
 </section>
-<section class="container-md mb-5">
-    <h2 class="my-3">作成した勉強会</h2>
+<section class="mk-studygroup mx-auto">
+    <h2 class="my-3 heading07" data-en="Study Groups">作成した勉強会</h2>
     <div class="row my-3">
         <?php foreach ($ownerGroupInfos as $group): ?>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
@@ -60,12 +60,12 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
                             <?= $group['date'] ?>
                             <?=
                                 empty($group['start_time']) && empty($group['end_time'])
-                                    ? "時間未定"
-                                    :
-                                        (empty($group['start_time']) ? "未定" : $group['start_time'])
-                                        . "~"
-                                        . (empty($group['end_time']) ? "未定" : $group['end_time'])
-                            ?>
+                                ? "時間未定"
+                                :
+                                (empty($group['start_time']) ? "未定" : $group['start_time'])
+                                . "~"
+                                . (empty($group['end_time']) ? "未定" : $group['end_time'])
+                                ?>
                         </li>
                         <li class="list-group-item d-flex justify-content-end"><?= $group['num_people'] ?>人</li>
                         <li class="list-group-item d-flex justify-content-end">
@@ -77,8 +77,8 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
         <?php endforeach; ?>
     </div>
 </section>
-<section class="container-md mb-5">
-    <h2 class="my-3">参加中の勉強会</h2>
+<section class="edit-studygroup mx-auto mb-5">
+    <h2 class="my-3 heading07" data-en="Study Groups">参加中の勉強会</h2>
     <div class="row my-3">
         <?php foreach ($memberGroupInfos as $group): ?>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
@@ -102,12 +102,12 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
                             <?= $group['date'] ?>
                             <?=
                                 empty($group['start_time']) && empty($group['end_time'])
-                                    ? "時間未定"
-                                    :
-                                        (empty($group['start_time']) ? "未定" : $group['start_time'])
-                                        . "~"
-                                        . (empty($group['end_time']) ? "未定" : $group['end_time'])
-                            ?>
+                                ? "時間未定"
+                                :
+                                (empty($group['start_time']) ? "未定" : $group['start_time'])
+                                . "~"
+                                . (empty($group['end_time']) ? "未定" : $group['end_time'])
+                                ?>
                         </li>
                         <li class="list-group-item d-flex justify-content-end"><?= $group['num_people'] ?>人</li>
                         <li class="list-group-item d-flex justify-content-end">

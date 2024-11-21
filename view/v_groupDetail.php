@@ -4,9 +4,8 @@ global $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
 ?>
 </pre>
 
-<h1 class="text-center">勉強会詳細</h1>
-<section class="container-md mb-5">
-    <h2 class="my-3">勉強会情報</h2>
+<section class="mb-5">
+    <h2 class="my-3 heading07" data-en="Study Info">勉強会情報</h2>
     <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
         <table class="maintable w-100 mb-5">
             <tbody>
@@ -79,8 +78,8 @@ global $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
     </div>
 </section>
 <?php if ($userStatus === GROUP_MEMBER || $userStatus === GROUP_OWNER): ?>
-    <section class="container-md mb-5">
-        <h2 class="my-3">メッセージ</h2>
+    <section class=" mb-5">
+        <h2 class="my-3 heading07" data-en="Message">メッセージ</h2>
         <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
             <table class="maintable w-100 mb-5">
                 <thead>
