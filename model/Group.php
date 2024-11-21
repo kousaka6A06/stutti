@@ -118,7 +118,7 @@ class Group {
     }
 
     // 〇トップページ表示用
-    // 無作為に勉強会の表示を最新「5件」返却
+    // 無作為に勉強会の表示を最新「8件」を返却
     // 降順
     // index.php
     function getNewGroups() {
@@ -129,7 +129,7 @@ class Group {
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
                 WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} 
-                ORDER BY `groups`.`id` DESC LIMIT 5";
+                ORDER BY `groups`.`id` DESC LIMIT 8";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -137,7 +137,9 @@ class Group {
     }
 
     // 〇勉強会一覧表示用
-    // 勉強会を tutti 毎に最新「5件」 tuttiId をキーにして、Groupの配列を値に持たせる。
+    // tuttiId をキーにして 勉強会を tutti 毎に「全件」返却
+    // m_tutti と join して、id name color icon を groups と同列の連想配列として併せて戻す
+    // 降順
     // groupList.php
     function getAllTuttiGroups() {
         $now = date('Y-m-d');
@@ -151,7 +153,7 @@ class Group {
                         `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`
                         FROM `groups` 
                         JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
-                        WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC LIMIT 5";
+                        WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
                 $stmt = $this->conn->prepare($query);
                 $stmt->execute();
                 $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
