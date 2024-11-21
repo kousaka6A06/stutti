@@ -49,7 +49,8 @@ global $groupInfos, $tuttiInfos;
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="row">
+
+    <div class="row mt-4">
         <?php foreach ($groupInfos as $groupInfo): ?>
             <div class="col-md-3 mb-2">
                 <div class="card">

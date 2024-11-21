@@ -16,6 +16,7 @@ body {
 main {
     margin-top: 8rem;
 }
+
 /* 
 h2:first-letter {
     font-size: 150%;
@@ -170,6 +171,13 @@ p {
     z-index: 1000;
     padding: 0px 10px;
     box-sizing: border-box;
+}
+/* バーガー */
+.navbar-toggler {
+    border: none;
+}
+.navbar-toggler-icon {
+    background-color: #fff; /* ハンバーガーアイコンの色を白に */
 }
 
 /* 通常の状態 */
@@ -392,7 +400,7 @@ p {
 /*/////// Tuttiカードのスタイル ///////*/
 .tutti-row {
     max-width: 90%;
-    margin: 5% 0;
+    margin: 3.5rem 0;
 }
 
 .tutti-card {
@@ -550,12 +558,12 @@ p {
 }
 
 /*//////// フッターのスタイル ////////*/
+footer img {
+    object-fit: cover; /* 画像の比率を維持しながらトリミング */
+    height: 200px; /* 必要に応じて高さを調整 */
+  }
 
-
-
-
-
-/*//////// tutti詳細セクションのスタイル ////////*/
+  /*//////// tutti詳細セクションのスタイル ////////*/
 
 .tutti-section {
     position: relative;
