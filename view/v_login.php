@@ -1,5 +1,5 @@
-<section class="container-md">
-    <h1 class="text-center">ログイン</h1>
+<section class="login">
+    <h2 class="text-center heading07" data-en="Log In">ログイン</h2>
     <p class="fs-10 text-muted text-center">ユーザー登録は
         <a href="userRegister.php" class="text-info fw-bold">こちら</a>
     </p>

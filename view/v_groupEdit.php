@@ -2,10 +2,9 @@
 global $groupId, $groupInfo, $tuttiInfos;
 ?>
 
-<section class="container-md">
-    <h1 class="text-center"><?= isset($groupId) ? "勉強会編集" : "勉強会作成" ?></h1>
+<section class="">
     <form action="groupEdit.php<?= isset($groupId) ? "?gid=" . $groupId : "" ?>" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow mx-auto"
-        style="max-width: 700px">
+        style="max-width: 650px">
         <div class="mb-4">
             <label for="name" class="form-label">勉強会名を入力</label>
             <small style="font-size: 10px; color: red;">*必須</small>

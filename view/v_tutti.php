@@ -10,7 +10,7 @@
     <div class="tutti-sections">
         <!-- セクション1 -->
         <section class="tutti-section" data-background="News">
-            <div class="container-md tutti-news">
+            <div class=" tutti-news">
                 <ul class="list-group">
                     <li class="list-group-item tutti-content-item">勉強会「PHP入門」開催決定！日程は11月25日。</li>
                     <li class="list-group-item tutti-content-item">新しいカテゴリー「React」を追加しました。</li>
@@ -21,7 +21,7 @@
 
         <!-- セクション2 -->
         <section class="tutti-section" data-background="Study Group">
-            <div class="container-md tutti-groups">
+            <div class=" tutti-groups">
                 <div class="row">
                     <?php foreach ($cards as $card) { ?>
                         <div class="col-md-3 mb-2">
@@ -62,7 +62,7 @@
 
         <!-- セクション3 -->
         <section class="tutti-section" data-background="Message">
-            <div class="container-md tutti-message">
+            <div class=" tutti-message">
                 <p class="lead tutti-content-item">TUTTIは、学びたい全ての人に平等な学習の機会を提供します。</p>
                 <p class="tutti-content-item">勉強会を通じて、新しいスキルを習得し、仲間とつながる場を提供することを目指しています。</p>
             </div>

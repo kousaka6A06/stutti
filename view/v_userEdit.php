@@ -2,7 +2,7 @@
 global $userInfo;
 ?>
 
-<section class="container-md">
+<section class="">
     <h1 class="text-center">ユーザー編集</h1>
     <div class="col-4 mx-auto my-2">
         <img class="w-100" src="<?= DIR_AVATAR ?><?= $userInfo['avatar'] ?>" alt="">

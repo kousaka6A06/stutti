@@ -1,12 +1,6 @@
-<?php
-$images = [
-    "footer1.png",
-    "footer3.png",
-    "footer2.png",
-    "footer4.png",
-    "footer5.png",
-    "footer7.png"
-];
+<?php 
+
+$images = ["footer1.png", "footer3.png", "footer2.png", "footer4.png", "footer5.png", "footer7.png"];
 
 $cards = [
     ['id' => '1', 'title' => 'AWS', 'color' => '#FF9800'],
@@ -50,9 +44,11 @@ $cards = [
     <header class="header rounded-header fixed-header">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
-                <a class="navbar-brand" href="index.php">
-                    STUTTI
-                </a>
+                <h1>
+                    <a class="navbar-brand" href="index.php">
+                        STUTTI
+                    </a>
+                </h1>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <?php if (isset($_SESSION['userId'])): ?>
@@ -81,9 +77,9 @@ $cards = [
 
 
     <!-- メイン -->
-    <main class="flex-grow-1">
+    <main class="container-xl flex-grow-1">
         <?php if (isset($_SESSION['message'])): ?>
-            <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 container-md"
+            <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 mx-auto"
                 style="max-width: 700px">
                 <?= $_SESSION['message'] ?>
             </p>

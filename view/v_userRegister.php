@@ -2,31 +2,33 @@
 global $userInfo;
 ?>
 
-<section class="container-md">
-    <h1 class="text-center">ユーザー登録</h1>
+<section class="">
     <form action="userRegister.php" method="POST" enctype="multipart/form-data"
         class="bg-light p-4 rounded shadow mx-auto" style="max-width: 700px">
         <div class="mb-4">
-          <label for="name" class="form-label">ユーザー名を入力</label>
-          <small style="font-size: 10px; color: red;">*必須</small>
-          <input type="text" id="name" name="name" class="form-control" value="<?= isset($userInfo) ? $userInfo['name'] : "" ?>" required>
+            <label for="name" class="form-label">ユーザー名を入力</label>
+            <small style="font-size: 10px; color: red;">*必須</small>
+            <input type="text" id="name" name="name" class="form-control"
+                value="<?= isset($userInfo) ? $userInfo['name'] : "" ?>" required>
         </div>
         <div class="mb-4">
             <label for="mail-address" class="form-label">メールアドレスを入力</label>
             <small style="font-size: 10px; color: red;">*必須</small>
             <input type="email" id="mail-address" name="mail-address" class="form-control"
-                placeholder="example@mail.com" value="<?= isset($userInfo) ? $userInfo['mail_address'] : "" ?>" required>
+                placeholder="example@mail.com" value="<?= isset($userInfo) ? $userInfo['mail_address'] : "" ?>"
+                required>
         </div>
         <div class="mb-4">
-          <label for="avatar" class="form-label">プロフィール画像をアップロードできます</label>
+            <label for="avatar" class="form-label">プロフィール画像をアップロードできます</label>
             <input type="hidden" name="max_file_size" value="1000000">
             <input type="file" id="avatar" name="avatar" class="form-control">
         </div>
         <div class="mb-4">
-          <label for="stutti-id" class="form-label">Stutti IDを入力</label>
-          <small style="font-size: 10px; color: red;">*必須</small>
-          <small>ログイン時に必要になります</small>
-          <input type="text" id="stutti-id" name="stutti-id" class="form-control" value="<?= isset($userInfo) ? $userInfo['stutti_id'] : "" ?>" required>
+            <label for="stutti-id" class="form-label">Stutti IDを入力</label>
+            <small style="font-size: 10px; color: red;">*必須</small>
+            <small>ログイン時に必要になります</small>
+            <input type="text" id="stutti-id" name="stutti-id" class="form-control"
+                value="<?= isset($userInfo) ? $userInfo['stutti_id'] : "" ?>" required>
         </div>
         <div class="mb-4">
             <label for="password" class="form-label">ログインパスワードを入力</label>
@@ -97,7 +99,7 @@ global $userInfo;
             </div>
         </div>
         <div class="form-check mb-4">
-            <input type="checkbox" id="agree" name="agree" class="form-check-input"<?= isset($userInfo) ? " checked" : "" ?> required>
+            <input type="checkbox" id="agree" name="agree" class="form-check-input" <?= isset($userInfo) ? " checked" : "" ?> required>
             <label for="agree" class="form-check-label">利用規約・プライバシーポリシーに同意する</label>
         </div>
         <button type="submit" id="submit" class="btn btn-dark w-30 d-block mx-auto">登録する</button>
