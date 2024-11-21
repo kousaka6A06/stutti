@@ -1,3 +1,7 @@
+<?php
+global $groupInfos, $tuttiInfos;
+?>
+
 <div class="container-md">
     <div class="board-3YD0c">
         <!-- マーカー -->
@@ -43,21 +47,14 @@
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="heading07" data-en="Study">募集中の勉強会</h2>
             <div class="icon-spacing">
-                <i class="fa-brands fa-aws fa-2x"></i>
-                <i class="fa-brands fa-linux fa-2x"></i>
-                <i class="fa-brands fa-php fa-2x"></i>
-                <i class="fa-brands fa-java fa-2x"></i>
-                <i class="fa-brands fa-python fa-2x"></i>
-                <i class="fa-solid fa-file-code fa-2x"></i>
-                <i class="fa-solid fa-database fa-2x"></i>
-                <i class="fa-solid fa-calculator fa-2x"></i>
-                <i class="fa-brands fa-etsy fa-2x"></i>
-                <i class="fa-solid fa-laptop-code fa-2x"></i>
+                <?php foreach ($tuttiInfos as $tuttiInfo): ?>
+                    <i class="<?= $tuttiInfo['icon'] ?> fa-2x"></i>
+                <?php endforeach ?>
             </div>
         </div>
 
         <div class="row">
-            <?php foreach ($cards as $card) { ?>
+            <?php foreach ($groupInfos as $groupInfo): ?>
                 <div class="col-md-3 mb-2">
                     <div class="card">
                         <ul class="list-group list-group-flush">
@@ -65,32 +62,41 @@
                                 <div>
                                     <!-- ボタンの色を動的に設定 -->
                                     <button type="button" class="btn btn-sm"
-                                        style="background-color: <?= $card['color']; ?>; color: white;">
-                                        <?= $card['title']; ?>
+                                        style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
+                                        <?= $groupInfo['tutti_name'] ?>
                                     </button>
                                 </div>
                             </li>
                         </ul>
                         <div class="card-body">
-                            <h3 class="card-title">「勉強会タイトル」</h3>
-                            <p class="card-text">「勉強内容」例：AWSを活用したインフラ設計について議論しましょう。</p>
+                            <h3 class="card-title"><?= $groupInfo['name'] ?></h3>
+                            <p class="card-text"><?= $groupInfo['content'] ?></p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-end">
-                                <i class="fa fa-calendar"></i> 「日時」
+                                <i class="fa fa-calendar"></i>
+                                <?= $groupInfo['date'] ?>
+                                <?=
+                                    empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
+                                        ? "時間未定"
+                                        :
+                                            (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
+                                            . "~"
+                                            . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
+                                ?>
                             </li>
                             <li class="list-group-item d-flex justify-content-end">
-                                <i class="fa fa-users"></i> 「参加人数」
+                                <i class="fa fa-users"></i><?= $groupInfo['num_people'] ?>人
                             </li>
                             <li class="list-group-item d-flex justify-content-end">
-                                <a href="groupDetail.php?gid=<?= $card['id']; ?>" class="btn btn-secondary btn-sm">
+                                <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">
                                     <i class="fa fa-arrow-right"></i>詳しく見る
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            <?php } ?>
+            <?php endforeach ?>
         </div>
         <div class="text-center mt-3">
             <a href="groupList.php" class="btn view-more-btn"><span>View more</span></a>
@@ -102,13 +108,13 @@
 <div class="container-md">
     <h2 class="heading07" data-en="community">TUTTI広場</h2>
     <div class="row d-flex justify-content-evenly tutti-row">
-        <?php foreach ($cards as $card): ?>
+        <?php foreach ($tuttiInfos as $tuttiInfo): ?>
             <div class="col-1">
-                <a href="tutti.php?tid=<?= $card['id']; ?>" style="text-decoration: none;">
+                <a href="tutti.php?tid=<?= $tuttiInfo['id'] ?>" style="text-decoration: none;">
                     <div class="card tutti-card p-0 shadow"
-                        style="height: 250px; background-color: <?= $card['color']; ?>; color: #586365; flex-direction: row;">
+                        style="height: 250px; background-color: <?= $tuttiInfo['color'] ?>; color: #586365; flex-direction: row;">
                         <div class="husen">
-                            <h3 class="card-title vertical-text"><?= $card['title']; ?></h3>
+                            <h3 class="card-title vertical-text"><?= $tuttiInfo['name'] ?></h3>
                         </div>
                         <div class="lines">
                             <div class="line line-1"></div>
