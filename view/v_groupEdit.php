@@ -49,7 +49,7 @@ global $groupId, $groupInfo, $tuttiInfos;
             <small style="font-size: 10px; color: red;">*必須</small><br>
             <textarea name="content" id="content" class="form-control p-3 w-100" rows="10" required><?= isset($groupInfo) ? $groupInfo['content'] : "" ?></textarea>
         </div>
-        <button id="submit" type="submit" class="btn btn-dark w-30 d-block mx-auto"><?= isset($groupInfo) ? "編集する" : "作成する" ?></button>
+        <button id="submit" type="submit" class="btn btn-dark w-30 d-block mx-auto"><?= isset($groupId) ? "編集する" : "作成する" ?></button>
     </form>
 </section>
 <script>
