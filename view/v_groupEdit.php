@@ -26,6 +26,7 @@ global $groupId, $groupInfo, $tuttiInfos;
             <input type="date" id="date" name="date" class="form-control d-table-cell" value="<?= isset($groupInfo) ? $groupInfo['date'] : "" ?>" required>
         </div>
         <div class="mb-4">
+            <p id="is-time" style="color:red;"></p>
             <label for="start-time" class="form-label">開始時刻</label>
             <input type="time" name="start-time" id="start-time" class="form-control d-table-cell" value="<?= isset($groupInfo) ? $groupInfo['start_time'] : "" ?>">
         </div>
@@ -41,13 +42,71 @@ global $groupId, $groupInfo, $tuttiInfos;
         <div class="mb-4">
             <label for="num-people" class="form-label">参加人数</label>
             <small style="font-size: 10px; color: red;">*必須</small>
-            <input type="number" name="num-people" id="num-people" class="form-control w-25" value="<?= isset($groupInfo) ? $groupInfo['num_people'] : "" ?>" required>
+            <input type="number" name="num-people" id="num-people" class="form-control w-25" max="999" min="2" value="<?= isset($groupInfo) ? $groupInfo['num_people'] : "2" ?>" required>
         </div>
         <div class="mb-4">
             <label for="content" class="form-label">勉強内容</label>
             <small style="font-size: 10px; color: red;">*必須</small><br>
             <textarea name="content" id="content" class="form-control p-3 w-100" rows="10" required><?= isset($groupInfo) ? $groupInfo['content'] : "" ?></textarea>
         </div>
-        <button type="submit" class="btn btn-dark w-30 d-block mx-auto"><?= isset($groupInfo) ? "編集する" : "作成する" ?></button>
+        <button id="submit" type="submit" class="btn btn-dark w-30 d-block mx-auto"><?= isset($groupInfo) ? "編集する" : "作成する" ?></button>
     </form>
 </section>
+<script>
+    const now = new Date();
+    let today = now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate();
+    let startTime = document.getElementById('start-time').value;
+    let endTime =document.getElementById('end-time').value;
+    let isRight = true;
+    
+    let date = document.getElementById('date');
+    date.setAttribute('min', today);
+    
+    document.getElementById('start-time').addEventListener('change', function(event) {
+        startTime = document.getElementById('start-time').value;
+        if(startTime && endTime) {
+            endTime = document.getElementById('end-time').value;
+            satrtTimeFull = new Date(today + "T" +startTime + ":00");
+            endTimeFull = new Date(today + "T" +endTime + ":00");
+            if(satrtTimeFull < endTimeFull) {
+                isRight = true;
+                document.getElementById('is-time').innerHTML = '';
+            } else {
+                isRight = false;
+                console.log(isRight);
+                document.getElementById('is-time').innerHTML = '終了時刻は開始時刻より未来の日付を設定してください。';
+            }
+        } else if(!startTime) {
+            isRight = true;
+            document.getElementById('is-time').innerHTML = '';
+        }
+    });
+    document.getElementById('end-time').addEventListener('change', function(event) {
+        endTime =document.getElementById('end-time').value;
+        if(startTime && endTime) {
+           startTime = document.getElementById('start-time').value;
+           satrtTimeFull = new Date(today + "T" +startTime + ":00");
+           endTimeFull = new Date(today + "T" +endTime + ":00");
+           console.log(satrtTimeFull);
+           console.log(endTimeFull);
+           if(satrtTimeFull < endTimeFull) {
+                isRight = true;
+                document.getElementById('is-time').innerHTML = '';
+            } else {
+                isRight = false;
+                console.log(isRight);
+                document.getElementById('is-time').innerHTML = '終了時刻は開始時刻より未来の日付を設定してください。';
+            }
+        } else if(!endTime) {
+            isRight = true;
+            document.getElementById('is-time').innerHTML = '';
+        } 
+        
+    });
+    document.getElementById('submit').addEventListener('click', function(event) {
+        if(isRight === false) {
+            event.preventDefault();
+        }
+    });
+
+</script>
