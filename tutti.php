@@ -7,6 +7,12 @@ require_once 'model/News.php';
 require_once 'model/TuttiComment.php';
 require_once 'utils/Utils.php';
 
+// セッションが存在しない場合
+if (session_status() === PHP_SESSION_NONE) {
+    // セッションを開始する
+    session_start();
+}
+
 // 画面から渡された情報をサニタイズして変数に格納
 $tuttiId = isset($_GET['tid']) ? Utils::e($_GET['tid']) : null;
 
