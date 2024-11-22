@@ -41,11 +41,11 @@ global $groupInfos, $tuttiInfos;
 
 <!-- 募集中勉強会 -->
 <section class="study-group mx-auto">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-baseline">
         <h2 class="heading07" data-en="Study">募集中の勉強会</h2>
         <div class="icon-spacing">
             <?php foreach ($tuttiInfos as $tuttiInfo): ?>
-                <i class="<?= $tuttiInfo['icon'] ?> fa-2x"></i>
+                <i class="<?= $tuttiInfo['icon'] ?> fa-2x" style="color: <?= $tuttiInfo['color'] ?>"></i>
             <?php endforeach; ?>
         </div>
     </div>
@@ -55,47 +55,59 @@ global $groupInfos, $tuttiInfos;
             <div class="col-md-3 mb-2">
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-title">
+                        <li class="list-group-item list-title d-flex justify-content-start ps-0 pt-0">
                             <div>
-                                <button type="button" class="btn btn-sm"
+                                <a href="tutti.php?tid=<?= $groupInfo['tutti_id'] ?>" class="btn btn-sm align-middle"
                                     style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
-                                    <?= $groupInfo['tutti_name'] ?>
-                                </button>
+                                    <i class="<?= $groupInfo['tutti_icon'] ?>" style="color: white;"></i>
+                                    <span><?= $groupInfo['tutti_name'] ?></span>
+                                </a>
                             </div>
                         </li>
+                        <li class="list-group-item">
+                            <span class="d-flex justify-content-end align-items-baseline text-end">
+                                <i class="fa fa-users me-2"></i>
+                                <?= $groupInfo['num_people'] ?>人
+                            </span>
+                        </li>
                     </ul>
-                    <div class="card-body">
-                        <h3 class="card-title"><?= $groupInfo['name'] ?></h3>
-                        <p class="card-text txt-limit"><?= $groupInfo['content'] ?></p>
+                    <div class="card-body pt-1">
+                        <h3 class="card-title fw-semibold">
+                            <?= $groupInfo['name'] ?>
+                        </h3>
+                        <p class="card-text"><?= $groupInfo['content'] ?></p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-end">
-                            <i class="fa fa-calendar"></i>
-                            <?= $groupInfo['date'] ?>
-                            <?=
-                                empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
+                        <li class="list-group-item">
+                            <span class="d-flex justify-content-end align-items-baseline text-end">
+                                <i class="fa fa-calendar me-2"></i>
+                                <?= $groupInfo['date'] ?><br>
+                            </span>
+                            <span class="d-flex justify-content-end align-items-baseline text-end">
+                                <i class="fa-regular fa-clock me-1"></i>
+                                <?=
+                                    empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
                                     ? "時間未定"
                                     :
-                                        (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
-                                        . "~"
-                                        . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
-                            ?>
+                                    (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
+                                    . "~"
+                                    . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
+                                    ?>
+                            </span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-end">
-                            <i class="fa fa-users"></i><?= $groupInfo['num_people'] ?>人
-                        </li>
-                        <li class="list-group-item d-flex justify-content-end">
+                       
+                        <!-- <li class="list-group-item d-flex justify-content-end">
                             <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">
-                                <i class="fa fa-arrow-right"></i>詳しく見る
+                                <i class="fa fa-arrow-right"></i>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
     <div class="text-center mt-3">
-        <a href="groupList.php" class="btn view-more-btn"><span>View more</span></a>
+        <a href="groupList.php" class="btn view-more-btn"><span>勉強会一覧</span></a>
     </div>
 </section>
 
