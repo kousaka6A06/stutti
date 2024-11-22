@@ -208,9 +208,10 @@ class Group {
                 `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
-                WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?)";
+                WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?) AND NOT `groups`.`created_by_id` = ? ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
+        $stmt->bindValue(2,$userId,PDO::PARAM_INT);
         $stmt->execute();
         $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $ary;
