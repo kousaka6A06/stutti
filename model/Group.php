@@ -153,7 +153,7 @@ class Group {
                         `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`
                         FROM `groups` 
                         JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
-                        WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
+                        WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= '{$now}' ORDER BY `groups`.`id` DESC";
                 $stmt = $this->conn->prepare($query);
                 $stmt->execute();
                 $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -185,7 +185,7 @@ class Group {
                 `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
-                WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` = ?";
+                WHERE `delete_flag` = 0 AND `groups`.`date` >= '{$now}' AND `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
         $stmt->execute();
@@ -208,7 +208,7 @@ class Group {
                 `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
-                WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?) AND NOT `groups`.`created_by_id` = ? ";
+                WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= '{$now}' AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?) AND NOT `groups`.`created_by_id` = ? ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
         $stmt->bindValue(2,$userId,PDO::PARAM_INT);
@@ -231,7 +231,7 @@ class Group {
                 `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
-                WHERE `delete_flag` = 0 AND `groups`.`date` >= {$now} AND `groups`.`created_by_id` = ?";
+                WHERE `delete_flag` = 0 AND `groups`.`date` >= '{$now}' AND `groups`.`created_by_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
         $stmt->execute();
@@ -253,7 +253,7 @@ class Group {
                 `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`,  `groups`.`tutti_id`, 
                 (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
                 FROM `groups` 
-                WHERE `groups`.`tutti_id` = ? AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} ORDER BY `groups`.`id` DESC";
+                WHERE `groups`.`tutti_id` = ? AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= '{$now}' ORDER BY `groups`.`id` DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $this->tuttiId, PDO::PARAM_INT);
         $stmt->execute();
