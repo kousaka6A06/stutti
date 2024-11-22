@@ -23,7 +23,7 @@
     <!-- ヘッダー -->
     <header class="header rounded-header fixed-header">
     <nav class="navbar navbar-expand-sm">
-        <div class="container">
+        <div class="container-md">
             <h1>
                 <a class="navbar-brand" href="index.php">
                     STUTTI
@@ -37,6 +37,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <?php if (isset($_SESSION['userId'])): ?>
+                        <li class="nav-item">
+                            <a class="btn mx-2 h-btm text-light" href="groupList.php">勉強会一覧</a>
+                        </li>
                         <li class="nav-item">
                             <a class="btn mx-2 h-btm text-light" href="groupEdit.php">勉強会を作る</a>
                         </li>

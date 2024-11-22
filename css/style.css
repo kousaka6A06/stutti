@@ -75,10 +75,6 @@ h2:first-letter {
     font-style: normal;
 } */
 
-h3 {
-    font-size: 16px;
-}
-
 p {
     font-size: 16px;
 }
@@ -123,7 +119,7 @@ p {
 .view-more-btn {
     color: #fff;
     display: inline-block;
-    width: 130px;
+    width: 100%;
     text-align: center;
     text-decoration: none;
     line-height: 35px;
@@ -175,7 +171,6 @@ p {
     top: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 55%;
     background-color: #92b29b;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -395,11 +390,15 @@ p {
 
 /*//////// 募集中の勉強会カードのスタイル ////////*/
 .card-title {
-    font-size: 1rem; /* フォントサイズを小さく */
+    font-size: 1rem;
 }
 
-.card-text {
+  .card-text {
     font-size: 0.875rem; /* 少し小さめ */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 
 .list-title h3 {
@@ -627,30 +626,42 @@ footer img {
 
 
 /*//////// メディアクエリ ////////*/
-@media (max-width: 768px) {
+/* 小型スマートフォン */
+@media (max-width: 479px) {
     body {
-        padding-top: 80px; /* スマホ用の余白 */
+        font-size: 12px;
     }
+}
 
-    .header {
-        width: 90%;
+/* 標準スマートフォン */
+@media (min-width: 480px) and (max-width: 767px) {
+    body {
         font-size: 14px;
     }
+    .fixed-header {
+        width: 85%;
+    }
+
     .board-inner {
         width: 100%;
     }
-    .board-3YD0c:after{
+
+    .board-3YD0c:after {
         width: 100%;
     }
+
     .board-3YD0c .magnet1 {
         right: 5%;
     }
+
     .board-3YD0c .magnet2 {
         right: 8%;
     }
+
     .board-3YD0c .magnet3 {
         right: 2%;
     }
+
     .tutti-row {
         display: flex;
         flex-direction: column;
@@ -658,20 +669,38 @@ footer img {
     }
 
     .tutti-card {
-        width: 100%; /* カード幅を画面いっぱいに */
+        width: 100%;
+        /* カード幅を画面いっぱいに */
         margin-bottom: 1rem;
     }
+}
 
-    h1, h2, h3 {
-        font-size: 1.2rem; /* テキストサイズ調整 */
+/* タブレット */
+@media (min-width: 768px) and (max-width: 1023px) {
+    body {
+        font-size: 16px;
     }
-
-    p {
-        font-size: 0.9rem;
+    .fixed-header {
+        width: 80%;
     }
+}
 
-    .view-more-btn {
-        width: 30%;
-        line-height: 30px;
+/* PC */
+@media (min-width: 1024px) {
+    body {
+        font-size: 18px;
+    }
+    .fixed-header {
+        width: 70%;
+    }
+}
+
+/* 大型画面（1600px以上） */
+@media (min-width: 1600px) {
+    body {
+        font-size: 20px;
+    }
+    .fixed-header {
+        width: 55%;
     }
 }
