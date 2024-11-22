@@ -78,17 +78,17 @@ class Group {
     // groupEdit.php
     function updateGroup() {
         $query = "UPDATE `groups` 
-                SET `groups`.`date` = ?, `groups`.`start_time` = ?, `groups`.`end_time` = ?, `groups`.`location` = ?, `groups`.`num_people` = ?, `groups`.`content` = ? 
+                SET `groups`.`name` = ?, `groups`.`date` = ?, `groups`.`start_time` = ?, `groups`.`end_time` = ?, `groups`.`location` = ?, `groups`.`num_people` = ?, `groups`.`content` = ? 
                 WHERE `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
-        
-        $stmt->bindValue(1, $this->date);
-        $stmt->bindValue(2, $this->startTime);
-        $stmt->bindValue(3, $this->endTime);
-        $stmt->bindValue(4, $this->location);
-        $stmt->bindValue(5, $this->numPeople);
-        $stmt->bindValue(6, $this->content);
-        $stmt->bindValue(7, $this->id); 
+        $stmt->bindValue(1, $this->name);
+        $stmt->bindValue(2, $this->date);
+        $stmt->bindValue(3, $this->startTime);
+        $stmt->bindValue(4, $this->endTime);
+        $stmt->bindValue(5, $this->location);
+        $stmt->bindValue(6, $this->numPeople);
+        $stmt->bindValue(7, $this->content);
+        $stmt->bindValue(8, $this->id); 
 
         try {
             return $stmt->execute();
