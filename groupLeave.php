@@ -44,17 +44,16 @@ if (!$belonging->isMemberOfGroup()) {
     exit;
 }
 
-// TODO:
 // 勉強会退会試行
 // 勉強会退会に成功した場合
-// if ($belonging->removeMember()) {
+if ($belonging->removeMember()) {
     // セッションにメッセージを保存して勉強会詳細画面に遷移
-    $_SESSION['message'] = '勉強会から退会しました（★実装中です★）';
+    $_SESSION['message'] = '勉強会から退会しました';
     header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
 
-// // 勉強会退会に失敗した場合
-// } else {
-//     // セッションにメッセージを保存してエラー画面に遷移
-//     $_SESSION['message'] = '勉強会のからの退会に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
-//     header('Location: ' . BASE_DOMAIN . '/error.php');
-// }
+// 勉強会退会に失敗した場合
+} else {
+    // セッションにメッセージを保存してエラー画面に遷移
+    $_SESSION['message'] = '勉強会のからの退会に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
+    header('Location: ' . BASE_DOMAIN . '/error.php');
+}
