@@ -111,9 +111,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
         // 勉強会登録試行
         // 勉強会登録に成功した場合
         if ($group->createGroup()) {
-            // セッションにメッセージを保存して勉強会詳細画面に遷移
-            $_SESSION['message'] = '勉強会を作成しました';
-            header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $group->getId());
+            // 勉強会参加者インスタンスを作成して画面から渡された情報をセット
+            $belonging = new Belonging();
+            $belonging->setGroupId($group->getId());
+            $belonging->setMemberId($userId);
+
+            // メンバー登録試行
+            // メンバー登録に成功した場合
+            if ($belonging->addMember()) {
+                // セッションにメッセージを保存して勉強会詳細画面に遷移
+                $_SESSION['message'] = '勉強会を作成しました';
+                header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $group->getId());
+
+            // メンバー登録に失敗した場合
+            } else {
+                // セッションにメッセージを保存してエラー画面に遷移
+                $_SESSION['message'] = '勉強会を作成しましたが、参加登録に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
+                header('Location: ' . BASE_DOMAIN . '/error.php');
+            }
 
         // 勉強会登録に失敗した場合
         } else {
