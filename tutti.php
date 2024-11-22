@@ -3,6 +3,7 @@
 require_once 'config/constants.php';
 require_once 'model/Group.php';
 require_once 'model/MTutti.php';
+require_once 'model/News.php';
 require_once 'model/TuttiComment.php';
 require_once 'utils/Utils.php';
 
@@ -35,5 +36,12 @@ $comment->setTuttiId($tuttiId);
 // tuttiコメント情報取得
 $commentInfos = $comment->getTuttiCommentsByTuttiId();
 
+// ニュースインスタンスを作成して画面から渡された情報をセット
+$news = new News();
+$news->setTuttiId($tuttiId);
+
+// ニュース情報取得
+$newsInfos = $news->getNewsByTuttiId();
+
 // tutti詳細画面を描画
-Utils::loadView('tutti詳細', 'view/v_tutti.php');
+Utils::loadView($tuttiInfo['name'] . ' - tutti詳細', 'view/v_tutti.php');
