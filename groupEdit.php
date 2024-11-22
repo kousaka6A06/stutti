@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config/constants.php';
+require_once 'model/Belonging.php';
 require_once 'model/Group.php';
 require_once 'model/MTutti.php';
 require_once 'model/User.php';

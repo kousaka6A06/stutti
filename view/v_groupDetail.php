@@ -68,7 +68,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                 <?php endif; ?>
             <?php endif; ?>
             <?php if ($userStatus === GROUP_MEMBER): ?>
-                <p class="text-danger">この勉強会に参加中です</p>
+                <a href="groupLeave.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">退会</a>
             <?php endif; ?>
             <?php if ($userStatus === GROUP_OWNER): ?>
                 <a href="groupEdit.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">編集</a>
