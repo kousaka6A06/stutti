@@ -28,7 +28,27 @@ class Belonging {
             return false;
         }
 
+
+
     }
+    // 勉強会メンバー削除用
+    //条件は＆＆でつなぐリムーブメンバー
+    public function removeMember():bool{
+
+        $query = "DELETE FROM `belonging` WHERE `belonging`.`group_id` = ? AND `belonging`.`member_id` = ? ";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $this->groupId);
+        $stmt->bindParam(2, $this->memberId);
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("removeMember Error:" . $e->getMessage());
+            return false;
+        }
+
+    }
+
 
 
     // ユーザーが勉強会メンバーかどうか確認用
