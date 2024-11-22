@@ -1,6 +1,6 @@
 <pre>
 <?php
-global $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
+global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
 ?>
 </pre>
 
@@ -95,8 +95,13 @@ global $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                             <?= $messageInfo['member_name'] ?>
                         </td>
                         <td class="p-3 w-75">
-                            <?= $messageInfo['content'] ?><br>
-                            <small><?= $messageInfo['created_at'] ?></small>
+                            <?= $messageInfo['content'] ?>
+                            <div class="d-flex justify-content-between mt-2">
+                                <small><?= $messageInfo['created_at'] ?></small>
+                                <?php if ($messageInfo['member_id'] === $userId): ?>
+                                    <a href="messageDelete.php?gid=<?= $groupInfo['id'] ?>&mid=<?= $messageInfo['id'] ?>" class="btn btn-secondary btn-sm ms-2">削除</a>
+                                <?php endif; ?>
+                            </div>
                         </td>
                     </tr>
                     <?php endforeach; ?>
