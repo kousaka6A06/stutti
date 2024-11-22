@@ -32,7 +32,7 @@ global $tuttiInfo, $groupInfos, $commentInfos;
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title"><?= $groupInfo['name'] ?></h3>
-                                    <p class="card-text"><?= $groupInfo['content'] ?></p>
+                                    <p class="card-text txt-limit"><?= $groupInfo['content'] ?></p>
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-end">

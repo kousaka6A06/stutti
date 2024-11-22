@@ -22,7 +22,7 @@ $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
                         <div class="card">
                             <div class="card-body" style="height: 100px;">
                                 <h3 class="card-title"><?= $group['name'] ?></h3>
-                                <p class="card-text"><?= $group['content'] ?></p>
+                                <p class="card-text txt-limit"><?= $group['content'] ?></p>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-end">

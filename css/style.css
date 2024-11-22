@@ -158,6 +158,16 @@ p {
     transition: transform 0.3s ease;
 }
 
+/*//////// カード文章の省略 ////////*/
+
+.txt-limit {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* 任意の行数を指定 */
+}
+
+
 /*//////// ヘッダー ////////*/
 .fixed-header {
     position: fixed;

@@ -53,7 +53,7 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
                     </ul>
                     <div class="card-body">
                         <h3 class="card-title"><?= $group['name'] ?></h3>
-                        <p class="card-text"><?= $group['content'] ?></p>
+                        <p class="card-text txt-limit"><?= $group['content'] ?></p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-end">
@@ -95,7 +95,7 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
                     </ul>
                     <div class="card-body">
                         <h3 class="card-title"><?= $group['name'] ?></h3>
-                        <p class="card-text"><?= $group['content'] ?></p>
+                        <p class="card-text txt-limit"><?= $group['content'] ?></p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-end">
