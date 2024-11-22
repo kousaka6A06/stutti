@@ -1,9 +1,9 @@
 <?php
-global $tuttiInfo, $groupInfos, $commentInfos;
+global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
 ?>
 
 <!-- 初期テキスト -->
-<div class="tutti-intro" id="tuttiIntro">AWSコミュニティ</div>
+<div class="tutti-intro" id="tuttiIntro"><?= $tuttiInfo['name'] ?>コミュニティ</div>
 
 <!-- コンテンツ全体をラップ -->
 <div class="tutti-hidden" id="tuttiContent">
@@ -15,11 +15,12 @@ global $tuttiInfo, $groupInfos, $commentInfos;
         <!-- セクション1 -->
         <section class="tutti-section" data-background="News">
             <div class="">
-                <ul class="list-group">
-                    <li class="list-group-item">勉強会「PHP入門」開催決定！日程は11月25日。</li>
-                    <li class="list-group-item">新しいカテゴリー「React」を追加しました。</li>
-                    <li class="list-group-item">TUTTIが正式リリースされました！</li>
-                </ul>
+                <dl class="list-group">
+                    <?php foreach ($newsInfos as $newsInfo) : ?>
+                        <dt class="list-group-item"><?= explode(' ', $newsInfo['created_at'])[0] ?></dt>
+                        <dd class="list-group-item"><a href="<?= $newsInfo['url'] ?>" class="text-dark"><?= $newsInfo['content'] ?></a></dd>
+                    <?php endforeach; ?>
+                </dl>
             </div>
         </section>
 
