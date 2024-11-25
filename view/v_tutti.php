@@ -90,7 +90,7 @@ global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
                 </table>
                 <p class="text-center">コメントを投稿する</p>
                 <form action="commentPost.php" method="POST" enctype="multipart/form-data" class="text-center">
-                    <input type="text" name="name" class="ps-1 w-75" maxlength="30" placeholder="投稿者（未入力の場合は「名無し」で投稿されます）">
+                    <input type="text" name="name" class="ps-1 w-75" maxlength="30" oninput="removeEmoji(this)" placeholder="投稿者（未入力の場合は「名無し」で投稿されます）">
                     <textarea type="text" name="content" class="p-1 w-75" maxlength="250" placeholder="投稿内容" required></textarea><br>
                     <input type="hidden" name="tid" value="<?= $tuttiInfo['id'] ?>">
                     <button type="submit" class="btn btn-dark w-30">投稿</button>
