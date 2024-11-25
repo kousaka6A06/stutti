@@ -81,32 +81,36 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
     <section class=" mb-5">
         <h2 class="my-3 heading07" data-en="Message">メッセージ</h2>
         <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
-            <table class="maintable w-100 mb-5">
-                <thead>
-                    <tr>
-                        <th class="p-3 w-25" style="background-color: <?= $groupInfo['tutti_color'] ?>;">投稿者</th>
-                        <th class="p-3 w-75" style="background-color: <?= $groupInfo['tutti_color'] ?>;">投稿内容</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($messageInfos as $messageInfo): ?>
-                    <tr>
-                        <td class="p-3 w-25">
-                            <?= $messageInfo['member_name'] ?>
-                        </td>
-                        <td class="p-3 w-75">
-                            <?= $messageInfo['content'] ?>
-                            <div class="d-flex justify-content-between mt-2">
-                                <small class="opacity-50"><?= $messageInfo['created_at'] ?></small>
-                                <?php if ($messageInfo['member_id'] === $userId): ?>
-                                    <a href="messageDelete.php?gid=<?= $groupInfo['id'] ?>&mid=<?= $messageInfo['id'] ?>" class="btn btn-secondary btn-sm ms-2">削除</a>
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+            <?php if (empty($messageInfos)): ?>
+                <p class="text-center py-3">まだメッセージは投稿されていません</p>
+            <?php else: ?> 
+                <table class="maintable w-100 mb-5">
+                    <thead>
+                        <tr>
+                            <th class="p-3 w-25" style="background-color: <?= $groupInfo['tutti_color'] ?>;">投稿者</th>
+                            <th class="p-3 w-75" style="background-color: <?= $groupInfo['tutti_color'] ?>;">投稿内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($messageInfos as $messageInfo): ?>
+                        <tr>
+                            <td class="p-3 w-25">
+                                <?= $messageInfo['member_name'] ?>
+                            </td>
+                            <td class="p-3 w-75">
+                                <?= $messageInfo['content'] ?>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <small class="opacity-50"><?= $messageInfo['created_at'] ?></small>
+                                    <?php if ($messageInfo['member_id'] === $userId): ?>
+                                        <a href="messageDelete.php?gid=<?= $groupInfo['id'] ?>&mid=<?= $messageInfo['id'] ?>" class="btn btn-secondary btn-sm ms-2">削除</a>
+                                    <?php endif; ?>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?> 
             <p class="text-center">メッセージを投稿する</p>
             <form action="messagePost.php" method="POST" enctype="multipart/form-data" class="text-center">
                 <textarea type="text" name="content" class="p-1 w-75" maxlength="250" oninput="removeEmoji(this)" placeholder="投稿内容" required></textarea>
