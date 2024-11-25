@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
     // 勉強会作成画面の場合
     if (!$groupId) {
         // バリデーション
-        if (!$group->isMatchTime() || !$group->isMatchStartEndTime()) {
+        if (!$group->isMatchDate() || !$group->isMatchStartEndTime()) {
             // 画面から渡された情報を次画面に引き継ぎ
             $groupInfo['name'] = $name;
             $groupInfo['date'] = $date;
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
 
             // セッションにメッセージを保存して勉強会作成画面を再描画
             $_SESSION['message'] = "";
-            if (!$group->isMatchTime()) {
+            if (!$group->isMatchDate()) {
                 $_SESSION['message'] .= '開催日に過去の日付が入力されています<br>';
             }
             if (!$group->isMatchStartEndTime()) {
@@ -140,22 +140,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !$groupId) {
 
     // 勉強会編集画面の場合
     } else {
+        // セッション情報をセット
+        $group->setId($groupId);
+
         // バリデーション
-        if (!$group->isMatchTime() || !$group->isMatchStartEndTime()) {
+        if (!$group->isMatchDate() || !$group->isMatchStartEndTime() || !$group->isMatchNumPeople()) {
             // セッションにメッセージを保存して勉強会編集画面に再遷移
             $_SESSION['message'] = "";
-            if (!$group->isMatchTime()) {
+            if (!$group->isMatchDate()) {
                 $_SESSION['message'] .= '開催日に過去の日付が入力されています<br>';
             }
             if (!$group->isMatchStartEndTime()) {
                 $_SESSION['message'] .= '終了時刻は開始時刻より後にしてください<br>';
             }
+            if (!$group->isMatchNumPeople()) {
+                $_SESSION['message'] .= '参加人数は現在参加中の人数より大きくしてください<br>';
+            }
             header('Location: ' . BASE_DOMAIN . '/groupEdit.php?gid=' . $groupId);
             exit;
         }
-
-        // セッション情報をセット
-        $group->setId($groupId);
 
         // 勉強会修正試行
         // 勉強会修正に成功した場合

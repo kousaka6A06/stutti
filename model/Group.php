@@ -23,7 +23,7 @@ class Group {
 
     // 開催日が未来の日付であるか確認する
     // 
-    public function isMatchTime() {
+    public function isMatchDate() {
         $now = date('Y-m-d');
         if($this->date < $now) {
             return false;
@@ -44,6 +44,19 @@ class Group {
         return true;
     }
 
+    // 参加人数が現在参加中の人数より大きいか確認する
+    public function isMatchNumPeople() {
+        $query = "SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(1, $this->id);
+        if ($stmt->execute()) {
+            $participants = $stmt->fetchColumn();
+            if ($this->numPeople >= $participants) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // 〇勉強会登録
     // groupEdit.php
@@ -125,7 +138,8 @@ class Group {
         $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
                 `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`, 
-                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
+                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`,
+                (SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = `groups`.`id`) AS `participants`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
                 WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} 
@@ -150,7 +164,8 @@ class Group {
         try {
             while($tutti = $q->fetch(PDO::FETCH_ASSOC)) {
                 $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
-                        `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`
+                        `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`,
+                        (SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = `groups`.`id`) AS `participants`
                         FROM `groups` 
                         JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
                         WHERE `tutti_id` = {$tutti['id']} AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= '{$now}' ORDER BY `groups`.`id` DESC";
@@ -182,7 +197,8 @@ class Group {
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
                 `groups`.`num_people`, `groups`.`content`, `groups`.`tutti_id`, `groups`.`created_at`, `groups`.`updated_at`, 
                 (SELECT `users`.`name` FROM`users` WHERE `users`.`id` = `groups`.`created_by_id`) AS `user_name`, 
-                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
+                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`,
+                (SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = `groups`.`id`) AS `participants`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
                 WHERE `delete_flag` = 0 AND `groups`.`date` >= '{$now}' AND `groups`.`id` = ?";
@@ -205,7 +221,8 @@ class Group {
         $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
                 `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`,
-                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
+                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`,
+                (SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = `groups`.`id`) AS `participants`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
                 WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= '{$now}' AND `groups`.`id` IN (SELECT `belonging`.`group_id` FROM `belonging` WHERE `belonging`.`member_id` = ?) AND NOT `groups`.`created_by_id` = ? ";
@@ -228,7 +245,8 @@ class Group {
         $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
                 `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`, `groups`.`tutti_id`,
-                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`
+                `m_tutti`.`name` AS `tutti_name`, `m_tutti`.`color` AS `tutti_color`, `m_tutti`.`icon` AS `tutti_icon`,
+                (SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = `groups`.`id`) AS `participants`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id`
                 WHERE `delete_flag` = 0 AND `groups`.`date` >= '{$now}' AND `groups`.`created_by_id` = ?";
@@ -251,7 +269,8 @@ class Group {
         $now = date('Y-m-d');
         $query = "SELECT `groups`.`id`, `groups`.`name`, `groups`.`date`, `groups`.`start_time`, `groups`.`end_time`, `groups`.`location`, 
                 `groups`.`num_people`, `groups`.`content`, `groups`.`created_by_id`,  `groups`.`tutti_id`, 
-                (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name` 
+                (SELECT `m_tutti`.`name` FROM `m_tutti` WHERE `m_tutti`.`id` = `groups`.`tutti_id`) AS `tutti_name`,
+                (SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = `groups`.`id`) AS `participants`
                 FROM `groups` 
                 WHERE `groups`.`tutti_id` = ? AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= '{$now}' ORDER BY `groups`.`id` DESC";
         $stmt = $this->conn->prepare($query);
