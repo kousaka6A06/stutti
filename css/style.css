@@ -237,6 +237,7 @@ p {
     width: 100px;
     z-index: 1;
 }
+
 /* マーカー */
 .white-board .marker1 {
     background-image: url('../img/marker1.png');
@@ -252,6 +253,7 @@ p {
     width: 90px; /* 幅を適宜調整 */
     z-index: 1;
 }
+
 .white-board .marker2 {
     background-image: url('../img/marker2.png');
     background-position: 50%;
@@ -266,6 +268,7 @@ p {
     width: 90px; /* 幅を適宜調整 */
     z-index: 1;
 }
+
 .white-board .marker3 {
     background-image: url('../img/marker3.png');
     background-position: 50%;
@@ -280,6 +283,7 @@ p {
     width: 90px; /* 幅を適宜調整 */
     z-index: 1;
 }
+
 /* マグネット */
 .white-board .magnet1 {
     background-image: url('../img/mag1.png');
@@ -296,6 +300,7 @@ p {
     width: 30px; /* 幅を適宜調整 */
     z-index: 1;
 }
+
 .white-board .magnet2 {
     background-image: url('../img/mag2.png');
     background-position: 50%;
@@ -311,6 +316,7 @@ p {
     width: 30px; /* 幅を適宜調整 */
     z-index: 1;
 }
+
 .white-board .magnet3 {
     background-image: url('../img/mag3.png');
     background-position: 50%;
@@ -326,7 +332,6 @@ p {
     width: 30px; /* 幅を適宜調整 */
     z-index: 1;
 }
-
 
 /* 細長い棒 */
 .white-board:after {
@@ -468,7 +473,6 @@ p {
     border-top: 1px solid #000;
 }
 
-
 .vertical-text {
     -ms-writing-mode: tb-rl; /* IE用 */
     writing-mode: vertical-rl; /* 左から右の縦書き */
@@ -500,6 +504,16 @@ p {
 /* グラデーション */
 .group-section {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(200, 200, 200, 0.5));
+}
+/*//////// 勉強会作成 ////////*/
+.group-edit .heading07 {
+    padding-left: 0;
+    padding-bottom: 10px;
+}
+
+.group-edit .heading07::before {
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
 }
 
 /*//////// マイページ ////////*/
@@ -566,14 +580,8 @@ p {
     border-bottom-right-radius: 5px;
 }
 
-/*//////// フッターのスタイル ////////*/
-footer img {
-    object-fit: cover; /* 画像の比率を維持しながらトリミング */
-    height: 200px; /* 必要に応じて高さを調整 */
-  }
 
-  /*//////// tutti詳細セクションのスタイル ////////*/
-
+/*//////// tutti詳細セクションのスタイル ////////*/
 .tutti-section {
     position: relative;
     min-height: 100vh;
@@ -590,6 +598,12 @@ footer img {
     color: rgba(139, 139, 139, 0.85);
     opacity: 0;
     animation: introFadeIn 1.5s ease forwards;
+}
+
+/*//////// フッターのスタイル ////////*/
+footer img {
+    object-fit: cover; /* 画像の比率を維持しながらトリミング */
+    height: 200px; /* 必要に応じて高さを調整 */
 }
 
 @keyframes introFadeIn {
@@ -627,7 +641,7 @@ footer img {
 
 /*//////// メディアクエリ ////////*/
 /* 375px 以上 500px 以下のスクリーンサイズ */
-@media (min-width: 375px) and (max-width: 767px) {
+@media (max-width: 767px) {
     /* ヘッダー */
     .navbar-brand {
         font-size: 20px;

@@ -3,7 +3,6 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
 ?>
 
 <section class="mypage mx-auto">
-    <h1 class="text-center">マイページ</h1>
     <h2 class="my-3 heading07" data-en="User">ユーザー情報</h2>
     <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
         <div class="col-6 mx-auto my-2">
