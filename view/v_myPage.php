@@ -40,38 +40,38 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
         <?php if (empty($ownerGroupInfos)): ?>
             <p class="text-center py-3">作成した勉強会は存在しません</p>
         <?php else: ?> 
-            <?php foreach ($ownerGroupInfos as $group): ?>
+            <?php foreach ($ownerGroupInfos as $groupInfo): ?>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
                     <div class="card">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item list-title">
                                 <div>
-                                    <a href="tutti.php?tid=<?= $group['tutti_id'] ?>" class="btn btn-sm"
-                                        style="background-color: <?= $group['tutti_color'] ?>; color: white;">
-                                        <?= $group['tutti_name'] ?>
+                                    <a href="tutti.php?tid=<?= $groupInfo['tutti_id'] ?>" class="btn btn-sm"
+                                        style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
+                                        <?= $groupInfo['tutti_name'] ?>
                                     </a>
                                 </div>
                             </li>
                         </ul>
                         <div class="card-body">
-                            <h3 class="card-title"><?= $group['name'] ?></h3>
-                            <p class="card-text txt-limit"><?= $group['content'] ?></p>
+                            <h3 class="card-title"><?= $groupInfo['name'] ?></h3>
+                            <p class="card-text txt-limit"><?= $groupInfo['content'] ?></p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-end">
-                                <?= $group['date'] ?>
+                                <?= $groupInfo['date'] ?>
                                 <?=
-                                    empty($group['start_time']) && empty($group['end_time'])
+                                    empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
                                     ? "時間未定"
                                     :
-                                    (empty($group['start_time']) ? "未定" : $group['start_time'])
+                                    (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
                                     . "~"
-                                    . (empty($group['end_time']) ? "未定" : $group['end_time'])
+                                    . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
                                     ?>
                             </li>
-                            <li class="list-group-item d-flex justify-content-end"><?= $group['num_people'] ?>人</li>
+                            <li class="list-group-item d-flex justify-content-end"><?= $groupInfo['participants'] ?> / <?= $groupInfo['num_people'] ?>人</li>
                             <li class="list-group-item d-flex justify-content-end">
-                                <a href="groupDetail.php?gid=<?= $group['id'] ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
+                                <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
                             </li>
                         </ul>
                     </div>
@@ -87,38 +87,38 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
             <p class="text-center pt-3">参加中の勉強会は存在しません</p>
             <small class="text-center pb-3">※作成した勉強会は除く</small>
         <?php else: ?>    
-            <?php foreach ($memberGroupInfos as $group): ?>
+            <?php foreach ($memberGroupInfos as $groupInfo): ?>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
                     <div class="card">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item list-title">
                                 <div>
-                                    <a href="tutti.php?tid=<?= $group['tutti_id'] ?>" class="btn btn-sm"
-                                        style="background-color: <?= $group['tutti_color'] ?>; color: white;">
-                                        <?= $group['tutti_name'] ?>
+                                    <a href="tutti.php?tid=<?= $groupInfo['tutti_id'] ?>" class="btn btn-sm"
+                                        style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
+                                        <?= $groupInfo['tutti_name'] ?>
                                     </a>
                                 </div>
                             </li>
                         </ul>
                         <div class="card-body">
-                            <h3 class="card-title"><?= $group['name'] ?></h3>
-                            <p class="card-text txt-limit"><?= $group['content'] ?></p>
+                            <h3 class="card-title"><?= $groupInfo['name'] ?></h3>
+                            <p class="card-text txt-limit"><?= $groupInfo['content'] ?></p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-end">
-                                <?= $group['date'] ?>
+                                <?= $groupInfo['date'] ?>
                                 <?=
-                                    empty($group['start_time']) && empty($group['end_time'])
+                                    empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
                                     ? "時間未定"
                                     :
-                                    (empty($group['start_time']) ? "未定" : $group['start_time'])
+                                    (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
                                     . "~"
-                                    . (empty($group['end_time']) ? "未定" : $group['end_time'])
+                                    . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
                                     ?>
                             </li>
-                            <li class="list-group-item d-flex justify-content-end"><?= $group['num_people'] ?>人</li>
+                            <li class="list-group-item d-flex justify-content-end"><?= $groupInfo['participants'] ?> / <?= $groupInfo['num_people'] ?>人</li>
                             <li class="list-group-item d-flex justify-content-end">
-                                <a href="groupDetail.php?gid=<?= $group['id'] ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
+                                <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
                             </li>
                         </ul>
                     </div>
