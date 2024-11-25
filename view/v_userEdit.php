@@ -12,12 +12,12 @@ global $userInfo;
         <div class="mb-4">
           <label for="name" class="form-label">ユーザー名を入力</label>
           <small style="font-size: 10px; color: red;">*必須</small>
-          <input type="text" id="name" name="name" class="form-control" value="<?= $userInfo['name'] ?>" required>
+          <input type="text" id="name" name="name" class="form-control" value="<?= $userInfo['name'] ?>" maxlength="90" required>
         </div>
         <div class="mb-4">
             <label for="mail-address" class="form-label">メールアドレスを入力</label>
             <small style="font-size: 10px; color: red;">*必須</small>
-            <input type="email" id="mail-address" name="mail-address" class="form-control"
+            <input type="email" id="mail-address" name="mail-address" class="form-control" maxlength="90"
                 placeholder="example@mail.com" value="<?= $userInfo['mail_address'] ?>" required>
         </div>
         <div class="mb-4">
