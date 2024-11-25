@@ -1,8 +1,6 @@
-<pre>
 <?php
 global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
 ?>
-</pre>
 
 <section class="mb-5">
     <h2 class="my-3 heading07" data-en="Study Info">勉強会情報</h2>

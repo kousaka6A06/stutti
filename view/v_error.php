@@ -1,0 +1,1 @@
+<p class="text-center"><a href="index.php">TOPに戻る</a></p>
