@@ -13,6 +13,16 @@ body {
     z-index: -1; /* 背景として配置 */
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #525151;
+    border-radius: 5px;
+  }
+
 main {
     margin-top: 8rem;
 }
@@ -91,16 +101,6 @@ p {
 
 .icon-spacing i {
     margin-left: 15px; /* アイコン間のスペースを15pxに設定 */
-}
-
- /* リストグループのボーダーを非表示に */
- .list-group.list-group-flush {
-    border: none; /* 内部リストのボーダーを非表示に */
-}
-
-/* リストアイテムの間に線が表示されないように */
-.list-group-item {
-    border: none; /* 各リストアイテムのボーダーを非表示に */
 }
 
 /* //////ボタン///// */
@@ -481,6 +481,10 @@ p {
 }
 
 /*//////// 勉強会一覧 ////////*/
+.group-list {
+    width: 85%;
+}
+
 .tilt-card {
     transform: rotate(7deg); /* 初期の傾き */
     transform-origin: bottom right; /* 右下を軸にする */
@@ -501,10 +505,21 @@ p {
     transform: scale(1.15);
 }
 
-/* グラデーション */
-.group-section {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(200, 200, 200, 0.5));
+.group-section .card-groups {
+    display: flex;
+    overflow-x: scroll;
+    flex-shrink: 0;
+    margin-left: 15px;
 }
+
+.group-section .card-cat {
+    margin-bottom: 28px;
+}
+
+/* グラデーション */
+/* .group-section {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(200, 200, 200, 0.5));
+} */
 /*//////// 勉強会作成 ////////*/
 .group-edit .heading07 {
     padding-left: 0;
@@ -517,15 +532,6 @@ p {
 }
 
 /*//////// マイページ ////////*/
-.mypage, .mk-studygroup, .edit-studygroup {
-    max-width: 80%;
-}
-
-.maintable {
-    border-spacing: 0;
-    border-collapse: separate;
-}
-
 .maintable th,
 .maintable td {
     border-top: 1px solid #FFFFFF;
@@ -533,7 +539,6 @@ p {
 }
 
 .maintable th {
-    padding: 5px 10px;
     background: #78CFBF;
     color: #FFFFFF;
 }
@@ -543,11 +548,10 @@ p {
 }
 
 .maintable td {
-    width: auto;
-    padding: 50px 0px;
     background: #FCFCFC;
     color: #2f302f;
     text-align: left;
+    word-break:break-word
 }
 
 .maintable tr:nth-child(even) td {
@@ -600,12 +604,6 @@ p {
     animation: introFadeIn 1.5s ease forwards;
 }
 
-/*//////// フッターのスタイル ////////*/
-footer img {
-    object-fit: cover; /* 画像の比率を維持しながらトリミング */
-    height: 200px; /* 必要に応じて高さを調整 */
-}
-
 @keyframes introFadeIn {
     from {
         opacity: 0;
@@ -630,17 +628,38 @@ footer img {
 }
 
 .tutti-background-text {
+    pointer-events: none;
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
     font-size: 6rem;
     color: rgba(139, 139, 139, 0.15);
-    z-index: 5;
+    z-index: 0;
 }
 
+ /* リストグループのボーダーを非表示に */
+.list-group.list-group-flush {
+    border: none; /* 内部リストのボーダーを非表示に */
+}
+
+/* リストアイテムの間に線が表示されないように */
+.list-group-item {
+    border: none; /* 各リストアイテムのボーダーを非表示に */
+}
+
+/* .list-group {
+    margin-top: 30px;
+} */
+
+
+/*//////// フッターのスタイル ////////*/
+footer img {
+    object-fit: cover; /* 画像の比率を維持しながらトリミング */
+    height: 200px; /* 必要に応じて高さを調整 */
+}
 
 /*//////// メディアクエリ ////////*/
-/* 375px 以上 500px 以下のスクリーンサイズ */
+/* 767px 以下のスクリーンサイズ */
 @media (max-width: 767px) {
     /* ヘッダー */
     .navbar-brand {
@@ -649,6 +668,7 @@ footer img {
 
     .fixed-header {
         width: 85%;
+        top: 10px;
     }
 
     .navbar-brand {
@@ -658,7 +678,8 @@ footer img {
     
     /* メイン */
     main {
-        margin-top: 6rem;
+        margin-top: 75px;
+        font-size: 12px;
     }
     
     .heading07 {
@@ -798,6 +819,24 @@ footer img {
         width: 19.333333%;
         margin-bottom: 15px;
         padding-left: 3px !important;
+    }
+
+    .tutti-intro {
+        font-size: 25px;
+    }
+
+    .tutti-section {
+        margin-top: 85px;
+    }
+    
+    .tutti-background-text {
+        font-size: 4rem;  /* フォントサイズを小さく */
+        top: 65px;  
+        /* 上に少し移動  */
+    }
+    /* マイページ */
+    .mypage .custum-flex {
+        display: flex;
     }
 
 }

@@ -71,10 +71,6 @@ global $groupInfos, $tuttiInfos;
                                     <span><?= $groupInfo['tutti_name'] ?></span>
                                 </a>
                             </div>
-                            <span class="d-flex justify-content-end align-items-baseline">
-                                <i class="fa fa-users me-2"></i>
-                                <?= $groupInfo['participants'] ?> / <?= $groupInfo['num_people'] ?>人
-                            </span>
                         </li>
                     </ul>
                     <div class="card-body pt-1">
@@ -103,6 +99,10 @@ global $groupInfos, $tuttiInfos;
                                     . "~"
                                     . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
                                 ?>
+                            </span>
+                            <span class="d-flex justify-content-end align-items-baseline">
+                                <i class="fa fa-users me-2"></i>
+                                <?= $groupInfo['participants'] ?> / <?= $groupInfo['num_people'] ?>人
                             </span>
                         </li>
                     </ul>

@@ -3,18 +3,18 @@ global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
 ?>
 
 <!-- 初期テキスト -->
-<div class="tutti-intro" id="tuttiIntro"><?= $tuttiInfo['name'] ?>コミュニティ</div>
+<div class="tutti-intro" id="tuttiIntro"><?= $tuttiInfo['name'] ?></div>
 
 <!-- コンテンツ全体をラップ -->
 <div class="tutti-hidden" id="tuttiContent">
     <!-- 固定された背景テキスト -->
-    <div class="tutti-background-text" id="tuttiBackgroundText">NEWS</div>
+    <div class="tutti-background-text" id="tuttiBackgroundText"></div>
 
     <!-- セクションコンテンツ -->
     <div class="tutti-sections">
         <!-- セクション1 -->
         <section class="tutti-section" data-background="News">
-            <div class="">
+            <div>
                 <dl class="list-group">
                     <?php foreach ($newsInfos as $newsInfo) : ?>
                         <dt class="list-group-item"><?= explode(' ', $newsInfo['created_at'])[0] ?></dt>
@@ -25,9 +25,9 @@ global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
         </section>
 
         <!-- セクション2 -->
-        <section class="tutti-section" data-background="Study Group">
+        <section class="tutti-section" data-background="Groups">
             <div class="">
-                <div class="row">
+                <div class="row mt-4">
                     <?php foreach ($groupInfos as $groupInfo) : ?>
                         <div class="col-md-3 mb-2">
                             <div class="card">
@@ -65,7 +65,7 @@ global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
 
         <!-- セクション3 -->
         <section class="tutti-section" data-background="Message">
-            <div class="bg-light p-4 rounded shadow">
+            <div class="bg-light p-4 rounded shadow list-group">
                 <p class="p-3"><?= $tuttiInfo['about'] ?></p>
                 <?php if (empty($commentInfos)): ?>
                     <p class="text-center py-3">まだコメントは投稿されていません</p>

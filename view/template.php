@@ -15,6 +15,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- 外部CSSファイルをリンク -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/favicon.ico">
 </head>
 
 <body class="d-flex flex-column min-vh-100">

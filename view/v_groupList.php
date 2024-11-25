@@ -4,12 +4,12 @@ global $tuttiGroupInfos;
 $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
 ?>
 
-<section class="group-list">
-    <h2 class="text-center heading07" data-en="Groups">グループ一覧</h2>
+<section class="group-list mx-auto">
+    <h2 class="text-center heading07" data-en="Groups">勉強会一覧</h2>
     <?php foreach ($tuttiGroupInfos as $key => $tuttiGroupInfo): ?>
         <div class="d-flex justify-content-center">
-            <div class="container group-section row d-flex justify-content-center align-items-end mt-3">
-                <div class="col-md-1">
+            <div class="container group-section flex-nowrap row d-flex justify-content-center align-items-end mt-3">
+                <div class="card-cat col-md-1">
                     <a href="tutti.php?tid=<?= $tuttiGroupInfo['id'] ?>" class="text-decoration-none">
                         <div class="card tutti-card2 <?= in_array($key, $tiltedKey) ? 'tilt-card' : ''; ?>"
                             style="border: 10px solid <?= $tuttiGroupInfo['color'] ?>; color: #586365">
@@ -19,9 +19,9 @@ $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
                         </div>
                     </a>
                 </div>
-                <div class="row mt-4">
+                <div class="card-groups mt-4 align-items-end">
                     <?php foreach ($tuttiGroupInfo['groups'] as $groupInfo): ?>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-3 mb-3 me-3">
                             <div class="card">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item list-title d-flex justify-content-end align-items-baseline ps-0 pt-0">

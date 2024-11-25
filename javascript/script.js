@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.5 // 50%が表示されたときにトリガー
+        threshold: 0.35, // 50%が表示されたときにトリガー
     });
 
     // 各セクションを監視
