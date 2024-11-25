@@ -97,7 +97,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                         <td class="p-3 w-75">
                             <?= $messageInfo['content'] ?>
                             <div class="d-flex justify-content-between mt-2">
-                                <small><?= $messageInfo['created_at'] ?></small>
+                                <small class="opacity-50"><?= $messageInfo['created_at'] ?></small>
                                 <?php if ($messageInfo['member_id'] === $userId): ?>
                                     <a href="messageDelete.php?gid=<?= $groupInfo['id'] ?>&mid=<?= $messageInfo['id'] ?>" class="btn btn-secondary btn-sm ms-2">削除</a>
                                 <?php endif; ?>
@@ -109,7 +109,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
             </table>
             <p class="text-center">メッセージを投稿する</p>
             <form action="messagePost.php" method="POST" enctype="multipart/form-data" class="text-center">
-                <textarea type="text" name="content" class="p-1 w-75" placeholder="投稿内容" required></textarea>
+                <textarea type="text" name="content" class="p-1 w-75" max="250" placeholder="投稿内容" required></textarea>
                 <input type="hidden" name="gid" value="<?= $groupId ?>">
                 <button type="submit" class="btn btn-dark w-30 d-block mx-auto">投稿</button>
             </form>
