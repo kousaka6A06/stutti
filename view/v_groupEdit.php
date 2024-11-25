@@ -3,13 +3,13 @@ global $groupId, $groupInfo, $tuttiInfos;
 ?>
 
 <section class="group-edit">
-    <h2 class="text-center heading07" data-en="Create">勉強会を作る</h2>
+    <h2 class="text-center heading07" data-en=<?= isset($groupId) ? "Edit" : "Create" ?>><?= isset($groupId) ? "勉強会を編集する" : "勉強会を作成する" ?></h2>
     <form action="groupEdit.php<?= isset($groupId) ? "?gid=" . $groupId : "" ?>" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow mx-auto"
         style="max-width: 650px">
         <div class="mb-4">
             <label for="name" class="form-label">勉強会名を入力</label>
             <small style="font-size: 10px; color: red;">*必須</small>
-            <input type="text" id="name" name="name" class="form-control" maxlength="60" placeholder="例：AWSの勉強しませんか？" value="<?= isset($groupInfo) ? $groupInfo['name'] : "" ?>" required>
+            <input type="text" id="name" name="name" class="form-control" maxlength="60" oninput="removeEmoji(this)" placeholder="例：AWSの勉強しませんか？" value="<?= isset($groupInfo) ? $groupInfo['name'] : "" ?>" required>
         </div>
         <div class="mb-4">
             <label for="tutti-id" class="form-label">関連するTutti</label>
@@ -38,7 +38,7 @@ global $groupId, $groupInfo, $tuttiInfos;
         <div class="mb-4">
             <label for="location" class="form-label">開催場所</label>
             <small style="font-size: 10px; color: red;">*必須</small>
-            <input type="text" name="location" id="location" class="form-control" maxlength="60" placeholder="例：梅田の１番街にあるカフェ" value="<?= isset($groupInfo) ? $groupInfo['location'] : "" ?>" required>
+            <input type="text" name="location" id="location" class="form-control" maxlength="60" oninput="removeEmoji(this)" placeholder="例：梅田の１番街にあるカフェ" value="<?= isset($groupInfo) ? $groupInfo['location'] : "" ?>" required>
         </div>
         <div class="mb-4">
             <label for="num-people" class="form-label">参加人数</label>
@@ -48,7 +48,7 @@ global $groupId, $groupInfo, $tuttiInfos;
         <div class="mb-4">
             <label for="content" class="form-label">勉強内容</label>
             <small style="font-size: 10px; color: red;">*必須</small><br>
-            <textarea name="content" id="content" class="form-control p-3 w-100" rows="10" maxlength="250" required><?= isset($groupInfo) ? $groupInfo['content'] : "" ?></textarea>
+            <textarea name="content" id="content" class="form-control p-3 w-100" rows="10" maxlength="250" oninput="removeEmoji(this)" required><?= isset($groupInfo) ? $groupInfo['content'] : "" ?></textarea>
         </div>
         <button id="submit" type="submit" class="btn btn-dark w-30 d-block mx-auto"><?= isset($groupId) ? "編集する" : "作成する" ?></button>
     </form>
