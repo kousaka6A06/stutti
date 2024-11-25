@@ -10,40 +10,60 @@ $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
         <div class="d-flex justify-content-center">
             <div class="container group-section row d-flex justify-content-center align-items-end mt-3">
                 <div class="col-md-1">
-                    <div class="card tutti-card2 <?= in_array($key, $tiltedKey) ? 'tilt-card' : ''; ?>"
-                        style="border: 10px solid <?= $tuttiGroupInfo['color'] ?>; color: #586365">
-                        <div class="card-body d-flex flex-column align-items-center" style="height: 150px;">
-                            <h5 class="card-title vertical-text"><?= $tuttiGroupInfo['name']; ?></h5>
-                        </div>
-                    </div>
-                </div>
-                <?php foreach ($tuttiGroupInfo['groups'] as $group): ?>
-                    <div class="col-md-2">
-                        <div class="card">
-                            <div class="card-body" style="height: 100px;">
-                                <h3 class="card-title"><?= $group['name'] ?></h3>
-                                <p class="card-text txt-limit"><?= $group['content'] ?></p>
+                    <a href="tutti.php?tid=<?= $tuttiGroupInfo['id'] ?>" class="text-decoration-none">
+                        <div class="card tutti-card2 <?= in_array($key, $tiltedKey) ? 'tilt-card' : ''; ?>"
+                            style="border: 10px solid <?= $tuttiGroupInfo['color'] ?>; color: #586365">
+                            <div class="card-body d-flex flex-column align-items-center" style="height: 150px;">
+                                <h5 class="card-title vertical-text"><?= $tuttiGroupInfo['name']; ?></h5>
                             </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-end">
-                                    <?= $group['date'] ?>
-                                    <?=
-                                        empty($group['start_time']) && empty($group['end_time'])
-                                        ? "時間未定"
-                                        :
-                                        (empty($group['start_time']) ? "未定" : $group['start_time'])
-                                        . "~"
-                                        . (empty($group['end_time']) ? "未定" : $group['end_time'])
-                                        ?>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-end"><?= $group['num_people'] ?>人</li>
-                                <li class="list-group-item d-flex justify-content-end">
-                                    <a href="groupDetail.php?gid=<?= $group['id'] ?>" class="btn btn-secondary btn-sm">詳しく見る</a>
-                                </li>
-                            </ul>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    </a>
+                </div>
+                <div class="row mt-4">
+                    <?php foreach ($tuttiGroupInfo['groups'] as $groupInfo): ?>
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item list-title d-flex justify-content-end align-items-baseline ps-0 pt-0">
+                                        <span class="d-flex  align-items-baseline">
+                                            <i class="fa fa-users me-2"></i>
+                                            <?= $groupInfo['num_people'] ?>人
+                                        </span>
+                                    </li>
+                                </ul>
+                                <div class="card-body pt-1">
+                                    <h3 class="card-title fw-semibold">
+                                        <?= $groupInfo['name'] ?>
+                                    </h3>
+                                    <p class="card-text"><?= $groupInfo['content'] ?></p>
+                                    <div class="d-flex justify-content-end">
+                                        <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">
+                                            続き<i class="fa fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <span class="d-flex justify-content-end align-items-baseline text-end">
+                                            <i class="fa fa-calendar me-2"></i>
+                                            <?= $groupInfo['date'] ?><br>
+                                        </span>
+                                        <span class="d-flex justify-content-end align-items-baseline text-end">
+                                            <i class="fa-regular fa-clock me-1"></i>
+                                            <?=
+                                            empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
+                                                ? "時間未定"
+                                                : (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
+                                                . "~"
+                                                . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
+                                            ?>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
     <?php endforeach; ?>
