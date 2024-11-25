@@ -13,7 +13,7 @@ $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
                     <a href="tutti.php?tid=<?= $tuttiGroupInfo['id'] ?>" class="text-decoration-none">
                         <div class="card tutti-card2 <?= in_array($key, $tiltedKey) ? 'tilt-card' : ''; ?>"
                             style="border: 10px solid <?= $tuttiGroupInfo['color'] ?>; color: #586365">
-                            <div class="card-body d-flex flex-column align-items-center" style="height: 150px;">
+                            <div class="card-body d-flex justify-content-center flex-column align-items-center" style="height: 160px;">
                                 <h5 class="card-title vertical-text"><?= $tuttiGroupInfo['name']; ?></h5>
                             </div>
                         </div>
