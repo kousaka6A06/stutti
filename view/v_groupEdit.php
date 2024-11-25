@@ -44,6 +44,7 @@ global $groupId, $groupInfo, $tuttiInfos;
             <label for="num-people" class="form-label">参加人数</label>
             <small style="font-size: 10px; color: red;">*必須</small>
             <input type="number" name="num-people" id="num-people" class="form-control w-25" max="999" min="2" value="<?= isset($groupInfo) ? $groupInfo['num_people'] : "2" ?>" required>
+            <small class="ms-2"><?= isset($groupInfo) ? $groupInfo['participants'] . "人参加中" : "" ?></small>
         </div>
         <div class="mb-4">
             <label for="content" class="form-label">勉強内容</label>
