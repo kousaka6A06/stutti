@@ -2,7 +2,8 @@
 global $groupId, $groupInfo, $tuttiInfos;
 ?>
 
-<section class="">
+<section class="group-edit">
+    <h2 class="text-center heading07" data-en="Create">勉強会を作る</h2>
     <form action="groupEdit.php<?= isset($groupId) ? "?gid=" . $groupId : "" ?>" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow mx-auto"
         style="max-width: 650px">
         <div class="mb-4">
