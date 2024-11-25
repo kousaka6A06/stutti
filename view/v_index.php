@@ -58,7 +58,7 @@ global $groupInfos, $tuttiInfos;
 
     <div class="row mt-4">
         <?php foreach ($groupInfos as $groupInfo): ?>
-            <div class="col-md-3 mb-3">
+            <div class="col-md-6 col-xl-4 col-xxl-3 mb-3">
                 <div class="card">
                     <ul class="list-group list-group-flush">
                         <li
