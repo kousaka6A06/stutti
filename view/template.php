@@ -18,73 +18,76 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <!-- 背景アニメーション用のキャンバス -->
-    <canvas id="canvas"></canvas>
-    <!-- ヘッダー -->
-    <header class="header rounded-header fixed-header">
-    <nav class="navbar navbar-expand-sm">
-        <div class="container-md">
-            <h1>
-                <a class="navbar-brand" href="index.php">
-                    STUTTI
-                </a>
-            </h1>
-            <!-- ハンバーガーメニューのボタン -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- メニュー -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <?php if (isset($_SESSION['userId'])): ?>
-                        <li class="nav-item">
-                            <a class="btn mx-2 h-btm text-light" href="groupList.php">勉強会一覧</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn mx-2 h-btm text-light" href="groupEdit.php">勉強会を作る</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn mx-2 h-btm text-light" href="myPage.php">マイページ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn mx-2 h-btm text-light" href="logout.php">ログアウト</a>
-                        </li>
-                    <?php else: ?>
-                        <li class="nav-item">
-                            <a class="btn mx-2 h-btm text-light" href="login.php">ログイン</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn mx-2 h-btm text-light" href="userRegister.php">ユーザー登録</a>
-                        </li>
-                    <?php endif ?>
-                </ul>
+        <!-- 背景アニメーション用のキャンバス -->
+        <canvas id="canvas"></canvas>
+        <!-- ヘッダー -->
+        <header class="header rounded-header fixed-header">
+            <nav class="navbar navbar-expand-md">
+                <div class="container-md">
+                    <h1>
+                        <a class="navbar-brand" href="index.php">
+                            STUTTI
+                        </a>
+                    </h1>
+                    <!-- ハンバーガーメニューのボタン -->
+                    <button class="navbar-toggler collapsed shadow-none focus-shadow-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon custom-toggler-icon"></span>
+                    </button>
+                    <!-- メニュー -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item py-1">
+                                <a class="btn mx-2 h-btm text-light" href="groupList.php">勉強会一覧</a>
+                            </li>
+                            <?php if (isset($_SESSION['userId'])): ?>
+                                <li class="nav-item py-1">
+                                    <a class="btn mx-2 h-btm text-light" href="groupEdit.php">勉強会を作る</a>
+                                </li>
+                                <li class="nav-item py-1">
+                                    <a class="btn mx-2 h-btm text-light" href="myPage.php">マイページ</a>
+                                </li>
+                                <li class="nav-item py-1">
+                                    <a class="btn mx-2 h-btm text-light" href="logout.php">ログアウト</a>
+                                </li>
+                            <?php else: ?>
+                                <li class="nav-item py-1">
+                                    <a class="btn mx-2 h-btm text-light" href="login.php">ログイン</a>
+                                </li>
+                                <li class="nav-item py-1">
+                                    <a class="btn mx-2 h-btm text-light" href="userRegister.php">ユーザー登録</a>
+                                </li>
+                            <?php endif ?>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- メイン -->
+        <main class="container-xl flex-grow-1">
+            <?php if (isset($_SESSION['message'])): ?>
+                <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 mx-auto"
+                    style="max-width: 700px">
+                    <?= $_SESSION['message'] ?>
+                </p>
+                <?php unset($_SESSION['message']) ?>
+            <?php endif ?>
+            <?php include $v_includeFile; ?>
+        </main>
+        
+        <!-- フッター -->
+        <footer class="text-white mt-5">
+            <div class="container-fluid p-0">
+                <img src="img/footer.png" class="img-fluid h-50 w-100" alt="Footer Image">
             </div>
-        </div>
-    </nav>
-</header>
+        </footer>
 
-    <!-- メイン -->
-    <main class="container-xl flex-grow-1">
-        <?php if (isset($_SESSION['message'])): ?>
-            <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 mx-auto"
-                style="max-width: 700px">
-                <?= $_SESSION['message'] ?>
-            </p>
-            <?php unset($_SESSION['message']) ?>
-        <?php endif ?>
-        <?php include $v_includeFile; ?>
-    </main>
-    <!-- フッター -->
-    <footer class="text-white mt-5">
-        <div class="container-fluid p-0">
-            <img src="img/footer.png" class="img-fluid h-50 w-100" alt="Footer Image">
-        </div>
-    </footer>
-
-    <!-- Bootstrap Bundle with Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- javascript -->
-    <script src="javascript/script.js"></script>
+        <!-- Bootstrap Bundle with Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- javascript -->
+        <script src="javascript/script.js"></script>
 </body>
 
 </html>

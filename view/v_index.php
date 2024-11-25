@@ -1,8 +1,8 @@
 <?php
 global $groupInfos, $tuttiInfos;
 ?>
-
-<section class="board-3YD0c">
+<section class="white-board mx-auto">
+    <h2 class="text-center heading07" data-en="About">なんですかこのサイトは</h2>
     <!-- マーカー -->
     <div class="marker1"></div>
     <div class="marker2"></div>
@@ -41,8 +41,8 @@ global $groupInfos, $tuttiInfos;
 
 <!-- 募集中勉強会 -->
 <section class="study-group mx-auto">
-    <div class="d-flex justify-content-between align-items-baseline">
-        <h2 class="heading07" data-en="Study">募集中の勉強会</h2>
+    <div class="d-flex custom-flex justify-content-between">
+        <h2 class="heading07" data-en="Groups">募集中の勉強会</h2>
         <div class="icon-spacing">
             <?php foreach ($tuttiInfos as $tuttiInfo): ?>
                 <i class="<?= $tuttiInfo['icon'] ?> fa-2x" style="color: <?= $tuttiInfo['color'] ?>"></i>
@@ -50,12 +50,19 @@ global $groupInfos, $tuttiInfos;
         </div>
     </div>
 
+    <div class="text-center mt-1 mt-md-3 mt-xl-3">
+        <a href="groupList.php" class="btn view-more-btn">
+            <span>勉強会一覧</span>
+        </a>
+    </div>
+
     <div class="row mt-4">
         <?php foreach ($groupInfos as $groupInfo): ?>
-            <div class="col-md-3 mb-2">
+            <div class="col-md-3 mb-3">
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-title d-flex justify-content-start ps-0 pt-0">
+                        <li
+                            class="list-group-item list-title d-flex justify-content-between align-items-baseline ps-0 pt-0">
                             <div>
                                 <a href="tutti.php?tid=<?= $groupInfo['tutti_id'] ?>" class="btn btn-sm align-middle"
                                     style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
@@ -63,9 +70,7 @@ global $groupInfos, $tuttiInfos;
                                     <span><?= $groupInfo['tutti_name'] ?></span>
                                 </a>
                             </div>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="d-flex justify-content-end align-items-baseline text-end">
+                            <span class="d-flex justify-content-end align-items-baseline">
                                 <i class="fa fa-users me-2"></i>
                                 <?= $groupInfo['num_people'] ?>人
                             </span>
@@ -76,6 +81,11 @@ global $groupInfos, $tuttiInfos;
                             <?= $groupInfo['name'] ?>
                         </h3>
                         <p class="card-text"><?= $groupInfo['content'] ?></p>
+                        <div class="d-flex justify-content-end">
+                            <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">
+                                続き<i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
@@ -86,40 +96,39 @@ global $groupInfos, $tuttiInfos;
                             <span class="d-flex justify-content-end align-items-baseline text-end">
                                 <i class="fa-regular fa-clock me-1"></i>
                                 <?=
-                                    empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
+                                empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
                                     ? "時間未定"
-                                    :
-                                    (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
+                                    : (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
                                     . "~"
                                     . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
-                                    ?>
+                                ?>
                             </span>
                         </li>
-                       
-                        <!-- <li class="list-group-item d-flex justify-content-end">
-                            <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">
-                                <i class="fa fa-arrow-right"></i>
-                            </a>
-                        </li> -->
                     </ul>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
-    <div class="text-center mt-3">
-        <a href="groupList.php" class="btn view-more-btn"><span>勉強会一覧</span></a>
+    <div class="text-center mt-1 mt-md-3 mt-xl-3">
+        <a href="groupList.php" class="btn view-more-btn">
+            <span>勉強会一覧</span>
+        </a>
     </div>
 </section>
 
 <!-- tutti -->
 <section class="tutti-list mx-auto">
-    <h2 class="heading07" data-en="community">TUTTI広場</h2>
+    <h2 class="heading07" data-en="community">
+        <div class="tutti-title">
+            TUTTIコミュニティ
+        </div>
+    </h2>
     <div class="row d-flex justify-content-evenly tutti-row">
         <?php foreach ($tuttiInfos as $tuttiInfo): ?>
-            <div class="col-1">
+            <div class="col-4 col-md-1 col-lg-1">
                 <a href="tutti.php?tid=<?= $tuttiInfo['id'] ?>" style="text-decoration: none;">
                     <div class="card tutti-card p-0 shadow"
-                        style="height: 250px; background-color: <?= $tuttiInfo['color'] ?>; color: #586365; flex-direction: row;">
+                        style="background-color: <?= $tuttiInfo['color'] ?>;">
                         <div class="husen">
                             <h3 class="card-title vertical-text"><?= $tuttiInfo['name'] ?></h3>
                         </div>
@@ -129,7 +138,6 @@ global $groupInfos, $tuttiInfos;
                             <div class="line line-3"></div>
                             <div class="line line-4"></div>
                         </div>
-
                     </div>
                 </a>
             </div>
