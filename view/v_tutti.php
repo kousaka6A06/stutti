@@ -67,27 +67,31 @@ global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
         <section class="tutti-section" data-background="Message">
             <div class="bg-light p-4 rounded shadow">
                 <p class="p-3"><?= $tuttiInfo['about'] ?></p>
-                <table class="maintable w-100 mb-5">
-                    <thead>
-                        <tr>
-                            <th class="p-3 w-25" style="background-color: <?= $tuttiInfo['color'] ?>;">投稿者</th>
-                            <th class="p-3 w-75" style="background-color: <?= $tuttiInfo['color'] ?>;">投稿内容</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($commentInfos as $commentInfo): ?>
-                        <tr>
-                            <td class="p-3 w-25">
-                                <?= $commentInfo['name'] ?>
-                            </td>
-                            <td class="p-3 w-75">
-                                <?= $commentInfo['content'] ?><br>
-                                <small class="opacity-50"><?= $commentInfo['created_at'] ?></small>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <?php if (empty($commentInfos)): ?>
+                    <p class="text-center py-3">まだコメントは投稿されていません</p>
+                <?php else: ?>
+                    <table class="maintable w-100 mb-5">
+                        <thead>
+                            <tr>
+                                <th class="p-3 w-25" style="background-color: <?= $tuttiInfo['color'] ?>;">投稿者</th>
+                                <th class="p-3 w-75" style="background-color: <?= $tuttiInfo['color'] ?>;">投稿内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($commentInfos as $commentInfo): ?>
+                            <tr>
+                                <td class="p-3 w-25">
+                                    <?= $commentInfo['name'] ?>
+                                </td>
+                                <td class="p-3 w-75">
+                                    <?= $commentInfo['content'] ?><br>
+                                    <small class="opacity-50"><?= $commentInfo['created_at'] ?></small>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
                 <p class="text-center">コメントを投稿する</p>
                 <form action="commentPost.php" method="POST" enctype="multipart/form-data" class="text-center">
                     <input type="text" name="name" class="ps-1 w-75" maxlength="30" oninput="removeEmoji(this)" placeholder="投稿者（未入力の場合は「名無し」で投稿されます）">
