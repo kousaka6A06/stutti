@@ -27,7 +27,7 @@ $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
                                     <li class="list-group-item list-title d-flex justify-content-end align-items-baseline ps-0 pt-0">
                                         <span class="d-flex  align-items-baseline">
                                             <i class="fa fa-users me-2"></i>
-                                            <?= $groupInfo['num_people'] ?>人
+                                            <?= $groupInfo['participants'] ?> / <?= $groupInfo['num_people'] ?>人
                                         </span>
                                     </li>
                                 </ul>

@@ -73,7 +73,7 @@ global $groupInfos, $tuttiInfos;
                             </div>
                             <span class="d-flex justify-content-end align-items-baseline">
                                 <i class="fa fa-users me-2"></i>
-                                <?= $groupInfo['num_people'] ?>人
+                                <?= $groupInfo['participants'] ?> / <?= $groupInfo['num_people'] ?>人
                             </span>
                         </li>
                     </ul>

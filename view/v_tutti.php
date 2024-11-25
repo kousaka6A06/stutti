@@ -49,7 +49,7 @@ global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
                                         ?>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-end">
-                                        <i class="fa fa-users"></i><?= $groupInfo['num_people'] ?>人
+                                        <i class="fa fa-users"></i><?= $groupInfo['participants'] ?> / <?= $groupInfo['num_people'] ?>人
                                     </li>
                                     <li class="list-group-item d-flex justify-content-end">
                                         <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">

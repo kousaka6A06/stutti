@@ -38,7 +38,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                 </tr>
                 <tr>
                     <th class="p-3 w-25">参加人数</th>
-                    <td class="p-3 w-75"><?= $groupInfo['num_people'] ?>人</td>
+                    <td class="p-3 w-75"><?= $groupInfo['participants'] ?> / <?= $groupInfo['num_people'] ?>人</td>
                 </tr>
                 <tr>
                     <th class="p-3 w-25">作成者名</th>
