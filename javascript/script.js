@@ -134,12 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 ////// カードの文章省略 ///////
-    const limit = document.querySelector(".txt-limit");
-    const str = limit.textContent;
-    const len = 40; // 半角50字（全角約25字）
-    if (str.length > len) {
-        limit.textContent = str.substring(0, len) + "…";
-    }
+const limit = document.querySelector(".txt-limit");
+const str = limit.textContent;
+const len = 40; // 半角50字（全角約25字）
+if (str.length > len) {
+    limit.textContent = str.substring(0, len) + "…";
+}
 /////////////////////////////
 
 ////// テキスト入力時に絵文字除去 ///////
@@ -168,3 +168,20 @@ function removeEmoji(e) {
     });
     e.value = validated.trim();
 }
+
+///////////////////////////////////////////
+// スムーズスクロール
+document.querySelector('.scroll-indicator').addEventListener('click', () => {
+    window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+    });
+});
+// テキストの再生アニメーション
+document.querySelector('.typing-text').addEventListener('animationend', (e) => {
+    if (e.animationName === 'typing') {
+        e.target.style.width = '100%';
+    }
+});
+
+/////////////////////////////////////////////
