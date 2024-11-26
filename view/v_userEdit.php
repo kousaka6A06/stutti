@@ -12,7 +12,7 @@ global $userInfo;
         <div class="mb-4">
           <label for="name" class="form-label">ユーザー名を入力</label>
           <small style="font-size: 10px; color: red;">*必須</small>
-          <input type="text" id="name" name="name" class="form-control" value="<?= $userInfo['name'] ?>" maxlength="90" oninput="removeEmoji(this)" required>
+          <input type="text" id="name" name="name" class="form-control" value="<?= $userInfo['name'] ?>" maxlength="90" onchange="removeEmoji(this)" required>
         </div>
         <div class="mb-4">
             <label for="mail-address" class="form-label">メールアドレスを入力</label>

@@ -143,14 +143,28 @@ document.addEventListener('DOMContentLoaded', () => {
 /////////////////////////////
 
 ////// テキスト入力時に絵文字除去 ///////
-function removeEmoji(t) {
-    var ranges = [
-        '\ud83c[\udf00-\udfff]',
-        '\ud83d[\udc00-\ude4f]',
-        '\ud83d[\ude80-\udeff]',
-        '\ud7c9[\ude00-\udeff]',
-        '[\u2600-\u27BF]'
-    ];
-    var reg = new RegExp(ranges.join('|'), 'g');
-    t.value = (t.value).replace(reg, '');
+function removeEmoji(e) {
+    var validated = '';
+    Array.prototype.forEach.call(e.value, function(c) {
+      if (
+        c.match(/[A-Za-z0-9]/)
+        || c.match(/[Ａ-Ｚａ-ｚ０-９]/)
+        || c.match(/[ -/:-@\[-~]/)
+        || c.match(/[\n|\r\n|\r]/)
+        || c.match(/[\u30a0-\u30ff\u3040-\u309f]/)
+        || c.match(/[\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF]/)
+        || c.match(/[ｦ-ﾟ]/)
+        || c.match(/[　、。，．・：；？！゛゜´｀＾]/)
+        || c.match(/[￣＿ヽヾゝゞ〃仝々〆〻〇ー―‐／＼]/)
+        || c.match(/[～｜…‥‘’“”°′″＃＆＊＠※]/)
+        || c.match(/[（）〔〕［］｛｝〈〉《》「」『』【】]/)
+        || c.match(/[＋－±×÷＝≠＜＞≦≧∞∴℃￥＄％〒]/)
+        || c.match(/[☆★○●◎◇◆□■△▲▽▼→←↑↓⇒⇔]/)
+        || c.match(/[⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]/)
+        || c.match(/[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]/)
+      ) {
+        validated += c;
+      }
+    });
+    e.value = validated;
 }

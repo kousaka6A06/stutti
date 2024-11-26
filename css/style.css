@@ -89,11 +89,6 @@ h2:first-letter {
     left: 50%;
     transform: translateX(-50%) rotate(-5deg);
 }
-/* h1 {
-    font-family: "Yusei Magic", serif;
-    font-weight: 400;
-    font-style: normal;
-} */
 
 p {
     font-size: 16px;
@@ -101,6 +96,14 @@ p {
 
 .icon-spacing i {
     margin-left: 15px; /* アイコン間のスペースを15pxに設定 */
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05); /* ホバー時にカードを少し拡大 */
 }
 
 /* //////ボタン///// */
@@ -420,7 +423,7 @@ p {
     border: none;
     color: #586365;
     flex-direction: row;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
     transform: rotate(2deg);
 }
 
@@ -502,7 +505,7 @@ p {
 }
 
 .tutti-card2:hover {
-    transform: scale(1.15);
+    transform: scale(1.05);
 }
 
 .group-section .card-groups {
@@ -527,6 +530,16 @@ p {
 }
 
 .group-edit .heading07::before {
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+}
+/*//////// 勉強会情報 ////////*/
+.group-info .heading07 {
+    padding-left: 0;
+    padding-bottom: 10px;
+}
+
+.group-info .heading07::before {
     left: 50%;
     transform: translateX(-50%) rotate(-5deg);
 }
@@ -588,9 +601,21 @@ p {
 /*//////// tutti詳細セクションのスタイル ////////*/
 .tutti-section {
     position: relative;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
     align-items: center;
+}
+
+.tutti-section .tutti-news {
+    margin-top: 285px;
+}
+
+.tutti-section .tutti-groups {
+    margin-top: 285px;
+}
+
+.tutti-section .tutti-message {
+    margin-top: 285px;
 }
 
 .tutti-intro {
@@ -661,6 +686,7 @@ footer img {
 /*//////// メディアクエリ ////////*/
 /* 767px 以下のスクリーンサイズ */
 @media (max-width: 767px) {
+
     /* ヘッダー */
     .navbar-brand {
         font-size: 20px;
@@ -675,21 +701,21 @@ footer img {
         font-size: 20px;
     }
 
-    
+
     /* メイン */
     main {
         margin-top: 75px;
         font-size: 12px;
     }
-    
+
     .heading07 {
-        font-size: 30px;
+        font-size: 20px;
         padding-left: 0;
     }
 
     .heading07::before {
-        font-size: 48px;
-        top: -3px;
+        font-size: 28px;
+        top: 18px;
     }
 
     /* ホワイトボード */
@@ -757,14 +783,16 @@ footer img {
     .feature p {
         font-size: 14px;
     }
-    
+
     /* 募集中の勉強会 */
     .custom-flex {
-        flex-direction: column; /* 縦並び */
+        flex-direction: column;
+        /* 縦並び */
         text-align: center
     }
 
-    .study-group, .tutti-list {
+    .study-group,
+    .tutti-list {
         max-width: 80%;
         margin-top: 3rem;
     }
@@ -786,23 +814,18 @@ footer img {
         display: inline;
         padding-top: 65px;
         position: relative;
-        left: 20%;
+        left: 36%;
     }
 
     .tutti-list .heading07 {
         padding-top: 105px;
     }
-    
+
     .tutti-list .heading07::before {
         display: inline;
-        top: 45px;
-        left: 18%;
+        top: 72px;
+        left: 36%;
     }
-    
-    /* .tutti-list .heading07::before{
-        top: 48px;
-        transform: translateX(-25%) rotate(-5deg);
-    } */
 
     .tutti-list {
         margin: 0 !important;
@@ -825,18 +848,112 @@ footer img {
         font-size: 25px;
     }
 
-    .tutti-section {
-        margin-top: 85px;
+    .tutti-section .tutti-news {
+        margin-top: 105px;
     }
-    
+
+    .tutti-section .tutti-groups {
+        margin-top: 105px;
+    }
+
+    .tutti-section .tutti-message {
+        margin-top: 155px;
+    }
+
     .tutti-background-text {
-        font-size: 4rem;  /* フォントサイズを小さく */
-        top: 65px;  
+        font-size: 4rem;
+        /* フォントサイズを小さく */
+        top: 75px;
         /* 上に少し移動  */
     }
+
     /* マイページ */
-    .mypage .custum-flex {
+    
+    .mypage .heading07 {
+        padding-left: 0;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+    
+    .mypage .heading07::before {
+        left: 50%;
+        transform: translateX(-50%) rotate(-5deg);
+    }
+    
+    .mk-studygroup .heading07 {
+        padding-left: 0;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+    
+    .mk-studygroup .heading07::before {
+        left: 50%;
+        transform: translateX(-50%) rotate(-5deg);
+    }
+    
+    .edit-studygroup .heading07 {
+        padding-left: 0;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+    
+    .edit-studygroup .heading07::before {
+        left: 50%;
+        transform: translateX(-50%) rotate(-5deg);
+    }
+
+    /*//////// 勉強会一覧 ////////*/
+    .group-list {
+        width: 85%;
+        
+    }
+
+    .group-section  {
+        flex-direction: column;
+    }
+
+    .group-section .card-cat{
+        margin-bottom: 0;
+    }
+
+    .tilt-card {
+        transform: none;        /* 初期の傾き */
+        transform-origin: none;        /* 右下を軸にする */
+    }
+
+    .tilt-card:hover {
+        transform: none;        /* ホバー時にまっすぐ */
+    }
+
+    .tutti-card2 {
+        transition: transform 0.3s ease;
+        height: 62px;
+    }
+
+    .tutti-card2:hover {
+        transform: scale(1.05);
+    }
+
+    .tutti-card2 .card-body {
+        padding: 0;
+        position: relative;
+    }
+
+    .group-section .card-groups {
         display: flex;
+        align-items: flex-start;
+        overflow-x: scroll;
+        flex-shrink: 0;
+        margin-left: 15px;
+    }
+
+    .tutti-card2 .vertical-text {
+        writing-mode: unset; /* writing-modeをリセットして縦書きのスタイルを無効にする */
+        transform: unset;     /* transformをリセットして上下反転を無効にする */
+        text-orientation: unset; /* text-orientationをリセット */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
 }

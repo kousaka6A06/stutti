@@ -2,19 +2,24 @@
 global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
 ?>
 
-<section class="mb-5">
-    <h2 class="my-3 heading07" data-en="Study Info">勉強会情報</h2>
+<section class="mb-5 group-info">
+    <h2 class="text-center my-3 heading07" data-en="Study Info">勉強会情報</h2>
     <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
         <table class="maintable w-100 mb-5">
             <tbody>
                 <tr>
-                    <th class="p-3 w-25">勉強会名</th>
+                    <th class="p-3 w-25">TUTTI</th>
                     <td class="p-3 w-75">
                         <a href="tutti.php?tid=<?= $groupInfo['tutti_id'] ?>" class="btn btn-sm align-middle mx-1"
                             style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
                             <i class="<?= $groupInfo['tutti_icon'] ?>" style="color: white;"></i>
                             <span><?= $groupInfo['tutti_name'] ?></span>
                         </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="p-3 w-25">勉強会名</th>
+                    <td class="p-3 w-75">
                         <?= $groupInfo['name'] ?>
                     </td>
                 </tr>
@@ -24,12 +29,12 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                         <?= $groupInfo['date'] ?>
                         <?=
                             empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
-                                ? "時間未定"
-                                :
-                                    (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
-                                    . "~"
-                                    . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
-                        ?>
+                            ? "時間未定"
+                            :
+                            (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
+                            . "~"
+                            . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
+                            ?>
                     </td>
                 </tr>
                 <tr>
@@ -81,7 +86,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
         <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
             <?php if (empty($messageInfos)): ?>
                 <p class="text-center py-3">まだメッセージは投稿されていません</p>
-            <?php else: ?> 
+            <?php else: ?>
                 <table class="maintable w-100 mb-5">
                     <thead>
                         <tr>
@@ -91,27 +96,28 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                     </thead>
                     <tbody>
                         <?php foreach ($messageInfos as $messageInfo): ?>
-                        <tr>
-                            <td class="p-3 w-25">
-                                <?= $messageInfo['member_name'] ?>
-                            </td>
-                            <td class="p-3 w-75">
-                                <?= $messageInfo['content'] ?>
-                                <div class="d-flex justify-content-between mt-2">
-                                    <small class="opacity-50"><?= $messageInfo['created_at'] ?></small>
-                                    <?php if ($messageInfo['member_id'] === $userId): ?>
-                                        <a href="messageDelete.php?gid=<?= $groupInfo['id'] ?>&mid=<?= $messageInfo['id'] ?>" class="btn btn-secondary btn-sm ms-2">削除</a>
-                                    <?php endif; ?>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="p-3 w-25">
+                                    <?= $messageInfo['member_name'] ?>
+                                </td>
+                                <td class="p-3 w-75">
+                                    <?= $messageInfo['content'] ?>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <small class="opacity-50"><?= $messageInfo['created_at'] ?></small>
+                                        <?php if ($messageInfo['member_id'] === $userId): ?>
+                                            <a href="messageDelete.php?gid=<?= $groupInfo['id'] ?>&mid=<?= $messageInfo['id'] ?>"
+                                                class="btn btn-secondary btn-sm ms-2">削除</a>
+                                        <?php endif; ?>
+                                    </div>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-            <?php endif; ?> 
+            <?php endif; ?>
             <p class="text-center">メッセージを投稿する</p>
             <form action="messagePost.php" method="POST" enctype="multipart/form-data" class="text-center">
-                <textarea type="text" name="content" class="p-1 w-75" maxlength="250" oninput="removeEmoji(this)" placeholder="投稿内容" required></textarea>
+                <textarea type="text" name="content" class="p-1 w-75" maxlength="250" onchange="removeEmoji(this)" placeholder="投稿内容" required></textarea>
                 <input type="hidden" name="gid" value="<?= $groupId ?>">
                 <button type="submit" class="btn btn-dark w-30 d-block mx-auto">投稿</button>
             </form>
