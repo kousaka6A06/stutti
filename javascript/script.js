@@ -148,6 +148,7 @@ function removeEmoji(e) {
     Array.prototype.forEach.call(e.value, function(c) {
       if (
         c.match(/[A-Za-z0-9]/)
+        || c.match(/[Ａ-Ｚａ-ｚ０-９]/)
         || c.match(/[ -/:-@\[-~]/)
         || c.match(/[\n|\r\n|\r]/)
         || c.match(/[\u30a0-\u30ff\u3040-\u309f]/)
@@ -160,7 +161,7 @@ function removeEmoji(e) {
         || c.match(/[＋－±×÷＝≠＜＞≦≧∞∴℃￥＄％〒]/)
         || c.match(/[☆★○●◎◇◆□■△▲▽▼→←↑↓⇒⇔]/)
         || c.match(/[⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]/)
-        || c.match(/[０１２３４５６７８９ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]/)
+        || c.match(/[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]/)
       ) {
         validated += c;
       }
