@@ -12,7 +12,7 @@ global $groupId, $groupInfo, $tuttiInfos;
             <input type="text" id="name" name="name" class="form-control" maxlength="60" onchange="removeEmoji(this)" placeholder="例：AWSの勉強しませんか？" value="<?= isset($groupInfo) ? $groupInfo['name'] : "" ?>" required>
         </div>
         <div class="mb-4">
-            <label for="tutti-id" class="form-label">関連するTutti</label>
+            <label for="tutti-id" class="form-label">関連するTUTTI</label>
             <small style="font-size: 10px; color: red;">*必須</small>
             <select id="tutti-id" name="tutti-id" class="form-control d-table-cell" required>
                 <option value="">選択してください</option>
