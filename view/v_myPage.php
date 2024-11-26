@@ -4,7 +4,7 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
 
 <section class="mypage mx-auto">
     <h2 class="my-3 heading07" data-en="User">ユーザー情報</h2>
-    <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
+    <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto custum-flex">
         <div class="col-6 mx-auto my-2">
             <img class="w-100" src="<?= DIR_AVATAR ?><?= $userInfo['avatar'] ?>" alt="">
         </div>
@@ -24,7 +24,7 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
                 </tr>
                 <tr>
                     <th class="p-3 w-25">パスワード</th>
-                    <td class="p-3 w-75">●●●●●●●●</td>
+                    <td class="p-3 w-75">●●●●●●</td>
                 </tr>
             </tbody>
         </table>
