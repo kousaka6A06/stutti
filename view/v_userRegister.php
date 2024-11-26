@@ -27,8 +27,10 @@ global $userInfo;
             <label for="stutti-id" class="form-label">Stutti IDを入力</label>
             <small style="font-size: 10px; color: red;">*必須</small>
             <small>ログイン時に必要になります</small>
+            <p id="idAl" style="color:red;"></p>
             <input type="text" id="stutti-id" name="stutti-id" class="form-control" maxlength="90" oninput="removeEmoji(this)" 
                 value="<?= isset($userInfo) ? $userInfo['stutti_id'] : "" ?>" required>
+                <small class="form-text text-muted">（半角英数字のみ利用可能）</small>
         </div>
         <div class="mb-4">
             <label for="password" class="form-label">ログインパスワードを入力</label>
@@ -106,10 +108,25 @@ global $userInfo;
     </form>
 </section>
 <script>
+    let idisRight = true;
     let isRight = true;
     let passPattern = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@;:])|(?=.*[A-Z])(?=.*[0-9])(?=.*[!@;:])|(?=.*[a-z])(?=.*[0-9])(?=.*[!@;:]))([a-zA-Z0-9!@;:]){8,}$/;
+    let stuttiIdPattern = /^[A-Za-z0-9]*$/;
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('confirmPassword').value;
+    let stuttiId = document.getElementById('stutti-id').value;
+
+    document.getElementById('stutti-id').addEventListener('change',function(event){
+        stuttiId = document.getElementById('stutti-id').value;
+        if(stuttiIdPattern.test(stuttiId)) {
+            document.getElementById('idAl').innerHTML = '';
+            idisRight = true;
+        } else {
+            document.getElementById('idAl').innerHTML = 'stutti_id は半角英数字のみでご入力ください。';
+            idisRight = false;
+        }
+    });
+
     document.getElementById('password').addEventListener('change', function(event) {
         password = document.getElementById('password').value;
         confirmPassword = document.getElementById('confirmPassword').value;
@@ -152,7 +169,7 @@ global $userInfo;
         }
     });
     document.getElementById('submit').addEventListener('click', function(event) {
-        if(isRight === false) {
+        if(isRight === false || idisRight === false) {
             event.preventDefault();
         }
     });
