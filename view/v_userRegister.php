@@ -20,7 +20,7 @@ global $userInfo;
         </div>
         <div class="mb-4">
             <label for="avatar" class="form-label">プロフィール画像をアップロードできます</label>
-            <input type="hidden" name="max_file_size" value="1000000">
+            <input type="hidden" name="MAX_FILE_SIZE" value="5242880">
             <input type="file" id="avatar" name="avatar" class="form-control">
         </div>
         <div class="mb-4">
