@@ -111,7 +111,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
             <?php endif; ?> 
             <p class="text-center">メッセージを投稿する</p>
             <form action="messagePost.php" method="POST" enctype="multipart/form-data" class="text-center">
-                <textarea type="text" name="content" class="p-1 w-75" maxlength="250" oninput="removeEmoji(this)" placeholder="投稿内容" required></textarea>
+                <textarea type="text" name="content" class="p-1 w-75" maxlength="250" onchange="removeEmoji(this)" placeholder="投稿内容" required></textarea>
                 <input type="hidden" name="gid" value="<?= $groupId ?>">
                 <button type="submit" class="btn btn-dark w-30 d-block mx-auto">投稿</button>
             </form>
