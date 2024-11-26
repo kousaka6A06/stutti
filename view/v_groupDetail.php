@@ -51,7 +51,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                 </tr>
                 <tr>
                     <th class="p-3 w-25">勉強内容</th>
-                    <td class="p-3 w-75"><?= $groupInfo['content'] ?></td>
+                    <td class="p-3 w-75" style="white-space: pre-wrap;"><?= $groupInfo['content'] ?></td>
                 </tr>
             </tbody>
         </table>
