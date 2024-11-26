@@ -60,29 +60,23 @@ global $groupInfos, $tuttiInfos;
     <div class="row mt-4">
         <?php foreach ($groupInfos as $groupInfo): ?>
             <div class="col-md-6 col-xl-4 col-xxl-3 mb-3">
-                <div class="card">
+                <div class="card shadow">
+                    <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="stretched-link"></a>
                     <ul class="list-group list-group-flush">
                         <li
                             class="list-group-item list-title d-flex justify-content-between align-items-baseline ps-0 pt-0">
-                            <div>
-                                <a href="tutti.php?tid=<?= $groupInfo['tutti_id'] ?>" class="btn btn-sm align-middle"
-                                    style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
-                                    <i class="<?= $groupInfo['tutti_icon'] ?>" style="color: white;"></i>
-                                    <span><?= $groupInfo['tutti_name'] ?></span>
-                                </a>
+                            <div class="btn btn-sm align-middle"
+                                style="background-color: <?= $groupInfo['tutti_color'] ?>; color: white;">
+                                <i class="<?= $groupInfo['tutti_icon'] ?>" style="color: white;"></i>
+                                <span><?= $groupInfo['tutti_name'] ?></span>
                             </div>
                         </li>
                     </ul>
-                    <div class="card-body pt-1">
+                    <div class="card-body pb-0">
                         <h3 class="card-title fw-semibold">
                             <?= $groupInfo['name'] ?>
                         </h3>
                         <p class="card-text"><?= $groupInfo['content'] ?></p>
-                        <div class="d-flex justify-content-end">
-                            <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">
-                                続き<i class="fa fa-arrow-right"></i>
-                            </a>
-                        </div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
@@ -93,12 +87,12 @@ global $groupInfos, $tuttiInfos;
                             <span class="d-flex justify-content-end align-items-baseline text-end">
                                 <i class="fa-regular fa-clock me-1"></i>
                                 <?=
-                                empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
+                                    empty($groupInfo['start_time']) && empty($groupInfo['end_time'])
                                     ? "時間未定"
                                     : (empty($groupInfo['start_time']) ? "未定" : $groupInfo['start_time'])
                                     . "~"
                                     . (empty($groupInfo['end_time']) ? "未定" : $groupInfo['end_time'])
-                                ?>
+                                    ?>
                             </span>
                             <span class="d-flex justify-content-end align-items-baseline">
                                 <i class="fa fa-users me-2"></i>
@@ -128,8 +122,7 @@ global $groupInfos, $tuttiInfos;
         <?php foreach ($tuttiInfos as $tuttiInfo): ?>
             <div class="col-4 col-md-1 col-lg-1">
                 <a href="tutti.php?tid=<?= $tuttiInfo['id'] ?>" style="text-decoration: none;">
-                    <div class="card tutti-card p-0 shadow"
-                        style="background-color: <?= $tuttiInfo['color'] ?>;">
+                    <div class="card tutti-card p-0 shadow" style="background-color: <?= $tuttiInfo['color'] ?>;">
                         <div class="husen">
                             <h3 class="card-title vertical-text"><?= $tuttiInfo['name'] ?></h3>
                         </div>
