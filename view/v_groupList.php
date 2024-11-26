@@ -1,6 +1,5 @@
 <?php
 global $tuttiGroupInfos;
-
 $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
 ?>
 
@@ -13,8 +12,7 @@ $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
                     <a href="tutti.php?tid=<?= $tuttiGroupInfo['id'] ?>" class="text-decoration-none">
                         <div class="card tutti-card2 <?= in_array($key, $tiltedKey) ? 'tilt-card' : ''; ?>"
                             style="border: 10px solid <?= $tuttiGroupInfo['color'] ?>; color: #586365">
-                            <div class="card-body d-flex justify-content-center flex-column align-items-center"
-                                style="height: 160px;">
+                            <div class="card-body d-flex justify-content-center flex-column align-items-center">
                                 <p class="card-title vertical-text"><?= $tuttiGroupInfo['name']; ?></p>
                             </div>
                         </div>
@@ -22,7 +20,7 @@ $tiltedKey = array_rand(array_keys($tuttiGroupInfos), 4);
                 </div>
                 <div class="card-groups mt-4 align-items-end">
                     <?php foreach ($tuttiGroupInfo['groups'] as $groupInfo): ?>
-                        <div class="col-12 col-md-3 mb-3 me-3">
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 mb-3 me-3">
                             <div class="card shadow">
                                 <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="stretched-link"></a>
                                 <div class="card-body">

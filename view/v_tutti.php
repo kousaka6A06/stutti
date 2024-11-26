@@ -29,7 +29,7 @@ global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
             <div class="tutti-groups">
                 <div class="row mt-4">
                     <?php foreach ($groupInfos as $groupInfo): ?>
-                        <div class="col-md-3 mb-2">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3 mb-2">
                             <div class="card shadow">
                                 <a href="groupDetail.php?gid=<?= $groupInfo['id'] ?>" class="stretched-link"></a>
                                 <div class="card-body">

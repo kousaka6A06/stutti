@@ -1,4 +1,149 @@
 /*//////// グローバルなスタイル ////////*/
+.first-view {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: transparent;
+}
+  
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-image: url(../img/logo.png);
+    background-position: center 100%;
+    background-repeat: no-repeat;
+    background-size: 1080px;
+}
+
+.hero-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    color: #495057;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.typing-container {
+    display: inline-block;
+    position: relative;
+}
+
+.typing-text {
+    display: inline-block;
+    border-right: 0.15em solid #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #495057;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: typing 1.5s steps(15, end), blink-caret 0.75s step-end infinite;
+}
+
+.subtitle {
+    text-align: center;
+    color: #495057;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s ease forwards 2.0s;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: #495057;
+    }
+}
+
+@keyframes gradient-shift {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #495057;
+    font-size: 2.5rem;
+    font-weight: bold;
+    opacity: 0;
+    animation: bounce 1.5s infinite, fadeIn 1s ease forwards 3.0s;
+    cursor: pointer;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
 body {
     font-family: 'Nunito', sans-serif;
 }
@@ -195,6 +340,11 @@ p {
     color: #fff !important; /* デフォルトの色 */
     font-weight: bold;
     font-size: 1.5rem;
+    transition: letter-spacing 0.5s;
+}
+  
+.navbar-brand:hover {
+    letter-spacing: 0.05em; /* 字間の設定 */
 }
 
 .navbar-nav .nav-item .btn {
@@ -485,7 +635,7 @@ p {
 
 /*//////// 勉強会一覧 ////////*/
 .group-list {
-    width: 85%;
+    width: 80%;
 }
 
 .tilt-card {
@@ -508,15 +658,56 @@ p {
     transform: scale(1.05);
 }
 
+.tutti-card2 .card-body {
+    height: 152px;
+}
+
+.card-groups-wrapper {
+    position: relative; /* 矢印をカード群の上に表示させるために位置を相対指定 */
+}
+
+.scroll-arrow {
+    font-size: 2rem;
+    color: #333; /* 矢印の色 */
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.6); /* 背景色を設定して矢印を目立たせる */
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease; /* ホバー時の背景色の変化 */
+}
+
+.scroll-arrow.left {
+    left: 0;
+}
+
+.scroll-arrow.right {
+    right: 0;
+}
+
+/* ホバー時の背景色変更 */
+.scroll-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+
 .group-section .card-groups {
     display: flex;
     overflow-x: scroll;
     flex-shrink: 0;
     margin-left: 15px;
+    scroll-behavior: smooth;
 }
 
 .group-section .card-cat {
     margin-bottom: 28px;
+}
+
+.group-section .col-md-1 {
+    width: 10.33333333%;;
 }
 
 /* グラデーション */
@@ -686,6 +877,9 @@ footer img {
 /*//////// メディアクエリ ////////*/
 /* 767px 以下のスクリーンサイズ */
 @media (max-width: 767px) {
+    .hero {
+        background-size: 620px;        
+    }
 
     /* ヘッダー */
     .navbar-brand {
@@ -945,6 +1139,10 @@ footer img {
         overflow-x: scroll;
         flex-shrink: 0;
         margin-left: 15px;
+    }
+
+    .group-section .col-md-1 {
+        width: 100%;
     }
 
     .tutti-card2 .vertical-text {

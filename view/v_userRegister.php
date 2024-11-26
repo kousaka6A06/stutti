@@ -38,7 +38,7 @@ global $userInfo;
             <p id="passAl1" style="color:red;"></p>
             <p id="passAl2" style="color:red;"></p>
             <input type="password" id="password" name="password" class="form-control" required>
-            <small class="form-text text-muted">（英大文字・英小文字・数字・記号(!@;:)の4種類の文字種のうち3種類を含む8文字以上）</small>
+            <small class="form-text text-muted">（英大文字・英小文字・数字・記号(!@;:)の4種類の文字種のうち3種類を含む8文字以上12文字以内）</small>
         </div>
         <div class="mb-4">
             <label for="confirmPassword" class="form-label">確認のため再度入力してください</label>

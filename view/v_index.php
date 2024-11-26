@@ -1,9 +1,11 @@
 <?php
+
 global $groupInfos, $tuttiInfos;
+
 ?>
 
 <section class="white-board mx-auto">
-    <h2 class="text-center heading07" data-en="About">なんですかこのサイトは</h2>
+    <h2 class="text-center heading07" data-en="About">このサイトについて</h2>
     <!-- マーカー -->
     <div class="marker1"></div>
     <div class="marker2"></div>
