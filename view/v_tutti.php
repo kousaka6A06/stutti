@@ -18,7 +18,7 @@ global $tuttiInfo, $groupInfos, $commentInfos, $newsInfos;
                 <dl class="list-group">
                     <?php foreach ($newsInfos as $newsInfo) : ?>
                         <dt class="list-group-item"><?= explode(' ', $newsInfo['created_at'])[0] ?></dt>
-                        <dd class="list-group-item"><a href="<?= $newsInfo['url'] ?>" class="text-dark"><?= $newsInfo['content'] ?></a></dd>
+                        <dd class="list-group-item"><a href="<?= $newsInfo['url'] ?>" class="text-dark" target="_blank" rel="noopener noreferrer"><?= $newsInfo['content'] ?></a></dd>
                     <?php endforeach; ?>
                 </dl>
             </div>
