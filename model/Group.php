@@ -146,7 +146,7 @@ class Group {
                 (SELECT COUNT(*) FROM `belonging` WHERE `belonging`.`group_id` = `groups`.`id`) AS `participants`
                 FROM `groups` 
                 JOIN `m_tutti` ON `groups`.`tutti_id` = `m_tutti`.`id` 
-                WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} 
+                WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= '{$now}' 
                 ORDER BY `groups`.`id` DESC LIMIT 8";
         $stmt = $this->conn->prepare($query);
         try{
