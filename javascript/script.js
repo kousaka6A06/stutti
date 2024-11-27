@@ -185,3 +185,16 @@ document.querySelector('.typing-text').addEventListener('animationend', (e) => {
 });
 
 /////////////////////////////////////////////
+
+///////            削除確認用            ////
+
+function deleteUsrBeutton() {
+        let result = confirm('本当にユーザーを削除しますか。');
+        if(result){
+            return true;
+        } else {
+            alert('削除をとりやめました。');
+            return false;
+        }
+    // });
+}

@@ -30,7 +30,7 @@ global $userInfo, $ownerGroupInfos, $memberGroupInfos;
         </table>
         <div class="d-flex justify-content-end mt-2">
             <a href="userEdit.php" class="btn btn-secondary btn-sm">編集</a>
-            <a href="userDelete.php" class="btn btn-secondary btn-sm ms-2">削除</a>
+            <a href="userDelete.php" class="btn btn-secondary btn-sm ms-2" onclick="return deleteUsrBeutton();">削除</a>
         </div>
     </div>
 </section>
