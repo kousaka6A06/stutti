@@ -196,5 +196,24 @@ function deleteUsrBeutton() {
             alert('削除をとりやめました。');
             return false;
         }
-    // });
+}
+
+function deleteGroupBeutton() {
+    let result = confirm('本当に勉強会を削除しますか。');
+    if(result){
+        return true;
+    } else {
+        alert('削除をとりやめました。');
+        return false;
+    }
+}
+
+function deleteMessageButton() {
+    let result = confirm('本当にメッセージを削除しますか。');
+    if(result){
+        return true;
+    } else {
+        alert('削除をとりやめました。');
+        return false;
+    }
 }
