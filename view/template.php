@@ -69,8 +69,8 @@
     <!-- メイン -->
     <main class="container-xl flex-grow-1">
         <?php if (isset($_SESSION['message'])): ?>
-            <p class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 mx-auto"
-                style="max-width: 700px">
+            <p class="error-message text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 p-4 w-50 mx-auto text-center">
+                <!-- style="max-width: 700px; margin-top: 100px;"> -->
                 <?= $_SESSION['message'] ?>
             </p>
             <?php unset($_SESSION['message']) ?>
