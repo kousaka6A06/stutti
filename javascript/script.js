@@ -166,7 +166,7 @@ function removeEmoji(e) {
         validated += c;
       }
     });
-    e.value = validated.trim();
+    e.value = validated;
 }
 
 ///////////////////////////////////////////
