@@ -26,7 +26,7 @@ if (!$groupId) {
 // 未ログインの場合
 if (!$userId) {
     // セッションにメッセージを保存して勉強会詳細画面に遷移
-    $_SESSION['message'] = '勉強会から退会したい場合はログインしてください';
+    $_SESSION['message'] = '勉強会への参加をキャンセルしたい場合はログインしてください';
     header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
     exit;
 }
@@ -39,21 +39,21 @@ $belonging->setGroupId($groupId);
 // 勉強会の参加者ではない場合
 if (!$belonging->isMemberOfGroup()) {
     // セッションにメッセージを保存して勉強会詳細画面に遷移
-    $_SESSION['message'] = '勉強会に参加していないため退会できません';
+    $_SESSION['message'] = '勉強会に参加していないためキャンセルできません';
     header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
     exit;
 }
 
-// 勉強会退会試行
-// 勉強会退会に成功した場合
+// 勉強会参加キャンセル試行
+// 勉強会参加キャンセルに成功した場合
 if ($belonging->removeMember()) {
     // セッションにメッセージを保存して勉強会詳細画面に遷移
-    $_SESSION['message'] = '勉強会から退会しました';
+    $_SESSION['message'] = '勉強会への参加をキャンセルしました';
     header('Location: ' . BASE_DOMAIN . '/groupDetail.php?gid=' . $groupId);
 
-// 勉強会退会に失敗した場合
+// 勉強会参加キャンセルに失敗した場合
 } else {
     // セッションにメッセージを保存してエラー画面に遷移
-    $_SESSION['message'] = '勉強会のからの退会に失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
+    $_SESSION['message'] = '勉強会参加キャンセルに失敗しました。<br>繰り返し失敗する場合は管理者に連絡して下さい。';
     header('Location: ' . BASE_DOMAIN . '/error.php');
 }
