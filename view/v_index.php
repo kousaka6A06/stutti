@@ -2,12 +2,9 @@
 
 global $groupInfos, $tuttiInfos;
 
-// 現在のページが index.php かどうかを確認
-$currentPage = basename($_SERVER['PHP_SELF']);
-
 ?>
 
-<section class="first-view" style="display: <?php echo ($currentPage === 'index.php') ? 'block' : 'none'; ?>;">
+<section class="first-view">
     <div class="hero">
         <div class="hero-text">
             <img class="hero-img" src="img/logo.png" alt="Background Image">
