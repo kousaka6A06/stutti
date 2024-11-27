@@ -80,8 +80,11 @@
 
     <!-- フッター -->
     <footer class="text-white mt-5">
-        <div class="container-fluid p-0">
+        <div class="container-fluid p-0 position-relative">
             <img src="img/footer.png" class="img-fluid w-100" alt="Footer Image">
+            <div class="overlay-text position-absolute top-50 start-50 translate-middle">
+                <small>STUTTI</small>
+            </div>
         </div>
     </footer>
 
