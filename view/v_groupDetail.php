@@ -75,7 +75,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
             <?php endif; ?>
             <?php if ($userStatus === GROUP_OWNER): ?>
                 <a href="groupEdit.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm">編集</a>
-                <a href="groupDelete.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm ms-2">削除</a>
+                <a href="groupDelete.php?gid=<?= $groupInfo['id'] ?>" class="btn btn-secondary btn-sm ms-2" onclick="return deleteGroupBeutton();">削除</a>
             <?php endif; ?>
         </div>
     </div>
@@ -106,7 +106,7 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
                                         <small class="opacity-50"><?= $messageInfo['created_at'] ?></small>
                                         <?php if ($messageInfo['member_id'] === $userId): ?>
                                             <a href="messageDelete.php?gid=<?= $groupInfo['id'] ?>&mid=<?= $messageInfo['id'] ?>"
-                                                class="btn btn-secondary btn-sm ms-2">削除</a>
+                                                class="btn btn-secondary btn-sm ms-2" onclick="return deleteMessageButton();">削除</a>
                                         <?php endif; ?>
                                     </div>
                                 </td>
