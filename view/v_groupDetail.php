@@ -81,8 +81,8 @@ global $userId, $groupId, $groupInfo, $userStatus, $groupStatus, $messageInfos;
     </div>
 </section>
 <?php if ($userStatus === GROUP_MEMBER || $userStatus === GROUP_OWNER): ?>
-    <section class=" mb-5">
-        <h2 class="my-3 heading07" data-en="Message">メッセージ</h2>
+    <section class="group-info-message mb-5">
+        <h2 class="text-center my-3 heading07" data-en="Message">メッセージ</h2>
         <div class="bg-light p-4 rounded shadow col-10 col-md-8 col-xl-6 mx-auto">
             <?php if (empty($messageInfos)): ?>
                 <p class="text-center py-3">まだメッセージは投稿されていません</p>

@@ -4,6 +4,19 @@ global $groupInfos, $tuttiInfos;
 
 ?>
 
+<section class="first-view">
+    <div class="hero">
+        <div class="hero-text">
+            <img class="hero-img" src="img/logo.png" alt="Background Image">
+            <div class="typing-container">
+                <span class="typing-text">STUTTI</span>
+            </div>
+        </div>
+        <div class="subtitle">一緒にお勉強しませんか？</div>
+        <div class="scroll-indicator">↓</div>
+    </div>
+</section>
+
 <section class="white-board mx-auto">
     <h2 class="text-center heading07" data-en="About">このサイトについて</h2>
     <!-- マーカー -->
