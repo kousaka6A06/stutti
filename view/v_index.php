@@ -67,7 +67,7 @@ global $groupInfos, $tuttiInfos;
     </div>
 
     <div class="text-center mt-1 mt-md-3 mt-xl-3">
-        <a href="groupList.php" class="btn view-more-btn">
+        <a href="groupList.php" class="btn view-more-btn1">
             <span>勉強会一覧</span>
         </a>
     </div>
