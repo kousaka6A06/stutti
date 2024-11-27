@@ -8,13 +8,13 @@ global $userInfo;
         <div class="mb-4">
             <label for="name" class="form-label">ユーザー名を入力</label>
             <small style="font-size: 10px; color: red;">*必須</small>
-            <input type="text" id="name" name="name" class="form-control" maxlength="90" onchange="removeEmoji(this)" 
+            <input type="text" id="name" name="name" class="form-control" maxlength="90" oninput="removeEmoji(this)" 
                 value="<?= isset($userInfo) ? $userInfo['name'] : "" ?>" required>
         </div>
         <div class="mb-4">
             <label for="mail-address" class="form-label">メールアドレスを入力</label>
             <small style="font-size: 10px; color: red;">*必須</small>
-            <input type="email" id="mail-address" name="mail-address" class="form-control" maxlength="90" 
+            <input type="email" id="mail-address" name="mail-address" class="form-control" maxlength="90" oninput="removeEmoji(this)" 
                 placeholder="example@mail.com" value="<?= isset($userInfo) ? $userInfo['mail_address'] : "" ?>"
                 required>
         </div>
@@ -28,7 +28,7 @@ global $userInfo;
             <small style="font-size: 10px; color: red;">*必須</small>
             <small>ログイン時に必要になります</small>
             <p id="idAl" style="color:red;"></p>
-            <input type="text" id="stutti-id" name="stutti-id" class="form-control" maxlength="90" onchange="removeEmoji(this)" 
+            <input type="text" id="stutti-id" name="stutti-id" class="form-control" maxlength="90" oninput="removeEmoji(this)" 
                 value="<?= isset($userInfo) ? $userInfo['stutti_id'] : "" ?>" required>
                 <small class="form-text text-muted">（半角英数字のみ利用可能）</small>
         </div>
