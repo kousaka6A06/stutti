@@ -31,6 +31,14 @@ $group->setId($groupId);
 // 勉強会情報取得
 $groupInfo = $group->getGroupById();
 
+// 勉強会情報が取得できなかった場合
+if (empty($groupInfo)) {
+    // セッションにメッセージを保存して勉強会一覧画面に遷移
+    $_SESSION['message'] = '勉強会の情報を取得できませんでした';
+    header('Location: ' . BASE_DOMAIN . '/groupList.php');
+    exit;
+}
+
 // 勉強会メッセージを作成して画面から渡された情報をセット
 $message = new GroupMessage();
 $message->setGroupId($groupId);
