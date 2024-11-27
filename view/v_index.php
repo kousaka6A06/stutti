@@ -2,7 +2,23 @@
 
 global $groupInfos, $tuttiInfos;
 
+// 現在のページが index.php かどうかを確認
+$currentPage = basename($_SERVER['PHP_SELF']);
+
 ?>
+
+<section class="first-view" style="display: <?php echo ($currentPage === 'index.php') ? 'block' : 'none'; ?>;">
+    <div class="hero">
+        <div class="hero-text">
+            <img class="hero-img" src="img/logo.png" alt="Background Image">
+            <div class="typing-container">
+                <span class="typing-text">STUTTI</span>
+            </div>
+        </div>
+        <div class="subtitle">一緒にお勉強しませんか？</div>
+        <div class="scroll-indicator">↓</div>
+    </div>
+</section>
 
 <section class="white-board mx-auto">
     <h2 class="text-center heading07" data-en="About">このサイトについて</h2>

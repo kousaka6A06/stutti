@@ -1,8 +1,3 @@
-<?php
-// 現在のページが index.php かどうかを確認
-$currentPage = basename($_SERVER['PHP_SELF']);
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -26,19 +21,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <body class="d-flex flex-column min-vh-100">
     <!-- 背景アニメーション用のキャンバス -->
     <canvas id="canvas"></canvas>
-
-    <div class="first-view" style="display: <?php echo ($currentPage === 'index.php') ? 'block' : 'none'; ?>;">
-        <div class="hero">
-        <div class="hero-text">
-                <div class="typing-container">
-                    <span class="typing-text">STUTTI</span>
-                </div>
-            </div>
-            <div class="subtitle">一緒にお勉強しませんか？</div>
-            <div class="scroll-indicator">↓</div>
-        </div>
-    </div>
-
     <!-- ヘッダー -->
     <header class="header rounded-header fixed-header">
         <nav class="navbar navbar-expand-md">
