@@ -76,12 +76,16 @@ class Group {
         $stmt->bindValue(7, $this->content);
         $stmt->bindValue(8, $this->createdById);
         $stmt->bindValue(9, $this->tuttiId);
-
-        // 最新の採番を id のプロパティに設定
-        if ($stmt->execute()) {
-            $this->id = $this->conn->lastInsertId();
-            return true;
-        } else {
+        try{
+            // 最新の採番を id のプロパティに設定
+            if ($stmt->execute()) {
+                $this->id = $this->conn->lastInsertId();
+                return true;
+            } else {
+                return false;
+            } 
+        } catch(PDOException $e) {
+            error_log("createGroup Error:" . $e->getMessage());
             return false;
         }
     }
@@ -145,9 +149,14 @@ class Group {
                 WHERE `groups`.`delete_flag` = 0 AND `groups`.`date` >= {$now} 
                 ORDER BY `groups`.`id` DESC LIMIT 8";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try{
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch(PDOException $e) {
+            error_log("getNewGroups Error:" . $e->getMessage());
+            return false;
+        }
     }
 
     // 〇勉強会一覧表示用
@@ -204,9 +213,14 @@ class Group {
                 WHERE `delete_flag` = 0 AND `groups`.`date` >= '{$now}' AND `groups`.`id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$this->id,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch(PDOException $e) {
+            error_log("getGroupById Error:" . $e->getMessage());
+            return false;
+        }
     }
 
 
@@ -229,9 +243,14 @@ class Group {
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
         $stmt->bindValue(2,$userId,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch(PDOException $e) {
+            error_log("getGroupsByMemberId Error:" . $e->getMessage());
+            return false;
+        }
     }
 
     // 〇マイページに表示させる自身で作成した勉強会(サムネ・昇順)
@@ -252,9 +271,14 @@ class Group {
                 WHERE `delete_flag` = 0 AND `groups`.`date` >= '{$now}' AND `groups`.`created_by_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1,$userId,PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch(PDOException $e) {
+            error_log("getGroupsByOwnerId Error:" . $e->getMessage());
+            return false;
+        }
     }
 
     // 〇tutti 詳細ページにて利用
@@ -275,9 +299,14 @@ class Group {
                 WHERE `groups`.`tutti_id` = ? AND `groups`.`delete_flag` = 0 AND `groups`.`date` >= '{$now}' ORDER BY `groups`.`id` DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $this->tuttiId, PDO::PARAM_INT);
-        $stmt->execute();
-        $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $ary;
+        try {
+            $stmt->execute();
+            $ary = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $ary;
+        } catch(PDOException $e) {
+            error_log("getGroupsByTuttiId Error:" . $e->getMessage());
+            return false;
+        }
     }
 
     // グループの定員 満員の場合true
@@ -287,21 +316,32 @@ class Group {
                 WHERE `belonging`.`group_id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $this->id);
-        if ($stmt->execute()) {
-            $currentCount = $stmt->fetchColumn();
+        try {
+            if ($stmt->execute()) {
+                $currentCount = $stmt->fetchColumn();
+            }
+        } catch(PDOException $e) {
+            error_log("isFull1 Error:" . $e->getMessage());
+            return false;
         }
+
         $query2 = "SELECT `groups`.`num_people` 
                 FROM `groups` 
                 WHERE `groups`.`id` = ?";
         $stmt2 = $this->conn->prepare($query2);
         $stmt2->bindValue(1, $this->id);
-        if($stmt2->execute()) {
-            $maxPeople = $stmt2->fetchColumn();
+        try {
+            if($stmt2->execute()) {
+                $maxPeople = $stmt2->fetchColumn();
+            }
+            if(isset($currentCount) && isset($maxPeople) && $currentCount >= $maxPeople) {
+                return true;
+            }
+            return false;
+        } catch(PDOException $e) {
+            error_log("isFull2 Error:" . $e->getMessage());
+            return false;
         }
-        if(isset($currentCount) && isset($maxPeople) && $currentCount >= $maxPeople) {
-            return true;
-        }
-        return false;
     }
 
     // setter
