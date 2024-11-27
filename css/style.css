@@ -1,4 +1,38 @@
 /*//////// グローバルなスタイル ////////*/
+/* 初期状態でエラーメッセージは非表示 */
+.error-message {
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+    max-width: 700px;
+    opacity: 0;
+    visibility: hidden; /* 初期状態では表示しない */
+    animation: showMessage 3s forwards;
+  }
+  
+  /* アニメーション定義 */
+  @keyframes showMessage {
+    0% {
+      opacity: 0;
+      visibility: hidden;
+    }
+    10% {
+      opacity: 1;
+      visibility: visible; /* すぐに表示開始 */
+    }
+    90% {
+      opacity: 1;
+      visibility: visible;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden; /* 3秒後に非表示 */
+    }
+  }
+
+
 .first-view {
     margin: 0;
     padding: 0;
@@ -54,7 +88,7 @@
 
 .subtitle {
     text-align: center;
-    color: #495057;
+    color: #004a55;
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 40px;
@@ -286,7 +320,7 @@ p {
     text-decoration: none;
     line-height: 35px;
     outline: none;
-    background-color: #8db2a1;
+    background-color: #a7cdcc;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -307,7 +341,7 @@ p {
     content: '';
     width: 135%;
     height: 100%;
-    background-color: #c4d9ca;
+    background-color: #a7cdcc;
     position: absolute;
     top: 0;
     left: 0;
@@ -323,7 +357,7 @@ p {
     top: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #92b29b;
+    background-color: #a7cdcc;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 0px 10px;
@@ -519,13 +553,14 @@ p {
 .board-list {
     height: 100%;
     overflow: auto;
+    margin-top: 0;
 }
 
 .feature {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
-    background-color: #e1dfdf;
+    background-color: #f1f1f1;
     padding: 15px;
     border-radius: 8px;
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
