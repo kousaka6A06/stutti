@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // ログインに失敗した場合
     } else {
         // セッションにメッセージを保存してログイン画面を再描画
-        $_SESSION['message'] = 'Stutti ID かパスワードが異なります';
+        $_SESSION['message'] = 'Stutti ID もしくはパスワードが異なります';
         Utils::loadView('ログイン', 'view/v_login.php');
     }
 }
