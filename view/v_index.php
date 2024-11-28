@@ -13,7 +13,7 @@ global $groupInfos, $tuttiInfos;
             </div>
         </div>
         <div class="subtitle">一緒にお勉強しませんか？</div>
-        <div class="scroll-indicator">↓</div>
+        <div class="scroll-indicator text-center lh-sm"><span class="fs-5">scroll</span><br>↓</div>
     </div>
 </section>
 
