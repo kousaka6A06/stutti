@@ -161,7 +161,6 @@
     font-weight: bold;
     opacity: 0;
     animation: bounce 1.5s infinite, fadeIn 1s ease forwards 3.0s;
-    cursor: pointer;
 }
 
 @keyframes bounce {
@@ -900,7 +899,7 @@ p {
     left: 50%;
     transform: translateX(-50%);
     font-size: 6rem;
-    color: rgba(139, 139, 139, 0.15);
+    color: rgba(139, 139, 139, 0.5);
     z-index: 0;
 }
 
