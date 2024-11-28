@@ -900,7 +900,7 @@ p {
     left: 50%;
     transform: translateX(-50%);
     font-size: 6rem;
-    color: rgba(139, 139, 139, 0.15);
+    color: rgba(139, 139, 139, 0.5);
     z-index: 0;
 }
 
